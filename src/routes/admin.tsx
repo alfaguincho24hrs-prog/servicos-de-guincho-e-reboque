@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   addProvider,
   getRawCityProviders,
@@ -9,18 +9,32 @@ import {
   removeAddedProvider,
   setProviderOverride,
   type Provider,
+  type ProviderOverride,
   type ProviderTier,
 } from "@/components/city-providers";
 import { ALL_CITIES } from "@/components/cities-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Lock, LogOut, Plus, Save, Trash2 } from "lucide-react";
+import {
+  BadgeCheck,
+  Image as ImageIcon,
+  Lock,
+  LogOut,
+  Phone,
+  Plus,
+  Save,
+  Trash2,
+  Upload,
+  X,
+} from "lucide-react";
 import { toast } from "sonner";
 
 const ADMIN_PASS = "guincho-admin-2026";
 const AUTH_KEY = "admin_session_v1";
+const MAX_PHOTOS = 4;
 
 export const Route = createFileRoute("/admin")({
   validateSearch: (s: Record<string, unknown>) => ({
@@ -81,10 +95,6 @@ function AdminPage() {
                 Entrar
               </Button>
             </form>
-            <p className="mt-4 text-xs text-muted-foreground">
-              As alterações são salvas localmente neste navegador. Para
-              persistência multiusuário, ative o backend depois.
-            </p>
           </CardContent>
         </Card>
       </div>
@@ -94,7 +104,6 @@ function AdminPage() {
   return <AdminEditor initialCity={search.city} />;
 }
 
-// Lista completa de cidades disponíveis (todas as cidades do site)
 const ALL_CITY_OPTIONS = ALL_CITIES.map((c) => ({
   value: `${c.slug}-${c.uf.toLowerCase()}`,
   label: `${c.name} - ${c.uf}`,
@@ -104,7 +113,6 @@ function AdminEditor({ initialCity }: { initialCity: string }) {
   const [city, setCity] = useState(initialCity || ALL_CITY_OPTIONS[0]?.value || "");
   const [tick, setTick] = useState(0);
 
-  // Cidades com cadastro (arquivo + adicionadas) — destacadas no topo do select
   const cadastradas = useMemo(() => listProviderCities(), [tick]);
 
   const providers = useMemo<Provider[]>(() => {
@@ -126,7 +134,7 @@ function AdminEditor({ initialCity }: { initialCity: string }) {
         <div>
           <h1 className="text-2xl font-bold">Painel — Anunciantes</h1>
           <p className="text-sm text-muted-foreground">
-            Selecione a cidade, edite ou crie novos anunciantes.
+            Crie e edite anunciantes com perfil completo (logo, fotos, contatos e mais).
           </p>
         </div>
         <Button
@@ -170,10 +178,25 @@ function AdminEditor({ initialCity }: { initialCity: string }) {
         </select>
       </div>
 
-      {/* Formulário: criar novo anunciante */}
-      <NewProviderForm
+      <ProviderForm
+        key={`new-${city}`}
         city={city}
-        onCreated={() => {
+        onSaved={(data) => {
+          addProvider(city, {
+            name: data.name,
+            tier: data.tier,
+            area: data.area || undefined,
+            whatsapp: data.whatsapp || undefined,
+            phoneMasked: data.phoneMasked || undefined,
+            phone: data.phone || undefined,
+            address: data.address || undefined,
+            description: data.description || undefined,
+            instagram: data.instagram || undefined,
+            website: data.website || undefined,
+            verified: data.verified,
+            logoUrl: data.logoUrl || undefined,
+            photos: data.photos.length ? data.photos : undefined,
+          });
           setTick((t) => t + 1);
           toast.success("Anunciante criado");
         }}
@@ -218,63 +241,165 @@ const TIERS: { value: ProviderTier; label: string; color: string }[] = [
   { value: "gold", label: "Ouro", color: "bg-yellow-500 text-white" },
 ];
 
-function NewProviderForm({ city, onCreated }: { city: string; onCreated: () => void }) {
-  const [name, setName] = useState("");
-  const [area, setArea] = useState("");
-  const [tier, setTier] = useState<ProviderTier>("bronze");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [phoneMasked, setPhoneMasked] = useState("");
+// ---------- Helpers ----------
+
+async function fileToDataUrl(file: File, maxSizeKB = 400): Promise<string> {
+  if (file.size > maxSizeKB * 1024 * 4) {
+    throw new Error(`Imagem muito grande (máx ~${maxSizeKB * 4}KB).`);
+  }
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(new Error("Falha ao ler imagem"));
+    reader.readAsDataURL(file);
+  });
+}
+
+type FormState = {
+  name: string;
+  tier: ProviderTier;
+  area: string;
+  whatsapp: string;
+  phoneMasked: string;
+  phone: string;
+  address: string;
+  description: string;
+  instagram: string;
+  website: string;
+  verified: boolean;
+  logoUrl: string;
+  photos: string[];
+};
+
+function emptyForm(): FormState {
+  return {
+    name: "",
+    tier: "bronze",
+    area: "",
+    whatsapp: "",
+    phoneMasked: "",
+    phone: "",
+    address: "",
+    description: "",
+    instagram: "",
+    website: "",
+    verified: false,
+    logoUrl: "",
+    photos: [],
+  };
+}
+
+function fromProvider(p: Provider): FormState {
+  return {
+    name: p.name || "",
+    tier: p.tier,
+    area: p.area || "",
+    whatsapp: p.whatsapp || "",
+    phoneMasked: p.phoneMasked || "",
+    phone: p.phone || "",
+    address: p.address || "",
+    description: p.description || "",
+    instagram: p.instagram || "",
+    website: p.website || "",
+    verified: !!p.verified,
+    logoUrl: p.logoUrl || "",
+    photos: p.photos || [],
+  };
+}
+
+// ---------- Form (create + inline edit reuse) ----------
+
+function ProviderForm({
+  city,
+  initial,
+  onSaved,
+  isEdit,
+}: {
+  city: string;
+  initial?: FormState;
+  onSaved: (data: FormState) => void;
+  isEdit?: boolean;
+}) {
+  const [f, setF] = useState<FormState>(initial || emptyForm());
+  const logoInput = useRef<HTMLInputElement>(null);
+  const photosInput = useRef<HTMLInputElement>(null);
+
+  const update = <K extends keyof FormState>(k: K, v: FormState[K]) =>
+    setF((s) => ({ ...s, [k]: v }));
+
+  const handleLogo = async (file?: File) => {
+    if (!file) return;
+    try {
+      const url = await fileToDataUrl(file, 200);
+      update("logoUrl", url);
+    } catch (e) {
+      toast.error((e as Error).message);
+    }
+  };
+
+  const handlePhotos = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const remaining = MAX_PHOTOS - f.photos.length;
+    if (remaining <= 0) {
+      toast.error(`Máximo de ${MAX_PHOTOS} fotos`);
+      return;
+    }
+    const toAdd: string[] = [];
+    for (const file of Array.from(files).slice(0, remaining)) {
+      try {
+        toAdd.push(await fileToDataUrl(file, 400));
+      } catch (e) {
+        toast.error((e as Error).message);
+      }
+    }
+    update("photos", [...f.photos, ...toAdd]);
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const trimmedName = name.trim();
-    if (!trimmedName) return toast.error("Informe o nome do anunciante");
-    if (trimmedName.length > 120) return toast.error("Nome muito longo (máx 120)");
+    const name = f.name.trim();
+    if (!name) return toast.error("Informe o nome do anunciante");
     if (!city) return toast.error("Selecione uma cidade");
-    if (tier !== "ghost" && !whatsapp) {
-      return toast.error("Tiers pagos exigem WhatsApp");
+    if (f.tier !== "ghost" && !f.whatsapp && !f.phone) {
+      return toast.error("Tiers pagos exigem WhatsApp ou Telefone");
     }
-    if (whatsapp && !/^\d{10,15}$/.test(whatsapp)) {
+    if (f.whatsapp && !/^\d{10,15}$/.test(f.whatsapp)) {
       return toast.error("WhatsApp inválido (apenas dígitos, ex: 5511999999999)");
     }
+    if (f.phone && !/^\d{8,15}$/.test(f.phone)) {
+      return toast.error("Telefone inválido (apenas dígitos)");
+    }
 
-    addProvider(city, {
-      name: trimmedName,
-      tier,
-      area: area.trim().slice(0, 200) || undefined,
-      whatsapp: whatsapp || undefined,
-      phoneMasked: phoneMasked.trim().slice(0, 30) || undefined,
-    });
-    setName("");
-    setArea("");
-    setWhatsapp("");
-    setPhoneMasked("");
-    setTier("bronze");
-    onCreated();
+    const data: FormState = { ...f, name };
+    onSaved(data);
+    if (!isEdit) setF(emptyForm());
   };
 
   return (
-    <Card className="border-primary/40 bg-primary/5">
+    <Card className={isEdit ? "" : "border-primary/40 bg-primary/5"}>
       <CardContent className="p-4">
-        <div className="mb-3 flex items-center gap-2">
-          <Plus className="h-4 w-4 text-primary" />
-          <h2 className="font-semibold">Adicionar novo anunciante</h2>
-        </div>
+        {!isEdit && (
+          <div className="mb-3 flex items-center gap-2">
+            <Plus className="h-4 w-4 text-primary" />
+            <h2 className="font-semibold">Adicionar novo anunciante</h2>
+          </div>
+        )}
         <form onSubmit={submit} className="grid gap-3 md:grid-cols-2">
           <div className="md:col-span-2">
             <label className="mb-1 block text-xs font-medium">Nome*</label>
             <Input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={f.name}
+              onChange={(e) => update("name", e.target.value)}
               placeholder="Ex: Guincho XPTO 24h"
               maxLength={120}
             />
           </div>
+
           <div>
             <label className="mb-1 block text-xs font-medium">Tier*</label>
             <select
-              value={tier}
-              onChange={(e) => setTier(e.target.value as ProviderTier)}
+              value={f.tier}
+              onChange={(e) => update("tier", e.target.value as ProviderTier)}
               className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             >
               {TIERS.map((t) => (
@@ -284,39 +409,201 @@ function NewProviderForm({ city, onCreated }: { city: string; onCreated: () => v
               ))}
             </select>
           </div>
+
           <div>
             <label className="mb-1 block text-xs font-medium">Área / bairros</label>
             <Input
-              value={area}
-              onChange={(e) => setArea(e.target.value)}
+              value={f.area}
+              onChange={(e) => update("area", e.target.value)}
               placeholder="Ex: Centro, Zona Sul"
               maxLength={200}
             />
           </div>
+
+          <div className="md:col-span-2">
+            <label className="mb-1 block text-xs font-medium">Endereço</label>
+            <Input
+              value={f.address}
+              onChange={(e) => update("address", e.target.value)}
+              placeholder="Rua, número, bairro, cidade"
+              maxLength={200}
+            />
+          </div>
+
           <div>
             <label className="mb-1 block text-xs font-medium">
-              WhatsApp (5511999999999) — obrigatório p/ tiers pagos
+              Telefone p/ ligar (apenas dígitos)
             </label>
             <Input
-              value={whatsapp}
-              onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, "").slice(0, 15))}
+              value={f.phone}
+              onChange={(e) => update("phone", e.target.value.replace(/\D/g, "").slice(0, 15))}
+              placeholder="12999999999"
+            />
+          </div>
+
+          <div>
+            <label className="mb-1 block text-xs font-medium">
+              WhatsApp (5511999999999)
+            </label>
+            <Input
+              value={f.whatsapp}
+              onChange={(e) => update("whatsapp", e.target.value.replace(/\D/g, "").slice(0, 15))}
               placeholder="55119XXXXXXXX"
             />
           </div>
+
+          <div>
+            <label className="mb-1 block text-xs font-medium">Instagram (URL)</label>
+            <Input
+              value={f.instagram}
+              onChange={(e) => update("instagram", e.target.value)}
+              placeholder="https://instagram.com/empresa"
+              maxLength={200}
+            />
+          </div>
+
+          <div>
+            <label className="mb-1 block text-xs font-medium">Site (URL)</label>
+            <Input
+              value={f.website}
+              onChange={(e) => update("website", e.target.value)}
+              placeholder="https://empresa.com.br"
+              maxLength={200}
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="mb-1 block text-xs font-medium">
+              Descrição da empresa
+            </label>
+            <Textarea
+              value={f.description}
+              onChange={(e) => update("description", e.target.value)}
+              placeholder="Conte sobre a empresa, serviços, anos de experiência..."
+              maxLength={600}
+              rows={3}
+            />
+          </div>
+
           <div>
             <label className="mb-1 block text-xs font-medium">
               Telefone mascarado (ghost)
             </label>
             <Input
-              value={phoneMasked}
-              onChange={(e) => setPhoneMasked(e.target.value)}
+              value={f.phoneMasked}
+              onChange={(e) => update("phoneMasked", e.target.value)}
               placeholder="(12) 9****-****"
               maxLength={30}
             />
           </div>
+
+          <div className="flex items-end">
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={f.verified}
+                onChange={(e) => update("verified", e.target.checked)}
+                className="h-4 w-4"
+              />
+              <BadgeCheck className="h-4 w-4 text-primary" />
+              Selo de verificação
+            </label>
+          </div>
+
+          {/* Logo */}
+          <div className="md:col-span-2">
+            <label className="mb-1 block text-xs font-medium">Logo da empresa</label>
+            <div className="flex items-center gap-3">
+              {f.logoUrl ? (
+                <div className="relative">
+                  <img
+                    src={f.logoUrl}
+                    alt="Logo"
+                    className="h-16 w-16 rounded-md border object-cover"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => update("logoUrl", "")}
+                    className="absolute -right-2 -top-2 rounded-full bg-destructive p-0.5 text-destructive-foreground"
+                    aria-label="Remover logo"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex h-16 w-16 items-center justify-center rounded-md border border-dashed text-muted-foreground">
+                  <ImageIcon className="h-5 w-5" />
+                </div>
+              )}
+              <input
+                ref={logoInput}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => handleLogo(e.target.files?.[0])}
+              />
+              <Button type="button" variant="outline" size="sm" onClick={() => logoInput.current?.click()}>
+                <Upload className="mr-2 h-4 w-4" /> Enviar logo
+              </Button>
+            </div>
+          </div>
+
+          {/* Fotos */}
+          <div className="md:col-span-2">
+            <label className="mb-1 block text-xs font-medium">
+              Fotos (até {MAX_PHOTOS})
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {f.photos.map((src, i) => (
+                <div key={i} className="relative">
+                  <img
+                    src={src}
+                    alt={`Foto ${i + 1}`}
+                    className="h-20 w-20 rounded-md border object-cover"
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      update(
+                        "photos",
+                        f.photos.filter((_, idx) => idx !== i),
+                      )
+                    }
+                    className="absolute -right-2 -top-2 rounded-full bg-destructive p-0.5 text-destructive-foreground"
+                    aria-label="Remover foto"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              ))}
+              {f.photos.length < MAX_PHOTOS && (
+                <>
+                  <input
+                    ref={photosInput}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    className="hidden"
+                    onChange={(e) => {
+                      handlePhotos(e.target.files);
+                      e.target.value = "";
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => photosInput.current?.click()}
+                    className="flex h-20 w-20 items-center justify-center rounded-md border border-dashed text-muted-foreground hover:bg-muted"
+                  >
+                    <Plus className="h-5 w-5" />
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
           <div className="md:col-span-2 flex justify-end">
             <Button type="submit">
-              <Plus className="mr-2 h-4 w-4" /> Adicionar
+              <Save className="mr-2 h-4 w-4" /> {isEdit ? "Salvar alterações" : "Adicionar anunciante"}
             </Button>
           </div>
         </form>
@@ -333,91 +620,95 @@ function ProviderRow({
 }: {
   provider: Provider;
   isCustom: boolean;
-  onSave: (patch: { tier: ProviderTier; whatsapp: string; phoneMasked: string; area: string }) => void;
+  onSave: (patch: ProviderOverride) => void;
   onRemove: () => void;
 }) {
-  const [tier, setTier] = useState<ProviderTier>(provider.tier);
-  const [whatsapp, setWhatsapp] = useState(provider.whatsapp || "");
-  const [phoneMasked, setPhoneMasked] = useState(provider.phoneMasked || "");
-  const [area, setArea] = useState(provider.area || "");
-
-  const tierMeta = TIERS.find((t) => t.value === tier)!;
+  const [open, setOpen] = useState(false);
+  const tierMeta = TIERS.find((t) => t.value === provider.tier)!;
 
   return (
     <Card>
       <CardContent className="p-4">
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 font-semibold">
-            {provider.name}
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-3">
+            {provider.logoUrl ? (
+              <img src={provider.logoUrl} alt="" className="h-10 w-10 rounded border object-cover" />
+            ) : (
+              <div className="flex h-10 w-10 items-center justify-center rounded border bg-muted text-muted-foreground">
+                <ImageIcon className="h-4 w-4" />
+              </div>
+            )}
+            <div>
+              <div className="flex items-center gap-2 font-semibold">
+                {provider.name}
+                {provider.verified && <BadgeCheck className="h-4 w-4 text-primary" />}
+                {isCustom && (
+                  <Badge variant="outline" className="text-[10px]">
+                    Adicionado
+                  </Badge>
+                )}
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Badge className={tierMeta.color + " text-[10px]"}>{tierMeta.label}</Badge>
+                {provider.phone && (
+                  <span className="flex items-center gap-1">
+                    <Phone className="h-3 w-3" /> {provider.phone}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <Button size="sm" variant="outline" onClick={() => setOpen((v) => !v)}>
+              {open ? "Fechar" : "Editar"}
+            </Button>
             {isCustom && (
-              <Badge variant="outline" className="text-[10px]">
-                Adicionado
-              </Badge>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="text-destructive hover:text-destructive"
+                onClick={() => {
+                  if (confirm("Remover este anunciante?")) onRemove();
+                }}
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
             )}
           </div>
-          <Badge className={tierMeta.color}>{tierMeta.label}</Badge>
         </div>
-        <div className="grid gap-3 md:grid-cols-2">
-          <div>
-            <label className="mb-1 block text-xs font-medium">Tier</label>
-            <select
-              value={tier}
-              onChange={(e) => setTier(e.target.value as ProviderTier)}
-              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-            >
-              {TIERS.map((t) => (
-                <option key={t.value} value={t.value}>
-                  {t.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="mb-1 block text-xs font-medium">Área / bairros</label>
-            <Input value={area} onChange={(e) => setArea(e.target.value)} maxLength={200} />
-          </div>
-          <div>
-            <label className="mb-1 block text-xs font-medium">
-              WhatsApp (formato 5511999999999)
-            </label>
-            <Input
-              value={whatsapp}
-              onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, "").slice(0, 15))}
-              placeholder="55119XXXXXXXX"
-            />
-          </div>
-          <div>
-            <label className="mb-1 block text-xs font-medium">
-              Telefone mascarado (ghost)
-            </label>
-            <Input
-              value={phoneMasked}
-              onChange={(e) => setPhoneMasked(e.target.value)}
-              placeholder="(12) 9****-****"
-              maxLength={30}
-            />
-          </div>
-        </div>
-        <div className="mt-4 flex justify-between gap-2">
-          {isCustom ? (
-            <Button
-              size="sm"
-              variant="ghost"
-              className="text-destructive hover:text-destructive"
-              onClick={() => {
-                if (confirm("Remover este anunciante?")) onRemove();
+
+        {open && (
+          <div className="mt-4">
+            <ProviderForm
+              city=""
+              isEdit
+              initial={fromProvider(provider)}
+              onSaved={(data) => {
+                onSave({
+                  name: data.name,
+                  tier: data.tier,
+                  area: data.area || undefined,
+                  whatsapp: data.whatsapp || undefined,
+                  phoneMasked: data.phoneMasked || undefined,
+                  phone: data.phone || undefined,
+                  address: data.address || undefined,
+                  description: data.description || undefined,
+                  instagram: data.instagram || undefined,
+                  website: data.website || undefined,
+                  verified: data.verified,
+                  logoUrl: data.logoUrl || undefined,
+                  photos: data.photos.length ? data.photos : undefined,
+                });
+                setOpen(false);
               }}
-            >
-              <Trash2 className="mr-2 h-4 w-4" /> Remover
-            </Button>
-          ) : (
-            <span />
-          )}
-          <Button size="sm" onClick={() => onSave({ tier, whatsapp, phoneMasked, area })}>
-            <Save className="mr-2 h-4 w-4" /> Salvar
-          </Button>
-        </div>
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );
 }
+
+// Bridge: when ProviderForm is used as the "create" form at the top, it needs to call addProvider.
+// We override onSaved at that call site:
+// (kept here for clarity — see AdminEditor above)
