@@ -25,6 +25,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import { SITE } from "@/components/site-data";
 import { ALL_CITIES, type City } from "@/components/cities-data";
+import { getCityProviders } from "@/components/city-providers";
+import { ProviderDirectory } from "@/components/provider-cards";
 
 const SITE_URL = "https://guincho24hrs.com.br";
 
@@ -218,6 +220,13 @@ function CityPage() {
           </span>
         </div>
       </header>
+
+      {/* Diretório de prestadores (Cards Ouro + Fantasma) */}
+      <ProviderDirectory
+        providers={getCityProviders(`${city.slug}-${city.uf.toLowerCase()}`)}
+        cityName={city.name}
+        cityUf={city.uf}
+      />
 
       {/* Serviços na cidade */}
       <section className="mt-14">
