@@ -1,0 +1,202 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Phone, MapPin, AlertTriangle, Truck } from "lucide-react";
+import { SITE } from "@/components/site-data";
+
+export const Route = createFileRoute("/rodovias-vale-do-paraiba")({
+  head: () => ({
+    meta: [
+      { title: "Guincho 24h nas Rodovias do Vale do Paraíba — Dutra, Carvalho Pinto, Tamoios" },
+      {
+        name: "description",
+        content:
+          "Atendimento de guincho e reboque 24 horas nas principais rodovias do Vale do Paraíba: Dutra (BR-116), Carvalho Pinto (SP-070), Tamoios (SP-099), Oswaldo Cruz (SP-125) e Floriano Rodrigues Pinheiro (SP-123).",
+      },
+      { name: "keywords", content: "guincho dutra, guincho carvalho pinto, guincho tamoios, guincho oswaldo cruz, reboque vale do paraíba, br-116, sp-070, sp-099" },
+      { property: "og:title", content: "Guincho 24h nas Rodovias do Vale do Paraíba" },
+      { property: "og:description", content: "Reboque rápido em toda extensão de Dutra, Carvalho Pinto, Tamoios e serra." },
+      { property: "og:type", content: "website" },
+      { name: "robots", content: "index,follow" },
+    ],
+    links: [{ rel: "canonical", href: "https://guincho24hrs.com.br/rodovias-vale-do-paraiba" }],
+  }),
+  component: RodoviasVPPage,
+});
+
+const RODOVIAS = [
+  {
+    sigla: "BR-116",
+    nome: "Rodovia Presidente Dutra",
+    extensao: "402 km no trecho SP",
+    descricao:
+      "Principal eixo rodoviário do país, liga São Paulo ao Rio de Janeiro cortando todo o Vale do Paraíba. Cidades atendidas: Guarulhos, Arujá, Jacareí, São José dos Campos, Caçapava, Taubaté, Pindamonhangaba, Aparecida, Guaratinguetá, Lorena, Cruzeiro e divisa com RJ.",
+    pontos: ["Pedágio Moreira César", "Trevo de Caçapava", "Saída Dutra/Tamoios em São José", "Praça Aparecida"],
+    riscos: "Trechos de serra com neblina entre Roseira e Cachoeira Paulista; pista molhada e congestionamento aos finais de semana.",
+  },
+  {
+    sigla: "SP-070",
+    nome: "Rodovia Ayrton Senna / Carvalho Pinto",
+    extensao: "139 km",
+    descricao:
+      "Liga São Paulo a Taubaté passando por Guararema, Jacareí e São José dos Campos. Alternativa rápida à Dutra com pista duplicada e pedágios eletrônicos.",
+    pontos: ["Praça do Pinhão (Jacareí)", "Saída Urbanova/Aquarius", "Entroncamento Carvalho Pinto/Dutra em Taubaté"],
+    riscos: "Velocidade alta e pouca acostamento em alguns trechos; presença de fauna no entardecer.",
+  },
+  {
+    sigla: "SP-099",
+    nome: "Rodovia dos Tamoios",
+    extensao: "82 km",
+    descricao:
+      "Conecta São José dos Campos ao Litoral Norte (Caraguatatuba, Ubatuba, São Sebastião, Ilhabela). Trecho de serra duplicado, mas com curvas acentuadas e neblina constante.",
+    pontos: ["Início em SJC (entroncamento Dutra)", "Paraibuna", "Trecho de Serra Nova", "Descida para Caraguatatuba"],
+    riscos: "Serra com neblina densa, chuvas fortes no verão e risco de panes em descidas longas. Reboque pesado disponível 24h.",
+  },
+  {
+    sigla: "SP-125",
+    nome: "Rodovia Oswaldo Cruz",
+    extensao: "97 km",
+    descricao:
+      "Cruza a Serra do Mar ligando Taubaté a Ubatuba, passando por Redenção da Serra e São Luiz do Paraitinga. Pista simples e curvilínea.",
+    pontos: ["Saída Taubaté", "São Luiz do Paraitinga", "Subida da Serra para Ubatuba"],
+    riscos: "Curvas fechadas, pista molhada, queda de barreiras no período chuvoso.",
+  },
+  {
+    sigla: "SP-123",
+    nome: "Rodovia Floriano Rodrigues Pinheiro",
+    extensao: "47 km",
+    descricao:
+      "Acesso turístico à Serra da Mantiqueira, ligando Taubaté a Campos do Jordão via Pindamonhangaba. Bastante usada no inverno.",
+    pontos: ["Pindamonhangaba", "Subida da Serra", "Acesso Capivari/Campos do Jordão"],
+    riscos: "Geada, neblina e aclives longos que provocam superaquecimento de motor e câmbio.",
+  },
+  {
+    sigla: "BR-459",
+    nome: "Rodovia Lorena–Itajubá",
+    extensao: "98 km no trecho SP/MG",
+    descricao:
+      "Liga Lorena (SP) a Itajubá (MG) cortando a Serra da Mantiqueira pela região de Piquete e Delfim Moreira. Importante corredor industrial.",
+    pontos: ["Lorena", "Piquete", "Subida da Serra para MG"],
+    riscos: "Pista simples sinuosa, neblina noturna e trechos sem acostamento.",
+  },
+];
+
+function RodoviasVPPage() {
+  const telHref = `tel:+55${SITE.phone.replace(/\D/g, "")}`;
+  const wppHref = `https://wa.me/55${SITE.whatsapp.replace(/\D/g, "")}?text=Preciso%20de%20guincho%20em%20rodovia%20do%20Vale%20do%20Para%C3%ADba`;
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-primary/10 via-background to-background py-16 border-b">
+        <div className="container max-w-5xl">
+          <Badge className="mb-4">Vale do Paraíba — SP</Badge>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            Guincho 24h nas Rodovias do Vale do Paraíba
+          </h1>
+          <p className="text-lg text-muted-foreground mb-6 max-w-3xl">
+            Reboque rápido e seguro em qualquer ponto da Dutra (BR-116), Carvalho Pinto (SP-070),
+            Tamoios (SP-099), Oswaldo Cruz (SP-125), Floriano Rodrigues Pinheiro (SP-123) e BR-459.
+            Cobertura completa entre São Paulo, Litoral Norte e Sul de Minas.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <a href={telHref}><Phone className="mr-2 h-4 w-4" />Ligar agora — {SITE.phone}</a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={wppHref} target="_blank" rel="noreferrer">WhatsApp</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Lista de rodovias */}
+      <section className="py-12">
+        <div className="container max-w-5xl space-y-6">
+          {RODOVIAS.map((r) => (
+            <Card key={r.sigla}>
+              <CardHeader>
+                <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div>
+                    <Badge variant="secondary" className="mb-2">{r.sigla}</Badge>
+                    <CardTitle className="text-2xl">{r.nome}</CardTitle>
+                    <p className="text-sm text-muted-foreground mt-1">Extensão: {r.extensao}</p>
+                  </div>
+                  <Button asChild size="sm">
+                    <a href={telHref}><Phone className="mr-2 h-4 w-4" />Acionar guincho</a>
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p>{r.descricao}</p>
+                <div>
+                  <h3 className="font-semibold flex items-center gap-2 mb-2">
+                    <MapPin className="h-4 w-4 text-primary" /> Pontos de referência atendidos
+                  </h3>
+                  <ul className="grid sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                    {r.pontos.map((p) => <li key={p}>• {p}</li>)}
+                  </ul>
+                </div>
+                <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50">
+                  <AlertTriangle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <p className="text-sm"><strong>Atenção:</strong> {r.riscos}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Cidades do Vale */}
+      <section className="py-12 bg-muted/30 border-t">
+        <div className="container max-w-5xl">
+          <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
+            <Truck className="h-7 w-7 text-primary" />
+            Cidades cobertas no Vale do Paraíba
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              ["sao-jose-dos-campos-sp", "São José dos Campos"],
+              ["taubate-sp", "Taubaté"],
+              ["jacarei-sp", "Jacareí"],
+              ["pindamonhangaba-sp", "Pindamonhangaba"],
+              ["tremembe-sp", "Tremembé"],
+              ["aparecida-sp", "Aparecida"],
+              ["roseira-sp", "Roseira"],
+              ["cruzeiro-sp", "Cruzeiro"],
+              ["queluz-sp", "Queluz"],
+              ["campos-do-jordao-sp", "Campos do Jordão"],
+              ["sao-luiz-do-paraitinga-sp", "São Luiz do Paraitinga"],
+              ["caraguatatuba-sp", "Caraguatatuba"],
+              ["ubatuba-sp", "Ubatuba"],
+              ["sao-sebastiao-sp", "São Sebastião"],
+            ].map(([slug, name]) => (
+              <Link
+                key={slug}
+                to="/guincho-em-{$slug}"
+                params={{ slug }}
+                className="inline-flex items-center px-3 py-1.5 rounded-full bg-background border text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                {name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA final */}
+      <section className="py-16">
+        <div className="container max-w-3xl text-center">
+          <h2 className="text-3xl font-bold mb-4">Parou na estrada? Aja rápido.</h2>
+          <p className="text-muted-foreground mb-6">
+            Equipes de guincho leve, médio e pesado prontas para atender qualquer trecho do Vale do Paraíba 24 horas.
+          </p>
+          <Button asChild size="lg">
+            <a href={telHref}><Phone className="mr-2 h-4 w-4" />{SITE.phone}</a>
+          </Button>
+        </div>
+      </section>
+    </div>
+  );
+}

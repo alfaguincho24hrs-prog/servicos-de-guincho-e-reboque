@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicosDeGuinchoEReboqueRouteImport } from './routes/servicos-de-guincho-e-reboque'
 import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as RodoviasValeDoParaibaRouteImport } from './routes/rodovias-vale-do-paraiba'
 import { Route as GuinchoEmChar123slugChar125RouteImport } from './routes/guincho-em-{$slug}'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CoberturaRouteImport } from './routes/cobertura'
@@ -26,6 +27,11 @@ const ServicosDeGuinchoEReboqueRoute =
 const ServicosRoute = ServicosRouteImport.update({
   id: '/servicos',
   path: '/servicos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RodoviasValeDoParaibaRoute = RodoviasValeDoParaibaRouteImport.update({
+  id: '/rodovias-vale-do-paraiba',
+  path: '/rodovias-vale-do-paraiba',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuinchoEmChar123slugChar125Route =
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-em-{$slug}': typeof GuinchoEmChar123slugChar125Route
+  '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-em-{$slug}': typeof GuinchoEmChar123slugChar125Route
+  '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-em-{$slug}': typeof GuinchoEmChar123slugChar125Route
+  '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/cobertura'
     | '/contato'
     | '/guincho-em-{$slug}'
+    | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
   fileRoutesByTo: FileRoutesByTo
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/cobertura'
     | '/contato'
     | '/guincho-em-{$slug}'
+    | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
   id:
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/cobertura'
     | '/contato'
     | '/guincho-em-{$slug}'
+    | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
   fileRoutesById: FileRoutesById
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   CoberturaRoute: typeof CoberturaRoute
   ContatoRoute: typeof ContatoRoute
   GuinchoEmChar123slugChar125Route: typeof GuinchoEmChar123slugChar125Route
+  RodoviasValeDoParaibaRoute: typeof RodoviasValeDoParaibaRoute
   ServicosRoute: typeof ServicosRoute
   ServicosDeGuinchoEReboqueRoute: typeof ServicosDeGuinchoEReboqueRoute
 }
@@ -137,6 +150,13 @@ declare module '@tanstack/react-router' {
       path: '/servicos'
       fullPath: '/servicos'
       preLoaderRoute: typeof ServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rodovias-vale-do-paraiba': {
+      id: '/rodovias-vale-do-paraiba'
+      path: '/rodovias-vale-do-paraiba'
+      fullPath: '/rodovias-vale-do-paraiba'
+      preLoaderRoute: typeof RodoviasValeDoParaibaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guincho-em-{$slug}': {
@@ -183,9 +203,19 @@ const rootRouteChildren: RootRouteChildren = {
   CoberturaRoute: CoberturaRoute,
   ContatoRoute: ContatoRoute,
   GuinchoEmChar123slugChar125Route: GuinchoEmChar123slugChar125Route,
+  RodoviasValeDoParaibaRoute: RodoviasValeDoParaibaRoute,
   ServicosRoute: ServicosRoute,
   ServicosDeGuinchoEReboqueRoute: ServicosDeGuinchoEReboqueRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
