@@ -20,6 +20,7 @@ import { Route as GuinchoEmChar123slugChar125RouteImport } from './routes/guinch
 import { Route as GuinchoDeMotosRouteImport } from './routes/guincho-de-motos'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CoberturaRouteImport } from './routes/cobertura'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AutoSocorroRouteImport } from './routes/auto-socorro'
 import { Route as AnuncieRouteImport } from './routes/anuncie'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -82,6 +83,11 @@ const CoberturaRoute = CoberturaRouteImport.update({
   path: '/cobertura',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AutoSocorroRoute = AutoSocorroRouteImport.update({
   id: '/auto-socorro',
   path: '/auto-socorro',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/anuncie': typeof AnuncieRoute
   '/auto-socorro': typeof AutoSocorroRoute
+  '/blog': typeof BlogRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-de-motos': typeof GuinchoDeMotosRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/anuncie': typeof AnuncieRoute
   '/auto-socorro': typeof AutoSocorroRoute
+  '/blog': typeof BlogRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-de-motos': typeof GuinchoDeMotosRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/anuncie': typeof AnuncieRoute
   '/auto-socorro': typeof AutoSocorroRoute
+  '/blog': typeof BlogRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-de-motos': typeof GuinchoDeMotosRoute
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/anuncie'
     | '/auto-socorro'
+    | '/blog'
     | '/cobertura'
     | '/contato'
     | '/guincho-de-motos'
@@ -179,6 +189,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/anuncie'
     | '/auto-socorro'
+    | '/blog'
     | '/cobertura'
     | '/contato'
     | '/guincho-de-motos'
@@ -196,6 +207,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/anuncie'
     | '/auto-socorro'
+    | '/blog'
     | '/cobertura'
     | '/contato'
     | '/guincho-de-motos'
@@ -214,6 +226,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AnuncieRoute: typeof AnuncieRoute
   AutoSocorroRoute: typeof AutoSocorroRoute
+  BlogRoute: typeof BlogRoute
   CoberturaRoute: typeof CoberturaRoute
   ContatoRoute: typeof ContatoRoute
   GuinchoDeMotosRoute: typeof GuinchoDeMotosRoute
@@ -306,6 +319,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoberturaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auto-socorro': {
       id: '/auto-socorro'
       path: '/auto-socorro'
@@ -342,6 +362,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AnuncieRoute: AnuncieRoute,
   AutoSocorroRoute: AutoSocorroRoute,
+  BlogRoute: BlogRoute,
   CoberturaRoute: CoberturaRoute,
   ContatoRoute: ContatoRoute,
   GuinchoDeMotosRoute: GuinchoDeMotosRoute,
