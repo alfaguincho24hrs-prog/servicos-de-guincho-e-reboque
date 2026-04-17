@@ -28,7 +28,26 @@ import { ALL_CITIES, type City } from "@/components/cities-data";
 const SITE_URL = "https://guincho24hrs.com.br";
 
 function findCity(slug: string): City | undefined {
-  return ALL_CITIES.find((c) => c.slug === slug);
+  const normalized = slug.toLowerCase().trim();
+  // Match exact slug (e.g. "sao-paulo")
+  let city = ALL_CITIES.find((c) => c.slug === normalized);
+  if (city) return city;
+  // Match slug with UF suffix (e.g. "americana-sp" or "sao-paulo-sp")
+  city = ALL_CITIES.find(
+    (c) => `${c.slug}-${c.uf.toLowerCase()}` === normalized
+  );
+  if (city) return city;
+  // Match slug where UF prefix is part (fallback)
+  const ufMatch = normalized.match(/-([a-z]{2})$/);
+  if (ufMatch) {
+    const baseSlug = normalized.slice(0, -3);
+    const uf = ufMatch[1].toUpperCase();
+    city = ALL_CITIES.find((c) => c.slug === baseSlug && c.uf === uf);
+    if (city) return city;
+    city = ALL_CITIES.find((c) => c.slug === baseSlug);
+    if (city) return city;
+  }
+  return undefined;
 }
 
 export const Route = createFileRoute("/guincho-em-$slug")({
@@ -326,7 +345,7 @@ function CityPage() {
               <Link
                 key={c.slug}
                 to="/guincho-em-$slug"
-                params={{ slug: c.slug }}
+                params={{ slug: `${c.slug}-${c.uf.toLowerCase()}` }}
                 className="rounded-full border bg-secondary/40 px-3 py-1 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
               >
                 Guincho em {c.name}
