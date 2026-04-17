@@ -170,29 +170,27 @@ function CitiesGrid({
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {cities.map((c) => (
-        <Card
+        <Link
           key={`${c.slug}-${c.uf}`}
-          className="border-border/60 transition-all hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-[var(--shadow-elegant)]"
+          to="/guincho-em-$slug"
+          params={{ slug: c.slug }}
+          className="block"
         >
-          <CardContent className="flex items-center gap-3 p-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-secondary">
-              <Truck className="h-5 w-5 text-primary" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate font-semibold">
-                Guincho 24h em {c.name}
-              </p>
-              <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                <MapPin className="h-3 w-3" /> {c.name} - {c.uf}
-              </p>
-            </div>
-            <Button asChild size="sm" variant="ghost" aria-label={`Ligar para guincho em ${c.name}`}>
-              <a href={`tel:${SITE.phone}`}>
-                <Phone className="h-4 w-4" />
-              </a>
-            </Button>
-          </CardContent>
-        </Card>
+          <Card className="border-border/60 transition-all hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-[var(--shadow-elegant)]">
+            <CardContent className="flex items-center gap-3 p-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-secondary">
+                <Truck className="h-5 w-5 text-primary" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate font-semibold">Guincho 24h em {c.name}</p>
+                <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <MapPin className="h-3 w-3" /> {c.name} - {c.uf}
+                </p>
+              </div>
+              <Phone className="h-4 w-4 text-primary" />
+            </CardContent>
+          </Card>
+        </Link>
       ))}
     </div>
   );
