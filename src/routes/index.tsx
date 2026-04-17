@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Phone, Clock, ShieldCheck, MapPin, Star, ArrowRight, Truck, Wrench, Zap } from "lucide-react";
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +23,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const partnersAutoplay = useRef(Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }));
   return (
     <div>
       {/* HERO */}
@@ -110,7 +113,7 @@ function HomePage() {
           </div>
           <Button asChild variant="outline"><Link to="/cobertura">Ver todos <ArrowRight className="h-4 w-4" /></Link></Button>
         </div>
-        <Carousel opts={{ align: "start", loop: true }} className="w-full">
+        <Carousel opts={{ align: "start", loop: true }} plugins={[partnersAutoplay.current]} className="w-full">
           <CarouselContent>
             {PARTNERS.map((p) => (
               <CarouselItem key={p.name} className="sm:basis-1/2 lg:basis-1/3">
