@@ -9,12 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicosDeGuinchoEReboqueRouteImport } from './routes/servicos-de-guincho-e-reboque'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CoberturaRouteImport } from './routes/cobertura'
 import { Route as AnuncieRouteImport } from './routes/anuncie'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ServicosDeGuinchoEReboqueRoute =
+  ServicosDeGuinchoEReboqueRouteImport.update({
+    id: '/servicos-de-guincho-e-reboque',
+    path: '/servicos-de-guincho-e-reboque',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicosRoute = ServicosRouteImport.update({
   id: '/servicos',
   path: '/servicos',
@@ -47,6 +54,7 @@ export interface FileRoutesByFullPath {
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
+  '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +62,7 @@ export interface FileRoutesByTo {
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
+  '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +71,33 @@ export interface FileRoutesById {
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
+  '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/anuncie' | '/cobertura' | '/contato' | '/servicos'
+  fullPaths:
+    | '/'
+    | '/anuncie'
+    | '/cobertura'
+    | '/contato'
+    | '/servicos'
+    | '/servicos-de-guincho-e-reboque'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/anuncie' | '/cobertura' | '/contato' | '/servicos'
-  id: '__root__' | '/' | '/anuncie' | '/cobertura' | '/contato' | '/servicos'
+  to:
+    | '/'
+    | '/anuncie'
+    | '/cobertura'
+    | '/contato'
+    | '/servicos'
+    | '/servicos-de-guincho-e-reboque'
+  id:
+    | '__root__'
+    | '/'
+    | '/anuncie'
+    | '/cobertura'
+    | '/contato'
+    | '/servicos'
+    | '/servicos-de-guincho-e-reboque'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,10 +106,18 @@ export interface RootRouteChildren {
   CoberturaRoute: typeof CoberturaRoute
   ContatoRoute: typeof ContatoRoute
   ServicosRoute: typeof ServicosRoute
+  ServicosDeGuinchoEReboqueRoute: typeof ServicosDeGuinchoEReboqueRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/servicos-de-guincho-e-reboque': {
+      id: '/servicos-de-guincho-e-reboque'
+      path: '/servicos-de-guincho-e-reboque'
+      fullPath: '/servicos-de-guincho-e-reboque'
+      preLoaderRoute: typeof ServicosDeGuinchoEReboqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos': {
       id: '/servicos'
       path: '/servicos'
@@ -125,7 +162,17 @@ const rootRouteChildren: RootRouteChildren = {
   CoberturaRoute: CoberturaRoute,
   ContatoRoute: ContatoRoute,
   ServicosRoute: ServicosRoute,
+  ServicosDeGuinchoEReboqueRoute: ServicosDeGuinchoEReboqueRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
