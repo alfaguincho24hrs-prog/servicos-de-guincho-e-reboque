@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Truck, Mail, Phone, MapPin } from "lucide-react";
-import { SITE, SERVICES } from "./site-data";
+import { SITE } from "./site-data";
 
 export function SiteFooter() {
   return (
