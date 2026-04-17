@@ -28,6 +28,8 @@ import { ALL_CITIES, type City } from "@/components/cities-data";
 import { getCityProviders } from "@/components/city-providers";
 import { ProviderDirectory } from "@/components/provider-cards";
 import { getCityCopy } from "@/components/city-variations";
+import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { AdminEditButton } from "@/components/admin-edit-button";
 
 const SITE_URL = "https://guincho24hrs.com.br";
 
@@ -435,6 +437,12 @@ function CityPage() {
           </Button>
         </div>
       </section>
+
+      {/* Depoimentos rotacionados por cidade (variação anti-doorway) */}
+      <TestimonialsCarousel citySeed={`${city.slug}-${city.uf}`} />
+
+      {/* Botão de edição (login na rota /admin) */}
+      <AdminEditButton citySlugUf={`${city.slug}-${city.uf.toLowerCase()}`} />
     </div>
   );
 }

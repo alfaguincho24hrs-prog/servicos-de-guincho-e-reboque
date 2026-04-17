@@ -39,6 +39,9 @@ export function getCityCopy(cityName: string, uf: string, slug: string): CityCop
     `Pane no meio do trânsito de ${c}? Respira fundo: estamos a uma ligação de distância. Atendimento 24 horas, todos os dias, com motoristas que conhecem a cidade de ponta a ponta e chegam rápido até onde você está.`,
     `Quando o carro para em ${c}, cada minuto pesa. Por isso operamos com uma rede local enxuta e ágil — guincho leve, pesado, moto, auto socorro e pane seca, tudo coordenado por uma única central que atende dia, noite e feriado.`,
     `Precisando de reboque agora em ${c}? Acionamos o parceiro mais próximo do seu endereço e você acompanha o tempo de chegada. Sem enrolação, sem taxa surpresa: orçamento fechado antes do guincho sair.`,
+    `Carro parado em ${c} não é o fim do dia — é só uma ligação. A gente toca a operação local com prestadores que já estão na rua, prontos para sair assim que sua chamada cai na central.`,
+    `Em ${c}, qualquer ocorrência veicular vira prioridade pra gente: pane mecânica, batida, pneu furado, falta de combustível ou simplesmente um carro que não dá partida no estacionamento. Liga, descreve, resolve.`,
+    `A vida em ${c} não para — e quando o seu carro para, a gente entra em ação. Equipes de plantão, central que atende em segundos e cobertura que vai do centro às bordas da cidade, inclusive nas rodovias de acesso.`,
   ];
 
   const servicesTitles = [

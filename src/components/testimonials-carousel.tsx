@@ -50,8 +50,26 @@ const TESTIMONIALS: Testimonial[] = [
   { name: "Priscila Nogueira Ataíde", city: "Cubatão - SP", text: "Descendo a Imigrantes meu freio falhou. Consegui parar e liguei. O guincho chegou rápido na serra, com toda segurança. Salvaram minha vida literalmente." },
 ];
 
-export function TestimonialsCarousel() {
+function hashSeed(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (h << 5) - h + s.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
+
+export function TestimonialsCarousel({ citySeed }: { citySeed?: string } = {}) {
   const plugin = React.useRef(Autoplay({ delay: 4500, stopOnInteraction: true }));
+  // Reordena depoimentos por cidade — mesma cidade = mesma ordem (estável p/ SEO).
+  const items = React.useMemo(() => {
+    if (!citySeed) return TESTIMONIALS;
+    const seed = hashSeed(citySeed);
+    const arr = [...TESTIMONIALS];
+    // rotação determinística
+    const offset = seed % arr.length;
+    return [...arr.slice(offset), ...arr.slice(0, offset)];
+  }, [citySeed]);
 
   return (
     <section className="bg-secondary/40 py-20" aria-labelledby="depoimentos-heading">
@@ -75,7 +93,7 @@ export function TestimonialsCarousel() {
           onMouseLeave={() => plugin.current.play()}
         >
           <CarouselContent>
-            {TESTIMONIALS.map((t, i) => (
+            {items.map((t, i) => (
               <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/3">
                 <Card className="h-full border-border/60">
                   <CardContent className="flex h-full flex-col gap-4 p-6">
