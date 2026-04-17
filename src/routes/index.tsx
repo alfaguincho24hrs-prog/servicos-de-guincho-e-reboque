@@ -23,6 +23,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const partnersAutoplay = useRef(Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }));
   return (
     <div>
       {/* HERO */}
