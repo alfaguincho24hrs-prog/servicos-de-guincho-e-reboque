@@ -46,7 +46,12 @@ export const Route = createRootRoute({
       { name: "twitter:title", content: "Guincho e Reboque 24 horas |  Guincho em Todo o Brasil" },
       { name: "twitter:description", content: "Portal nacional de guincho e reboque 24 horas. Encontre empresas de auto socorro qualificadas na sua cidade. Atendimento rápido em rodovias e área urbana." },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "shortcut icon", type: "image/png", href: "/favicon.png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
