@@ -27,6 +27,7 @@ import { SITE } from "@/components/site-data";
 import { ALL_CITIES, type City } from "@/components/cities-data";
 import { getCityProviders } from "@/components/city-providers";
 import { ProviderDirectory } from "@/components/provider-cards";
+import { getCityCopy } from "@/components/city-variations";
 
 const SITE_URL = "https://guincho24hrs.com.br";
 
@@ -116,6 +117,7 @@ function CityPage() {
   const telHref = `tel:${SITE.phone.replace(/\D/g, "")}`;
   const url = `${SITE_URL}/guincho-em-${city.slug}-${city.uf.toLowerCase()}`;
   const local = getCityLocalData(`${city.slug}-${city.uf.toLowerCase()}`, city.uf);
+  const copy = getCityCopy(city.name, city.uf, city.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -184,12 +186,7 @@ function CityPage() {
         <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
           Guincho 24 Horas em {city.name} - {city.uf}
         </h1>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Precisa de um <strong>guincho em {city.name}</strong> agora? Atuamos
-          de forma ininterrupta em toda a cidade e região com reboque rápido,
-          seguro e com profissionais habilitados. Acionamento em minutos para
-          carros, motos, utilitários e veículos pesados.
-        </p>
+        <p className="mt-4 max-w-2xl text-muted-foreground">{copy.heroIntro}</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
             <a href={telHref}>
@@ -230,14 +227,8 @@ function CityPage() {
 
       {/* Serviços na cidade */}
       <section className="mt-14">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Serviços de guincho disponíveis em {city.name}
-        </h2>
-        <p className="mt-2 max-w-3xl text-muted-foreground">
-          Nossa rede de parceiros em {city.name}/{city.uf} oferece soluções
-          completas para emergências automotivas, com cobertura em bairros
-          centrais, periferia e rodovias de acesso.
-        </p>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.servicesTitle}</h2>
+        <p className="mt-2 max-w-3xl text-muted-foreground">{copy.servicesIntro}</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICE_ITEMS.map((s) => (
             <Card key={s.title} className="border-border/60">
@@ -257,9 +248,7 @@ function CityPage() {
 
       {/* Bairros e CEPs - SEO local hiper-segmentado */}
       <section className="mt-14">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Bairros atendidos pelo guincho em {city.name}
-        </h2>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.neighborhoodsTitle}</h2>
         <p className="mt-2 max-w-3xl text-muted-foreground">
           Nosso serviço de guincho 24h cobre todos os bairros de {city.name}/{city.uf},
           incluindo região central, zona industrial, bairros residenciais e
@@ -286,9 +275,7 @@ function CityPage() {
       {/* Por que escolher */}
       <section className="mt-14 grid gap-8 md:grid-cols-2">
         <div>
-          <h2 className="text-2xl font-bold md:text-3xl">
-            Por que contratar nosso guincho em {city.name}?
-          </h2>
+          <h2 className="text-2xl font-bold md:text-3xl">{copy.whyTitle}</h2>
           <ul className="mt-4 space-y-3 text-muted-foreground">
             <li className="flex gap-3">
               <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
@@ -342,28 +329,9 @@ function CityPage() {
 
       {/* FAQ */}
       <section className="mt-14">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Dúvidas frequentes sobre guincho em {city.name}
-        </h2>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.faqTitle}</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {[
-            {
-              q: `Quanto custa um guincho em ${city.name}?`,
-              a: `O valor varia conforme a distância, tipo de veículo e horário. Solicite um orçamento gratuito por telefone ou WhatsApp e receba o preço exato para sua rota em ${city.name}/${city.uf}.`,
-            },
-            {
-              q: `Em quanto tempo o guincho chega em ${city.name}?`,
-              a: `Com nossa rede de parceiros locais, o tempo médio de chegada em ${city.name} é de 20 a 40 minutos, dependendo da localização e do trânsito.`,
-            },
-            {
-              q: `Vocês atendem rodovias próximas a ${city.name}?`,
-              a: `Sim. Atendemos toda a malha rodoviária que dá acesso a ${city.name}, incluindo trechos urbanos e estradas vicinais da região.`,
-            },
-            {
-              q: `O serviço é realmente 24 horas em ${city.name}?`,
-              a: `Sim. Operamos 24 horas por dia, 7 dias por semana, inclusive aos finais de semana e feriados em ${city.name} e cidades vizinhas.`,
-            },
-          ].map((f) => (
+          {copy.faqs.map((f) => (
             <Card key={f.q} className="border-border/60">
               <CardContent className="p-5">
                 <h3 className="font-semibold">{f.q}</h3>
@@ -403,19 +371,8 @@ function CityPage() {
 
       {/* SEO LONGO — autoridade local */}
       <section className="mt-14 max-w-4xl space-y-5">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Guincho 24 horas em {city.name}: socorro veicular completo perto de você
-        </h2>
-        <p className="text-muted-foreground leading-relaxed">
-          Quando o seu carro pifa em <strong>{city.name}/{city.uf}</strong>, cada minuto parado
-          significa risco, estresse e prejuízo. O <strong>{SITE.name}</strong> mantém uma rede
-          consolidada de empresas locais especializadas em <strong>guincho 24h em {city.name}</strong>,{" "}
-          <strong>reboque rápido</strong>, <strong>auto socorro mecânico</strong>, <strong>pane seca</strong>{" "}
-          e <strong>remoção veicular</strong>, com cobertura em todos os bairros{local.cepRange ? <> e na faixa de CEP <strong>{local.cepRange}</strong></> : null}. Atendemos carros de
-          passeio, SUVs, picapes, vans, motocicletas, caminhões, ônibus e máquinas pesadas, com{" "}
-          <strong>plataformas hidráulicas</strong>, <strong>asas-delta</strong>, <strong>guinchos pesados</strong>{" "}
-          e <strong>prancha rebaixada</strong> para qualquer porte de veículo.
-        </p>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.longTitle}</h2>
+        <p className="text-muted-foreground leading-relaxed">{copy.longIntro}</p>
         <p className="text-muted-foreground leading-relaxed">
           Nossa central despacha o socorro mais próximo da sua localização em{" "}
           <strong>{city.name}</strong> em poucos minutos, com tempo médio de chegada entre 20 e 40
@@ -462,9 +419,7 @@ function CityPage() {
 
       {/* CTA final */}
       <section className="mt-14 rounded-2xl bg-secondary/50 p-10 text-center">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Guincho 24h em {city.name} a um clique de distância
-        </h2>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.ctaTitle}</h2>
         <p className="mt-2 text-muted-foreground">
           Não fique parado na estrada. Acione agora e resolva sua emergência com
           rapidez e segurança em {city.name}/{city.uf}.
