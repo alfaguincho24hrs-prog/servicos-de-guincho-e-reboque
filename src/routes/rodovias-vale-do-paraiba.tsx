@@ -185,6 +185,50 @@ function RodoviasVPPage() {
         </div>
       </section>
 
+      {/* SEO content */}
+      <section className="py-16">
+        <div className="container max-w-4xl space-y-6">
+          <h2 className="text-3xl font-bold">Guincho 24h no Vale do Paraíba: por que escolher nossa rede?</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            O Vale do Paraíba é uma das regiões mais movimentadas do Brasil, cruzada diariamente por milhares de
+            caminhões, carros de passeio, motos e veículos de carga que se deslocam entre São Paulo, Rio de Janeiro,
+            o Litoral Norte paulista e o Sul de Minas. Esse fluxo intenso, somado a serras com neblina, chuvas
+            torrenciais no verão e descidas longas como a da <strong>Rodovia dos Tamoios</strong> e a da{" "}
+            <strong>Oswaldo Cruz</strong>, faz com que panes mecânicas, superaquecimentos e acidentes sejam
+            ocorrências frequentes. Por isso mantemos bases operacionais em <strong>São José dos Campos</strong>,{" "}
+            <strong>Taubaté</strong>, <strong>Jacareí</strong>, <strong>Pindamonhangaba</strong>,{" "}
+            <strong>Aparecida</strong>, <strong>Guaratinguetá</strong>, <strong>Cruzeiro</strong> e{" "}
+            <strong>Caraguatatuba</strong>, garantindo tempo de resposta médio inferior a 45 minutos em qualquer
+            ponto da Dutra (BR-116) e da Carvalho Pinto (SP-070).
+          </p>
+          <h3 className="text-2xl font-bold pt-4">Serviços disponíveis 24 horas em toda a região</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Nossa frota inclui <strong>guincho leve com plataforma hidráulica</strong> para carros de passeio,{" "}
+            <strong>guincho médio com asa delta</strong> para vans e utilitários, <strong>guincho pesado</strong>{" "}
+            para caminhões, ônibus e máquinas, além de <strong>prancha rebaixada</strong> para veículos esportivos,
+            blindados e importados. Também oferecemos <strong>auto socorro mecânico</strong>, troca de pneu,
+            partida de bateria, chaveiro automotivo emergencial e <strong>pane seca</strong> com entrega de
+            combustível em qualquer trecho do Vale.
+          </p>
+          <h3 className="text-2xl font-bold pt-4">Atendimento em emergências de serra</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Trechos como a subida para <strong>Campos do Jordão</strong> pela SP-123, a descida da{" "}
+            <strong>Tamoios</strong> rumo a Caraguatatuba e a serra da <strong>Oswaldo Cruz</strong> em direção a
+            Ubatuba exigem reboque com freio motor reforçado, cintas certificadas e operadores experientes em
+            condução em aclives e declives acentuados. Nossa equipe é treinada para atuar com segurança em neblina
+            densa, pista molhada e em situações de geada — comuns no inverno da Serra da Mantiqueira.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-4">
+            <Button asChild size="lg">
+              <a href={telHref}><Phone className="h-5 w-5" /> Ligar agora — {SITE.phone}</a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={wppHref} target="_blank" rel="noreferrer">WhatsApp emergencial</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* CTA final */}
       <section className="py-16">
         <div className="container max-w-3xl text-center">
