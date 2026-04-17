@@ -275,9 +275,7 @@ function CityPage() {
       {/* Por que escolher */}
       <section className="mt-14 grid gap-8 md:grid-cols-2">
         <div>
-          <h2 className="text-2xl font-bold md:text-3xl">
-            Por que contratar nosso guincho em {city.name}?
-          </h2>
+          <h2 className="text-2xl font-bold md:text-3xl">{copy.whyTitle}</h2>
           <ul className="mt-4 space-y-3 text-muted-foreground">
             <li className="flex gap-3">
               <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
