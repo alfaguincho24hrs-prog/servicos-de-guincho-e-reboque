@@ -101,7 +101,34 @@ function AdminPage() {
     );
   }
 
-  return <AdminEditor initialCity={search.city} />;
+  return <AdminTabs initialCity={search.city} />;
+}
+
+function AdminTabs({ initialCity }: { initialCity: string }) {
+  const [tab, setTab] = useState<"providers" | "blog">("providers");
+  return (
+    <div>
+      <div className="container mx-auto max-w-5xl px-4 pt-6">
+        <div className="flex gap-2">
+          <Button
+            variant={tab === "providers" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setTab("providers")}
+          >
+            Anunciantes
+          </Button>
+          <Button
+            variant={tab === "blog" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setTab("blog")}
+          >
+            Blog
+          </Button>
+        </div>
+      </div>
+      {tab === "providers" ? <AdminEditor initialCity={initialCity} /> : <BlogAdmin />}
+    </div>
+  );
 }
 
 const ALL_CITY_OPTIONS = ALL_CITIES.map((c) => ({
