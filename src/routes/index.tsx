@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Guincho 24 Horas em Todo o Brasil | Reboque e Auto Socorro" },
       { name: "description", content: "Precisa de guincho agora? Conectamos você a empresas de reboque 24h na sua cidade. Atendimento rápido para carros, motos e veículos pesados em todo o país." },
-      { property: "og:title", content: "Guincho 24 Horas em Todo o Brasil" },
+      { property: "og:title", content: "Guincho 24 Horas no Brasil | Reboque e Auto Socorro" },
       { property: "og:description", content: "Reboque, auto socorro e remoção veicular 24h em todo o Brasil." },
     ],
   }),
