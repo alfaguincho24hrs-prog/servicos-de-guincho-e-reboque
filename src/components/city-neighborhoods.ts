@@ -11,10 +11,16 @@ export const CITY_LOCAL: Record<string, CityLocalData> = {
   // ===== CAPITAL SP - por zonas =====
   "sao-paulo-sp": {
     neighborhoods: [
-      "Centro", "Sé", "Bela Vista", "Liberdade", "Vila Mariana", "Moema",
-      "Pinheiros", "Vila Madalena", "Itaim Bibi", "Jardins", "Brooklin",
-      "Morumbi", "Tatuapé", "Mooca", "Santana", "Lapa", "Butantã",
-      "Vila Olímpia", "Santo Amaro", "Ipiranga", "Penha", "Guaianases",
+      "Centro", "Sé", "República", "Bela Vista", "Liberdade", "Consolação",
+      "Higienópolis", "Santa Cecília", "Bom Retiro", "Pari", "Brás", "Cambuci",
+      "Vila Mariana", "Moema", "Saúde", "Jabaquara", "Vila Clementino",
+      "Pinheiros", "Vila Madalena", "Itaim Bibi", "Jardim Paulista", "Jardim América",
+      "Jardim Europa", "Jardins", "Brooklin", "Campo Belo", "Vila Olímpia",
+      "Morumbi", "Vila Andrade", "Tatuapé", "Mooca", "Belém", "Vila Prudente",
+      "Santana", "Tucuruvi", "Casa Verde", "Lapa", "Perdizes", "Pompeia",
+      "Barra Funda", "Butantã", "Vila Sônia", "Santo Amaro", "Ipiranga",
+      "Vila Carrão", "Penha", "Itaquera", "Guaianases", "Cidade Tiradentes",
+      "Aclimação", "Paraíso",
     ],
     cepRange: "01000-000 a 05999-999 e 08000-000 a 08499-999",
   },
