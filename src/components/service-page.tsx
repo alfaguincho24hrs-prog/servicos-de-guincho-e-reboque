@@ -1,0 +1,125 @@
+import { Link } from "@tanstack/react-router";
+import { Phone, MessageCircle, Check } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { SITE } from "@/components/site-data";
+import { SeoBlock, type FAQItem } from "@/components/seo-block";
+import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+
+export type ServicePageProps = {
+  serviceName: string; // ex: "Guincho Leve"
+  slug: string; // ex: "guincho-leve"
+  heroTitle: string;
+  heroSubtitle: string;
+  intro: string[]; // parágrafos
+  features: string[]; // bullets
+  whenToUse: string[]; // bullets
+  vehicles: string[]; // bullets de veículos atendidos
+  faqs: FAQItem[];
+  whatsappMsg: string;
+  schemaServiceType: string; // ex: "TowingService"
+};
+
+export function ServicePage(p: ServicePageProps) {
+  const wppHref = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(p.whatsappMsg)}`;
+  const url = `https://guincho24hrs.com.br/${p.slug}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: p.schemaServiceType,
+    name: p.serviceName,
+    provider: {
+      "@type": "LocalBusiness",
+      name: SITE.name,
+      telephone: SITE.phone,
+      url: "https://guincho24hrs.com.br",
+    },
+    areaServed: { "@type": "Country", name: "Brasil" },
+    description: p.heroSubtitle,
+    url,
+    hoursAvailable: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "00:00",
+      closes: "23:59",
+    },
+  };
+
+  return (
+    <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+      {/* Hero */}
+      <section className="bg-[image:var(--gradient-hero)] py-20 text-primary-foreground">
+        <div className="container mx-auto max-w-4xl px-4 text-center">
+          <Badge className="mb-3 border-accent/40 bg-accent/15 text-accent">{p.serviceName} 24h</Badge>
+          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">{p.heroTitle}</h1>
+          <p className="mt-4 text-primary-foreground/85">{p.heroSubtitle}</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
+              <a href={`tel:${SITE.phone}`}><Phone className="h-5 w-5" /> {SITE.phone}</a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10">
+              <a href={wppHref} target="_blank" rel="noreferrer"><MessageCircle className="h-5 w-5" /> WhatsApp 24h</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Intro + features + vehicles */}
+      <section className="container mx-auto max-w-4xl px-4 py-16 space-y-6">
+        {p.intro.map((t, i) => (
+          <p key={i} className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t }} />
+        ))}
+
+        <h2 className="text-2xl font-bold pt-4">O que está incluso no serviço de {p.serviceName.toLowerCase()}</h2>
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {p.features.map((f) => (
+            <li key={f} className="flex gap-3"><Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" /><span dangerouslySetInnerHTML={{ __html: f }} /></li>
+          ))}
+        </ul>
+
+        <h2 className="text-2xl font-bold pt-4">Quando acionar nosso {p.serviceName.toLowerCase()}?</h2>
+        <ul className="space-y-2 text-muted-foreground">
+          {p.whenToUse.map((w) => (
+            <li key={w}>• {w}</li>
+          ))}
+        </ul>
+
+        <h2 className="text-2xl font-bold pt-4">Veículos atendidos</h2>
+        <div className="flex flex-wrap gap-2">
+          {p.vehicles.map((v) => (
+            <span key={v} className="rounded-full border bg-secondary/40 px-3 py-1.5 text-sm">{v}</span>
+          ))}
+        </div>
+
+        <Card className="border-border/60 bg-secondary/40 mt-8">
+          <CardContent className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-xl font-bold">Precisa de {p.serviceName.toLowerCase()} agora?</h3>
+              <p className="text-muted-foreground text-sm">Atendimento 24 horas em todo o Brasil.</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild><a href={`tel:${SITE.phone}`}><Phone className="h-4 w-4" /> {SITE.phone}</a></Button>
+              <Button asChild variant="outline"><a href={wppHref} target="_blank" rel="noreferrer">WhatsApp</a></Button>
+              <Button asChild variant="secondary"><Link to="/servicos-de-guincho-e-reboque">Ver cidades</Link></Button>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <SeoBlock
+        badge={`${p.serviceName} 24h em todo o Brasil`}
+        title={`${p.serviceName}: atendimento profissional, rápido e seguro 24 horas`}
+        paragraphs={p.intro}
+        bullets={p.features}
+        faqs={p.faqs}
+        whatsappMessage={p.whatsappMsg}
+      />
+
+      <TestimonialsCarousel />
+    </div>
+  );
+}
