@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 
 const WHATSAPP_NUMBER = "5511996451510";
-const DEFAULT_MSG = "Olá! Preciso de um guincho 24h, podem me ajudar?";
+const DEFAULT_MSG = "Olá! Preciso de um guincho 24h agora, podem me ajudar com reboque urgente?";
 
 export function WhatsAppFloat() {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MSG)}`;
