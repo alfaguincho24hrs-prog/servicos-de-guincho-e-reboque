@@ -371,19 +371,8 @@ function CityPage() {
 
       {/* SEO LONGO — autoridade local */}
       <section className="mt-14 max-w-4xl space-y-5">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Guincho 24 horas em {city.name}: socorro veicular completo perto de você
-        </h2>
-        <p className="text-muted-foreground leading-relaxed">
-          Quando o seu carro pifa em <strong>{city.name}/{city.uf}</strong>, cada minuto parado
-          significa risco, estresse e prejuízo. O <strong>{SITE.name}</strong> mantém uma rede
-          consolidada de empresas locais especializadas em <strong>guincho 24h em {city.name}</strong>,{" "}
-          <strong>reboque rápido</strong>, <strong>auto socorro mecânico</strong>, <strong>pane seca</strong>{" "}
-          e <strong>remoção veicular</strong>, com cobertura em todos os bairros{local.cepRange ? <> e na faixa de CEP <strong>{local.cepRange}</strong></> : null}. Atendemos carros de
-          passeio, SUVs, picapes, vans, motocicletas, caminhões, ônibus e máquinas pesadas, com{" "}
-          <strong>plataformas hidráulicas</strong>, <strong>asas-delta</strong>, <strong>guinchos pesados</strong>{" "}
-          e <strong>prancha rebaixada</strong> para qualquer porte de veículo.
-        </p>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.longTitle}</h2>
+        <p className="text-muted-foreground leading-relaxed">{copy.longIntro}</p>
         <p className="text-muted-foreground leading-relaxed">
           Nossa central despacha o socorro mais próximo da sua localização em{" "}
           <strong>{city.name}</strong> em poucos minutos, com tempo médio de chegada entre 20 e 40
