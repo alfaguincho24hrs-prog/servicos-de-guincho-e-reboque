@@ -1,0 +1,17 @@
+{
+  "name": "Guincho 24 Horas - Reboque e Auto Socorro",
+  "short_name": "Guincho 24h",
+  "description": "Portal nacional de guincho e reboque 24 horas. Auto socorro rápido em rodovias e área urbana.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ef2b2b",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/favicon.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/favicon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
