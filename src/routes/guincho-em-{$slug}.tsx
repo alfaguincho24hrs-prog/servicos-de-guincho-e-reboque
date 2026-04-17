@@ -186,12 +186,7 @@ function CityPage() {
         <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
           Guincho 24 Horas em {city.name} - {city.uf}
         </h1>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Precisa de um <strong>guincho em {city.name}</strong> agora? Atuamos
-          de forma ininterrupta em toda a cidade e região com reboque rápido,
-          seguro e com profissionais habilitados. Acionamento em minutos para
-          carros, motos, utilitários e veículos pesados.
-        </p>
+        <p className="mt-4 max-w-2xl text-muted-foreground">{copy.heroIntro}</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
             <a href={telHref}>
