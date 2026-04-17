@@ -55,6 +55,7 @@ const SP_VALE_PARAIBA: Array<[string, string]> = [
   ["Aparecida", "SP"], ["Roseira", "SP"], ["Potim", "SP"],
   ["Tremembé", "SP"], ["Caçapava", "SP"], ["Igaratá", "SP"],
   ["Jambeiro", "SP"], ["Monteiro Lobato", "SP"], ["Paraibuna", "SP"],
+  ["São Luiz do Paraitinga", "SP"],
   ["Redenção da Serra", "SP"], ["Santa Branca", "SP"], ["São Bento do Sapucaí", "SP"],
   ["Campos do Jordão", "SP"], ["Santo Antônio do Pinhal", "SP"],
   ["Bananal", "SP"], ["São José do Barreiro", "SP"], ["Areias", "SP"],
