@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { LegalNotice } from "@/components/legal-notice";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -73,6 +74,7 @@ function RootComponent() {
       <main className="flex-1">
         <Outlet />
       </main>
+      <LegalNotice />
       <SiteFooter />
       <WhatsAppFloat />
       <Toaster />
