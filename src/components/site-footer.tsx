@@ -32,6 +32,7 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm text-primary-foreground/80">
             <li><Link to="/cobertura" className="hover:text-accent">Cobertura nacional</Link></li>
             <li><Link to="/anuncie" className="hover:text-accent">Anuncie sua empresa</Link></li>
+            <li><Link to="/blog" className="hover:text-accent">Blog</Link></li>
             <li><Link to="/contato" className="hover:text-accent">Fale conosco</Link></li>
           </ul>
         </div>

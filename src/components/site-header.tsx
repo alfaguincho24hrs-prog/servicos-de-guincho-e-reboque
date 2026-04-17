@@ -44,6 +44,7 @@ export function SiteHeader() {
           <Link to="/cobertura" activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent">Cobertura</Link>
           <Link to="/servicos-de-guincho-e-reboque" activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent">Cidades A-Z</Link>
           <Link to="/anuncie" activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent">Anuncie</Link>
+          <Link to="/blog" activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent">Blog</Link>
           <Link to="/contato" activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent">Contato</Link>
         </nav>
         <Button asChild size="sm" className="bg-[image:var(--gradient-cta)] text-primary hover:opacity-90">
