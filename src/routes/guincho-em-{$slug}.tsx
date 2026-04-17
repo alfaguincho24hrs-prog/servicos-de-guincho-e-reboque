@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { getCityLocalData } from "@/components/city-neighborhoods";
 import {
   Clock,
   MapPin,
@@ -111,7 +112,8 @@ const SERVICE_ITEMS = [
 function CityPage() {
   const { city } = Route.useLoaderData();
   const telHref = `tel:${SITE.phone.replace(/\D/g, "")}`;
-  const url = `${SITE_URL}/guincho-em-${city.slug}`;
+  const url = `${SITE_URL}/guincho-em-${city.slug}-${city.uf.toLowerCase()}`;
+  const local = getCityLocalData(`${city.slug}-${city.uf.toLowerCase()}`, city.uf);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -242,6 +244,34 @@ function CityPage() {
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* Bairros e CEPs - SEO local hiper-segmentado */}
+      <section className="mt-14">
+        <h2 className="text-2xl font-bold md:text-3xl">
+          Bairros atendidos pelo guincho em {city.name}
+        </h2>
+        <p className="mt-2 max-w-3xl text-muted-foreground">
+          Nosso serviço de guincho 24h cobre todos os bairros de {city.name}/{city.uf},
+          incluindo região central, zona industrial, bairros residenciais e
+          rodovias de acesso. {local.cepRange ? (
+            <>Atendemos a faixa de CEP <strong>{local.cepRange}</strong>.</>
+          ) : null}
+        </p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {local.neighborhoods.map((b) => (
+            <span
+              key={b}
+              className="rounded-full border border-border/60 bg-secondary/40 px-3 py-1 text-sm"
+            >
+              Guincho no {b}
+            </span>
+          ))}
+        </div>
+        <p className="mt-4 text-sm text-muted-foreground">
+          Não encontrou seu bairro? Atendemos toda a região metropolitana de
+          {" "}{city.name}. Ligue agora e confirme a cobertura no seu endereço.
+        </p>
       </section>
 
       {/* Por que escolher */}
