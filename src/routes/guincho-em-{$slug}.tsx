@@ -437,6 +437,12 @@ function CityPage() {
           </Button>
         </div>
       </section>
+
+      {/* Depoimentos rotacionados por cidade (variação anti-doorway) */}
+      <TestimonialsCarousel citySeed={`${city.slug}-${city.uf}`} />
+
+      {/* Botão de edição (login na rota /admin) */}
+      <AdminEditButton citySlugUf={`${city.slug}-${city.uf.toLowerCase()}`} />
     </div>
   );
 }
