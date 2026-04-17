@@ -227,14 +227,8 @@ function CityPage() {
 
       {/* Serviços na cidade */}
       <section className="mt-14">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Serviços de guincho disponíveis em {city.name}
-        </h2>
-        <p className="mt-2 max-w-3xl text-muted-foreground">
-          Nossa rede de parceiros em {city.name}/{city.uf} oferece soluções
-          completas para emergências automotivas, com cobertura em bairros
-          centrais, periferia e rodovias de acesso.
-        </p>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.servicesTitle}</h2>
+        <p className="mt-2 max-w-3xl text-muted-foreground">{copy.servicesIntro}</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICE_ITEMS.map((s) => (
             <Card key={s.title} className="border-border/60">
