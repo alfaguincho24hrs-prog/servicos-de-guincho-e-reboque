@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SITE, SERVICES, PARTNERS, CITIES } from "@/components/site-data";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import heroImg from "@/assets/hero-guincho.jpg";
 
 export const Route = createFileRoute("/")({
