@@ -113,7 +113,7 @@ function HomePage() {
           </div>
           <Button asChild variant="outline"><Link to="/cobertura">Ver todos <ArrowRight className="h-4 w-4" /></Link></Button>
         </div>
-        <Carousel opts={{ align: "start", loop: true }} className="w-full">
+        <Carousel opts={{ align: "start", loop: true }} plugins={[partnersAutoplay.current]} className="w-full">
           <CarouselContent>
             {PARTNERS.map((p) => (
               <CarouselItem key={p.name} className="sm:basis-1/2 lg:basis-1/3">
