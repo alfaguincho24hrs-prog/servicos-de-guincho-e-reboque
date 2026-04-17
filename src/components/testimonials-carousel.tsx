@@ -114,7 +114,7 @@ export function TestimonialsCarousel({ citySeed }: { citySeed?: string } = {}) {
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <Badge variant="secondary" className="mb-3">Avaliações reais — guincho 24h</Badge>
           <h2 id="depoimentos-heading" className="text-3xl font-bold tracking-tight md:text-4xl">
-            +30 motoristas avaliaram nosso serviço de guincho e reboque com 5 estrelas
+            +60 motoristas avaliaram nosso serviço de guincho e reboque com 5 estrelas
           </h2>
           <p className="mt-3 text-muted-foreground">
             Confira depoimentos reais de quem precisou de auto socorro, reboque na rodovia, guincho de moto e
