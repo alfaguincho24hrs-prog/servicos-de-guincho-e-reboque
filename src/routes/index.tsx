@@ -148,6 +148,131 @@ function HomePage() {
         </div>
       </section>
 
+      {/* SEO TEXT — AUTORIDADE */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="mx-auto max-w-4xl space-y-6">
+          <Badge variant="secondary">Guincho 24 horas perto de você</Badge>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            A maior rede de guincho e reboque 24h do Brasil — atendimento rápido em rodovias e cidades
+          </h2>
+          <p className="text-muted-foreground leading-relaxed">
+            Quando o seu carro pifa no meio da rodovia, na garagem de casa ou no estacionamento do trabalho, cada
+            minuto conta. O <strong>{SITE.name}</strong> nasceu para conectar motoristas a empresas de guincho,
+            reboque e auto socorro mecânico de forma rápida, transparente e segura, com cobertura nas principais
+            cidades do país e em todas as rodovias federais e estaduais. Solicite um <strong>guincho 24 horas</strong>{" "}
+            agora mesmo pelo telefone <a className="underline font-semibold" href={`tel:${SITE.phone}`}>{SITE.phone}</a>{" "}
+            ou pelo WhatsApp e fale direto com um operador da nossa central de emergências, sem robôs e sem espera.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Trabalhamos com <strong>guincho leve</strong> (carros de passeio, SUVs, picapes e utilitários até 3,5
+            toneladas), <strong>guincho pesado</strong> (caminhões, ônibus, máquinas agrícolas e veículos acima de 8
+            toneladas), <strong>guincho de motos</strong> com içamento adequado, <strong>auto socorro mecânico</strong>{" "}
+            para troca de pneu, partida de bateria e pequenos reparos no local, além de <strong>pane seca</strong>{" "}
+            (entrega emergencial de combustível) e <strong>remoção veicular</strong> programada para sinistros,
+            leilões e mudanças interestaduais. Toda a frota é equipada com plataformas hidráulicas modernas, asas
+            deltas, munk e prancha rebaixada para transporte seguro de qualquer tipo de veículo.
+          </p>
+          <h3 className="text-2xl font-bold pt-4">Por que escolher o {SITE.name}?</h3>
+          <ul className="space-y-3 text-muted-foreground leading-relaxed">
+            <li>✅ <strong>Atendimento 24 horas, 7 dias por semana</strong>, inclusive feriados, madrugada e finais de semana.</li>
+            <li>✅ <strong>Tempo médio de chegada inferior a 40 minutos</strong> em áreas urbanas e até 60 minutos em rodovias.</li>
+            <li>✅ <strong>Empresas parceiras verificadas</strong>, com CNPJ ativo, ANTT regularizada e seguro de responsabilidade civil.</li>
+            <li>✅ <strong>Orçamento transparente</strong> informado antes do início do serviço — sem taxas ocultas.</li>
+            <li>✅ <strong>Pagamento facilitado</strong>: dinheiro, PIX, débito, crédito e principais aplicativos de assistência.</li>
+            <li>✅ <strong>Cobertura em mais de 1.000 cidades</strong> de todos os estados, com foco em São Paulo, Vale do Paraíba, Litoral Norte, Serra da Mantiqueira, Grande SP e ABC.</li>
+          </ul>
+          <h3 className="text-2xl font-bold pt-4">Quando acionar um guincho 24 horas?</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Acidentes de trânsito, colisões traseiras, capotamentos, panes elétricas, problemas no câmbio,
+            superaquecimento de motor, pneus furados sem estepe, falta de combustível, bateria descarregada,
+            chaves trancadas dentro do carro, embreagem queimada, vazamento de óleo, perda de freio em descida de
+            serra, atolamentos em terrenos irregulares e transporte de veículos batidos para oficinas e seguradoras —
+            todas essas são situações em que você deve acionar imediatamente um guincho profissional. Tentar
+            empurrar ou rebocar um veículo de forma improvisada pode causar acidentes graves, multas de trânsito e
+            danos ainda maiores ao automóvel.
+          </p>
+          <h3 className="text-2xl font-bold pt-4">Cobertura em rodovias estratégicas</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Atendemos com prioridade as principais rodovias do estado de São Paulo:{" "}
+            <strong>Rodovia Presidente Dutra (BR-116)</strong>,{" "}
+            <strong>Rodovia Ayrton Senna / Carvalho Pinto (SP-070)</strong>,{" "}
+            <strong>Rodovia dos Tamoios (SP-099)</strong>, <strong>Rodovia Oswaldo Cruz (SP-125)</strong>,{" "}
+            <strong>Floriano Rodrigues Pinheiro (SP-123)</strong>, <strong>Anhanguera (SP-330)</strong>,{" "}
+            <strong>Bandeirantes (SP-348)</strong>, <strong>Castello Branco (SP-280)</strong>,{" "}
+            <strong>Raposo Tavares (SP-270)</strong>, <strong>Régis Bittencourt (BR-116 Sul)</strong>,{" "}
+            <strong>Anchieta (SP-150)</strong> e <strong>Imigrantes (SP-160)</strong>. Conheça também a página
+            dedicada às <Link to="/rodovias-vale-do-paraiba" className="underline font-semibold">rodovias do Vale do Paraíba</Link>.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-4">
+            <Button asChild size="lg">
+              <a href={`tel:${SITE.phone}`}><Phone className="h-5 w-5" /> Ligar agora — {SITE.phone}</a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer">WhatsApp 24h</a>
+            </Button>
+            <Button asChild size="lg" variant="secondary">
+              <Link to="/servicos-de-guincho-e-reboque">Ver todas as cidades</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SEO */}
+      <section className="bg-secondary/40 py-20">
+        <div className="container mx-auto max-w-4xl px-4 space-y-6">
+          <Badge variant="secondary">Perguntas frequentes</Badge>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Dúvidas comuns sobre guincho 24h</h2>
+          <div className="space-y-5">
+            <div>
+              <h3 className="font-semibold text-lg">Quanto custa um guincho 24 horas?</h3>
+              <p className="text-muted-foreground">
+                O valor varia conforme distância percorrida (KM rodado), tipo de veículo (leve, médio ou pesado),
+                horário (diurno, noturno, feriados) e região. Em média, dentro da cidade o serviço fica entre R$ 150
+                e R$ 350. Em rodovias o cálculo é por quilômetro a partir do ponto de saída. Sempre fornecemos
+                orçamento exato antes de iniciar o atendimento.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg">Em quanto tempo o guincho chega?</h3>
+              <p className="text-muted-foreground">
+                Em áreas urbanas, o tempo médio é de 30 a 40 minutos. Em rodovias e regiões afastadas, entre 40 e 60
+                minutos, dependendo do trânsito e da localização exata. Trabalhamos com bases distribuídas para
+                garantir o menor tempo de resposta.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg">Vocês atendem em rodovias e na serra?</h3>
+              <p className="text-muted-foreground">
+                Sim. Temos cobertura completa em rodovias federais e estaduais, incluindo trechos de serra como
+                Tamoios, Oswaldo Cruz, Floriano Rodrigues Pinheiro, Régis Bittencourt e Anchieta/Imigrantes.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg">Posso pagar com cartão ou PIX?</h3>
+              <p className="text-muted-foreground">
+                Sim. Aceitamos PIX, cartão de débito, crédito (à vista e parcelado), dinheiro e principais
+                aplicativos de assistência veicular conveniados.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg">Atendem moto, caminhão e veículo blindado?</h3>
+              <p className="text-muted-foreground">
+                Sim. Possuímos plataformas para motos com içamento sem dano à pintura, guincho pesado para
+                caminhões e ônibus, e prancha rebaixada para veículos blindados, esportivos rebaixados e clássicos.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-3 pt-4">
+            <Button asChild size="lg">
+              <a href={`tel:${SITE.phone}`}><Phone className="h-5 w-5" /> Solicitar guincho — {SITE.phone}</a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer">Chamar no WhatsApp</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* CTA ANUNCIE */}
       <section className="container mx-auto px-4 py-20">
         <div className="overflow-hidden rounded-3xl bg-[image:var(--gradient-hero)] p-10 text-primary-foreground shadow-[var(--shadow-elegant)] md:p-16">

@@ -1,8 +1,8 @@
 export const SITE = {
   name: "Guincho Brasil 24h",
   tagline: "Guincho e Reboque 24 Horas em Todo o Brasil",
-  phone: "0800-000-0000",
-  whatsapp: "5511999999999",
+  phone: "(11) 99645-1510",
+  whatsapp: "5511996451510",
   email: "atendimento@guinchobrasil24h.com.br",
 };
 
