@@ -12,9 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicosDeGuinchoEReboqueRouteImport } from './routes/servicos-de-guincho-e-reboque'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as RodoviasValeDoParaibaRouteImport } from './routes/rodovias-vale-do-paraiba'
+import { Route as RemocaoVeicularRouteImport } from './routes/remocao-veicular'
+import { Route as PaneSecaRouteImport } from './routes/pane-seca'
+import { Route as GuinchoPesadoRouteImport } from './routes/guincho-pesado'
+import { Route as GuinchoLeveRouteImport } from './routes/guincho-leve'
 import { Route as GuinchoEmChar123slugChar125RouteImport } from './routes/guincho-em-{$slug}'
+import { Route as GuinchoDeMotosRouteImport } from './routes/guincho-de-motos'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CoberturaRouteImport } from './routes/cobertura'
+import { Route as AutoSocorroRouteImport } from './routes/auto-socorro'
 import { Route as AnuncieRouteImport } from './routes/anuncie'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -34,12 +40,37 @@ const RodoviasValeDoParaibaRoute = RodoviasValeDoParaibaRouteImport.update({
   path: '/rodovias-vale-do-paraiba',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RemocaoVeicularRoute = RemocaoVeicularRouteImport.update({
+  id: '/remocao-veicular',
+  path: '/remocao-veicular',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaneSecaRoute = PaneSecaRouteImport.update({
+  id: '/pane-seca',
+  path: '/pane-seca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuinchoPesadoRoute = GuinchoPesadoRouteImport.update({
+  id: '/guincho-pesado',
+  path: '/guincho-pesado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuinchoLeveRoute = GuinchoLeveRouteImport.update({
+  id: '/guincho-leve',
+  path: '/guincho-leve',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuinchoEmChar123slugChar125Route =
   GuinchoEmChar123slugChar125RouteImport.update({
     id: '/guincho-em-{$slug}',
     path: '/guincho-em-{$slug}',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuinchoDeMotosRoute = GuinchoDeMotosRouteImport.update({
+  id: '/guincho-de-motos',
+  path: '/guincho-de-motos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
@@ -48,6 +79,11 @@ const ContatoRoute = ContatoRouteImport.update({
 const CoberturaRoute = CoberturaRouteImport.update({
   id: '/cobertura',
   path: '/cobertura',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutoSocorroRoute = AutoSocorroRouteImport.update({
+  id: '/auto-socorro',
+  path: '/auto-socorro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AnuncieRoute = AnuncieRouteImport.update({
@@ -64,9 +100,15 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/anuncie': typeof AnuncieRoute
+  '/auto-socorro': typeof AutoSocorroRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
+  '/guincho-de-motos': typeof GuinchoDeMotosRoute
   '/guincho-em-{$slug}': typeof GuinchoEmChar123slugChar125Route
+  '/guincho-leve': typeof GuinchoLeveRoute
+  '/guincho-pesado': typeof GuinchoPesadoRoute
+  '/pane-seca': typeof PaneSecaRoute
+  '/remocao-veicular': typeof RemocaoVeicularRoute
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
@@ -74,9 +116,15 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/anuncie': typeof AnuncieRoute
+  '/auto-socorro': typeof AutoSocorroRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
+  '/guincho-de-motos': typeof GuinchoDeMotosRoute
   '/guincho-em-{$slug}': typeof GuinchoEmChar123slugChar125Route
+  '/guincho-leve': typeof GuinchoLeveRoute
+  '/guincho-pesado': typeof GuinchoPesadoRoute
+  '/pane-seca': typeof PaneSecaRoute
+  '/remocao-veicular': typeof RemocaoVeicularRoute
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
@@ -85,9 +133,15 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/anuncie': typeof AnuncieRoute
+  '/auto-socorro': typeof AutoSocorroRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
+  '/guincho-de-motos': typeof GuinchoDeMotosRoute
   '/guincho-em-{$slug}': typeof GuinchoEmChar123slugChar125Route
+  '/guincho-leve': typeof GuinchoLeveRoute
+  '/guincho-pesado': typeof GuinchoPesadoRoute
+  '/pane-seca': typeof PaneSecaRoute
+  '/remocao-veicular': typeof RemocaoVeicularRoute
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
@@ -97,9 +151,15 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/anuncie'
+    | '/auto-socorro'
     | '/cobertura'
     | '/contato'
+    | '/guincho-de-motos'
     | '/guincho-em-{$slug}'
+    | '/guincho-leve'
+    | '/guincho-pesado'
+    | '/pane-seca'
+    | '/remocao-veicular'
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
@@ -107,9 +167,15 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/anuncie'
+    | '/auto-socorro'
     | '/cobertura'
     | '/contato'
+    | '/guincho-de-motos'
     | '/guincho-em-{$slug}'
+    | '/guincho-leve'
+    | '/guincho-pesado'
+    | '/pane-seca'
+    | '/remocao-veicular'
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
@@ -117,9 +183,15 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/anuncie'
+    | '/auto-socorro'
     | '/cobertura'
     | '/contato'
+    | '/guincho-de-motos'
     | '/guincho-em-{$slug}'
+    | '/guincho-leve'
+    | '/guincho-pesado'
+    | '/pane-seca'
+    | '/remocao-veicular'
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
@@ -128,9 +200,15 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnuncieRoute: typeof AnuncieRoute
+  AutoSocorroRoute: typeof AutoSocorroRoute
   CoberturaRoute: typeof CoberturaRoute
   ContatoRoute: typeof ContatoRoute
+  GuinchoDeMotosRoute: typeof GuinchoDeMotosRoute
   GuinchoEmChar123slugChar125Route: typeof GuinchoEmChar123slugChar125Route
+  GuinchoLeveRoute: typeof GuinchoLeveRoute
+  GuinchoPesadoRoute: typeof GuinchoPesadoRoute
+  PaneSecaRoute: typeof PaneSecaRoute
+  RemocaoVeicularRoute: typeof RemocaoVeicularRoute
   RodoviasValeDoParaibaRoute: typeof RodoviasValeDoParaibaRoute
   ServicosRoute: typeof ServicosRoute
   ServicosDeGuinchoEReboqueRoute: typeof ServicosDeGuinchoEReboqueRoute
@@ -159,11 +237,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RodoviasValeDoParaibaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/remocao-veicular': {
+      id: '/remocao-veicular'
+      path: '/remocao-veicular'
+      fullPath: '/remocao-veicular'
+      preLoaderRoute: typeof RemocaoVeicularRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pane-seca': {
+      id: '/pane-seca'
+      path: '/pane-seca'
+      fullPath: '/pane-seca'
+      preLoaderRoute: typeof PaneSecaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guincho-pesado': {
+      id: '/guincho-pesado'
+      path: '/guincho-pesado'
+      fullPath: '/guincho-pesado'
+      preLoaderRoute: typeof GuinchoPesadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guincho-leve': {
+      id: '/guincho-leve'
+      path: '/guincho-leve'
+      fullPath: '/guincho-leve'
+      preLoaderRoute: typeof GuinchoLeveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guincho-em-{$slug}': {
       id: '/guincho-em-{$slug}'
       path: '/guincho-em-{$slug}'
       fullPath: '/guincho-em-{$slug}'
       preLoaderRoute: typeof GuinchoEmChar123slugChar125RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guincho-de-motos': {
+      id: '/guincho-de-motos'
+      path: '/guincho-de-motos'
+      fullPath: '/guincho-de-motos'
+      preLoaderRoute: typeof GuinchoDeMotosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -178,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/cobertura'
       fullPath: '/cobertura'
       preLoaderRoute: typeof CoberturaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auto-socorro': {
+      id: '/auto-socorro'
+      path: '/auto-socorro'
+      fullPath: '/auto-socorro'
+      preLoaderRoute: typeof AutoSocorroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/anuncie': {
@@ -200,9 +320,15 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnuncieRoute: AnuncieRoute,
+  AutoSocorroRoute: AutoSocorroRoute,
   CoberturaRoute: CoberturaRoute,
   ContatoRoute: ContatoRoute,
+  GuinchoDeMotosRoute: GuinchoDeMotosRoute,
   GuinchoEmChar123slugChar125Route: GuinchoEmChar123slugChar125Route,
+  GuinchoLeveRoute: GuinchoLeveRoute,
+  GuinchoPesadoRoute: GuinchoPesadoRoute,
+  PaneSecaRoute: PaneSecaRoute,
+  RemocaoVeicularRoute: RemocaoVeicularRoute,
   RodoviasValeDoParaibaRoute: RodoviasValeDoParaibaRoute,
   ServicosRoute: ServicosRoute,
   ServicosDeGuinchoEReboqueRoute: ServicosDeGuinchoEReboqueRoute,
