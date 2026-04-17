@@ -173,7 +173,7 @@ function CitiesGrid({
         <Link
           key={`${c.slug}-${c.uf}`}
           to="/guincho-em-$slug"
-          params={{ slug: c.slug }}
+          params={{ slug: `${c.slug}-${c.uf.toLowerCase()}` }}
           className="block"
         >
           <Card className="border-border/60 transition-all hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-[var(--shadow-elegant)]">
