@@ -1,0 +1,75 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+import { SITE } from "@/components/site-data";
+
+export const Route = createFileRoute("/contato")({
+  head: () => ({
+    meta: [
+      { title: "Contato | Guincho Brasil 24h - Atendimento 24 Horas" },
+      { name: "description", content: "Fale com a central do Guincho Brasil 24h. Atendimento por telefone, WhatsApp e e-mail, 24 horas por dia, em todo o Brasil." },
+      { property: "og:title", content: "Contato | Guincho Brasil 24h" },
+      { property: "og:description", content: "Atendimento 24h por telefone, WhatsApp e e-mail." },
+    ],
+  }),
+  component: ContactPage,
+});
+
+function ContactPage() {
+  return (
+    <div className="container mx-auto px-4 py-20">
+      <div className="mx-auto max-w-3xl text-center">
+        <Badge variant="secondary" className="mb-3">Contato</Badge>
+        <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Fale com nossa central</h1>
+        <p className="mt-4 text-muted-foreground">Estamos disponíveis 24 horas para emergências, dúvidas e parcerias.</p>
+      </div>
+
+      <div className="mt-14 grid gap-6 md:grid-cols-4">
+        {[
+          { icon: Phone, title: "Telefone", text: SITE.phone, href: `tel:${SITE.phone}` },
+          { icon: Mail, title: "E-mail", text: SITE.email, href: `mailto:${SITE.email}` },
+          { icon: MapPin, title: "Cobertura", text: "Todo o Brasil" },
+          { icon: Clock, title: "Horário", text: "24h · 7 dias" },
+        ].map(({ icon: Icon, title, text, href }) => (
+          <Card key={title} className="border-border/60 text-center">
+            <CardContent className="space-y-2 p-6">
+              <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[image:var(--gradient-cta)] text-primary">
+                <Icon className="h-6 w-6" />
+              </div>
+              <h3 className="font-semibold">{title}</h3>
+              {href ? <a href={href} className="text-sm text-muted-foreground hover:text-accent">{text}</a> : <p className="text-sm text-muted-foreground">{text}</p>}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <Card className="mx-auto mt-14 max-w-2xl border-border/60 shadow-[var(--shadow-elegant)]">
+        <CardContent className="p-6">
+          <h2 className="text-2xl font-bold">Envie sua mensagem</h2>
+          <form
+            className="mt-5 space-y-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              toast.success("Mensagem enviada! Retornaremos em breve.");
+              (e.target as HTMLFormElement).reset();
+            }}
+          >
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5"><Label htmlFor="nome">Nome</Label><Input id="nome" required /></div>
+              <div className="space-y-1.5"><Label htmlFor="tel">Telefone</Label><Input id="tel" type="tel" required /></div>
+            </div>
+            <div className="space-y-1.5"><Label htmlFor="email">E-mail</Label><Input id="email" type="email" required /></div>
+            <div className="space-y-1.5"><Label htmlFor="msg">Mensagem</Label><Textarea id="msg" rows={5} required /></div>
+            <Button type="submit" className="w-full bg-[image:var(--gradient-cta)] text-primary hover:opacity-95">Enviar mensagem</Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
