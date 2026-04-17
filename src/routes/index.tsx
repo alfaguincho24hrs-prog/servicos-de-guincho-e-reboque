@@ -274,6 +274,8 @@ function HomePage() {
         </div>
       </section>
 
+      <TestimonialsCarousel />
+
       {/* CTA ANUNCIE */}
       <section className="container mx-auto px-4 py-20">
         <div className="overflow-hidden rounded-3xl bg-[image:var(--gradient-hero)] p-10 text-primary-foreground shadow-[var(--shadow-elegant)] md:p-16">
