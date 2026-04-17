@@ -50,7 +50,7 @@ function findCity(slug: string): City | undefined {
   return undefined;
 }
 
-export const Route = createFileRoute("/guincho-em-$slug")({
+export const Route = createFileRoute("/guincho-em-{$slug}")({
   loader: ({ params }) => {
     const city = findCity(params.slug);
     if (!city) throw notFound();
