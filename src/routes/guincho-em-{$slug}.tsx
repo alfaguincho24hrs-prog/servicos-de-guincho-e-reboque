@@ -419,9 +419,7 @@ function CityPage() {
 
       {/* CTA final */}
       <section className="mt-14 rounded-2xl bg-secondary/50 p-10 text-center">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Guincho 24h em {city.name} a um clique de distância
-        </h2>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.ctaTitle}</h2>
         <p className="mt-2 text-muted-foreground">
           Não fique parado na estrada. Acione agora e resolva sua emergência com
           rapidez e segurança em {city.name}/{city.uf}.
