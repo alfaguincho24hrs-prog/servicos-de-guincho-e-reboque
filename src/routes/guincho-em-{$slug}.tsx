@@ -117,6 +117,7 @@ function CityPage() {
   const telHref = `tel:${SITE.phone.replace(/\D/g, "")}`;
   const url = `${SITE_URL}/guincho-em-${city.slug}-${city.uf.toLowerCase()}`;
   const local = getCityLocalData(`${city.slug}-${city.uf.toLowerCase()}`, city.uf);
+  const copy = getCityCopy(city.name, city.uf, city.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
