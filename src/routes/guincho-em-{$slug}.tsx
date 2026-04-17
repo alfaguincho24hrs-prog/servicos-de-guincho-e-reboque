@@ -329,28 +329,9 @@ function CityPage() {
 
       {/* FAQ */}
       <section className="mt-14">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Dúvidas frequentes sobre guincho em {city.name}
-        </h2>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.faqTitle}</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {[
-            {
-              q: `Quanto custa um guincho em ${city.name}?`,
-              a: `O valor varia conforme a distância, tipo de veículo e horário. Solicite um orçamento gratuito por telefone ou WhatsApp e receba o preço exato para sua rota em ${city.name}/${city.uf}.`,
-            },
-            {
-              q: `Em quanto tempo o guincho chega em ${city.name}?`,
-              a: `Com nossa rede de parceiros locais, o tempo médio de chegada em ${city.name} é de 20 a 40 minutos, dependendo da localização e do trânsito.`,
-            },
-            {
-              q: `Vocês atendem rodovias próximas a ${city.name}?`,
-              a: `Sim. Atendemos toda a malha rodoviária que dá acesso a ${city.name}, incluindo trechos urbanos e estradas vicinais da região.`,
-            },
-            {
-              q: `O serviço é realmente 24 horas em ${city.name}?`,
-              a: `Sim. Operamos 24 horas por dia, 7 dias por semana, inclusive aos finais de semana e feriados em ${city.name} e cidades vizinhas.`,
-            },
-          ].map((f) => (
+          {copy.faqs.map((f) => (
             <Card key={f.q} className="border-border/60">
               <CardContent className="p-5">
                 <h3 className="font-semibold">{f.q}</h3>
