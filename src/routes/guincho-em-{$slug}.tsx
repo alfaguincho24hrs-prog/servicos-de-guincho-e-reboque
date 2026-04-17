@@ -50,7 +50,7 @@ function findCity(slug: string): City | undefined {
   return undefined;
 }
 
-export const Route = createFileRoute("/guincho-em-$slug")({
+export const Route = createFileRoute("/guincho-em-{$slug}")({
   loader: ({ params }) => {
     const city = findCity(params.slug);
     if (!city) throw notFound();
@@ -344,7 +344,7 @@ function CityPage() {
             .map((c) => (
               <Link
                 key={c.slug}
-                to="/guincho-em-$slug"
+                to="/guincho-em-{$slug}"
                 params={{ slug: `${c.slug}-${c.uf.toLowerCase()}` }}
                 className="rounded-full border bg-secondary/40 px-3 py-1 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
               >

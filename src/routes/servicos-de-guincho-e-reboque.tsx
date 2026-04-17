@@ -172,7 +172,7 @@ function CitiesGrid({
       {cities.map((c) => (
         <Link
           key={`${c.slug}-${c.uf}`}
-          to="/guincho-em-$slug"
+          to="/guincho-em-{$slug}"
           params={{ slug: `${c.slug}-${c.uf.toLowerCase()}` }}
           className="block"
         >
