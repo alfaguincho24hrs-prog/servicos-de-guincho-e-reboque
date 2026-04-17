@@ -18,9 +18,13 @@ export function SiteFooter() {
         <div>
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Serviços</h3>
           <ul className="space-y-2 text-sm text-primary-foreground/80">
-            {SERVICES.slice(0, 5).map((s) => (
-              <li key={s.slug}><Link to="/servicos" className="hover:text-accent">{s.title}</Link></li>
-            ))}
+            <li><Link to="/guincho-leve" className="hover:text-accent">Guincho Leve</Link></li>
+            <li><Link to="/guincho-pesado" className="hover:text-accent">Guincho Pesado</Link></li>
+            <li><Link to="/guincho-de-motos" className="hover:text-accent">Guincho de Motos</Link></li>
+            <li><Link to="/auto-socorro" className="hover:text-accent">Auto Socorro</Link></li>
+            <li><Link to="/pane-seca" className="hover:text-accent">Pane Seca</Link></li>
+            <li><Link to="/remocao-veicular" className="hover:text-accent">Remoção Veicular</Link></li>
+            <li><Link to="/servicos" className="font-medium hover:text-accent">Ver todos →</Link></li>
           </ul>
         </div>
         <div>
