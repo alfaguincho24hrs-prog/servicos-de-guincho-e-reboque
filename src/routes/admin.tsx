@@ -12,6 +12,7 @@ import {
   type ProviderOverride,
   type ProviderTier,
 } from "@/components/city-providers";
+import { getAllPosts, upsertPost, deletePost, slugify, type BlogPost } from "@/components/blog-data";
 import { ALL_CITIES } from "@/components/cities-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -738,4 +739,162 @@ function ProviderRow({
 
 // Bridge: when ProviderForm is used as the "create" form at the top, it needs to call addProvider.
 // We override onSaved at that call site:
+
+// ---------- Blog admin ----------
+
+function BlogAdmin() {
+  const [tick, setTick] = useState(0);
+  const [editing, setEditing] = useState<BlogPost | null>(null);
+  const posts = useMemo(() => getAllPosts(), [tick]);
+
+  const blank: BlogPost = {
+    slug: "",
+    title: "",
+    excerpt: "",
+    content: "",
+    date: new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" }),
+    category: "Dicas",
+    coverUrl: "",
+  };
+
+  return (
+    <div className="container mx-auto max-w-5xl px-4 py-10">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold">Painel — Blog</h1>
+        <p className="text-sm text-muted-foreground">Crie, edite e remova artigos do blog.</p>
+      </div>
+
+      <BlogPostForm
+        key={editing?.slug || "new"}
+        initial={editing || blank}
+        isEdit={!!editing}
+        onSaved={(post) => {
+          upsertPost(post);
+          setEditing(null);
+          setTick((t) => t + 1);
+          toast.success(editing ? "Artigo atualizado" : "Artigo criado");
+        }}
+        onCancel={editing ? () => setEditing(null) : undefined}
+      />
+
+      <h2 className="mb-3 mt-8 text-lg font-semibold">Artigos ({posts.length})</h2>
+      <div className="space-y-2">
+        {posts.map((p) => (
+          <Card key={p.slug}>
+            <CardContent className="flex items-center justify-between gap-3 p-4">
+              <div className="min-w-0">
+                <div className="truncate font-medium">{p.title}</div>
+                <div className="text-xs text-muted-foreground">/{p.slug} · {p.category} · {p.date}</div>
+              </div>
+              <div className="flex shrink-0 gap-2">
+                <Button size="sm" variant="outline" onClick={() => setEditing(p)}>Editar</Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    if (!confirm(`Excluir "${p.title}"?`)) return;
+                    deletePost(p.slug);
+                    setTick((t) => t + 1);
+                    toast.success("Artigo removido");
+                  }}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BlogPostForm({
+  initial,
+  isEdit,
+  onSaved,
+  onCancel,
+}: {
+  initial: BlogPost;
+  isEdit: boolean;
+  onSaved: (p: BlogPost) => void;
+  onCancel?: () => void;
+}) {
+  const [p, setP] = useState<BlogPost>(initial);
+  const upd = <K extends keyof BlogPost>(k: K, v: BlogPost[K]) => setP((s) => ({ ...s, [k]: v }));
+
+  const handleCover = async (file?: File) => {
+    if (!file) return;
+    try {
+      const url = await fileToDataUrl(file, 400);
+      upd("coverUrl", url);
+    } catch (e) {
+      toast.error((e as Error).message);
+    }
+  };
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const title = p.title.trim();
+    if (!title) return toast.error("Informe o título");
+    if (!p.content.trim()) return toast.error("Informe o conteúdo");
+    const slug = (p.slug.trim() || slugify(title));
+    if (!slug) return toast.error("Slug inválido");
+    onSaved({ ...p, title, slug, excerpt: p.excerpt.trim() || title });
+  };
+
+  return (
+    <Card className={isEdit ? "" : "border-primary/40 bg-primary/5"}>
+      <CardContent className="p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="font-semibold">{isEdit ? "Editar artigo" : "Novo artigo"}</h2>
+          {onCancel && (
+            <Button size="sm" variant="ghost" onClick={onCancel}>Cancelar edição</Button>
+          )}
+        </div>
+        <form onSubmit={submit} className="grid gap-3 md:grid-cols-2">
+          <div className="md:col-span-2">
+            <label className="mb-1 block text-xs font-medium">Título*</label>
+            <Input value={p.title} onChange={(e) => upd("title", e.target.value)} maxLength={140} />
+          </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium">Slug (URL)</label>
+            <Input
+              value={p.slug}
+              onChange={(e) => upd("slug", slugify(e.target.value))}
+              placeholder="auto-gerado do título"
+              disabled={isEdit}
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium">Categoria</label>
+            <Input value={p.category} onChange={(e) => upd("category", e.target.value)} maxLength={40} />
+          </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium">Data</label>
+            <Input value={p.date} onChange={(e) => upd("date", e.target.value)} maxLength={40} />
+          </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium">Imagem de capa</label>
+            <Input type="file" accept="image/*" onChange={(e) => handleCover(e.target.files?.[0])} />
+            {p.coverUrl && (
+              <img src={p.coverUrl} alt="capa" className="mt-2 h-20 w-full rounded object-cover" />
+            )}
+          </div>
+          <div className="md:col-span-2">
+            <label className="mb-1 block text-xs font-medium">Resumo</label>
+            <Textarea value={p.excerpt} onChange={(e) => upd("excerpt", e.target.value)} rows={2} maxLength={300} />
+          </div>
+          <div className="md:col-span-2">
+            <label className="mb-1 block text-xs font-medium">Conteúdo* (parágrafos separados por linha em branco)</label>
+            <Textarea value={p.content} onChange={(e) => upd("content", e.target.value)} rows={10} />
+          </div>
+          <div className="md:col-span-2">
+            <Button type="submit"><Save className="h-4 w-4" /> {isEdit ? "Salvar" : "Publicar"}</Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}
 // (kept here for clarity — see AdminEditor above)
