@@ -248,9 +248,7 @@ function CityPage() {
 
       {/* Bairros e CEPs - SEO local hiper-segmentado */}
       <section className="mt-14">
-        <h2 className="text-2xl font-bold md:text-3xl">
-          Bairros atendidos pelo guincho em {city.name}
-        </h2>
+        <h2 className="text-2xl font-bold md:text-3xl">{copy.neighborhoodsTitle}</h2>
         <p className="mt-2 max-w-3xl text-muted-foreground">
           Nosso serviço de guincho 24h cobre todos os bairros de {city.name}/{city.uf},
           incluindo região central, zona industrial, bairros residenciais e
