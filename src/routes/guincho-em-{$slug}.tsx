@@ -228,27 +228,6 @@ function CityPage() {
         cityUf={city.uf}
       />
 
-      {/* Aviso LGPD / Marco Civil */}
-      <aside className="mt-6 rounded-lg border border-border/60 bg-muted/40 p-4 text-xs leading-relaxed text-muted-foreground">
-        <p>
-          <strong>* Aviso legal:</strong> Todos os anúncios publicados em nosso site
-          atendem às exigências da <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD)</strong>{" "}
-          e da <strong>Lei do Marco Civil da Internet (Lei nº 12.965/2014)</strong>.
-          As informações exibidas nesta página são <strong>públicas</strong> e foram
-          adquiridas legalmente através da internet e também em portais do Governo
-          Federal, juntas comerciais, listas telefônicas públicas e diretórios
-          empresariais abertos. É o responsável por uma das empresas listadas e
-          deseja atualizar, complementar ou remover seus dados?{" "}
-          <Link
-            to="/anuncie"
-            className="font-semibold text-primary underline-offset-4 hover:underline"
-          >
-            Clique aqui para liberar / atualizar seu telefone
-          </Link>
-          .
-        </p>
-      </aside>
-
       {/* Serviços na cidade */}
       <section className="mt-14">
         <h2 className="text-2xl font-bold md:text-3xl">
