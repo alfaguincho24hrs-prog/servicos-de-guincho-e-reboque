@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { SeoBlock } from "@/components/seo-block";
+import { TestimonialsCarousel } from "@/components/testimonials-carousel";
 
 export const Route = createFileRoute("/anuncie")({
   head: () => ({
@@ -94,6 +96,31 @@ function AnunciePage() {
           </CardContent>
         </Card>
       </section>
+
+      <SeoBlock
+        badge="Cresça com o maior portal de guinchos do Brasil"
+        title="Por que anunciar sua empresa de guincho e reboque com a gente?"
+        paragraphs={[
+          "Quem pesquisa <strong>guincho 24h perto de mim</strong>, <strong>reboque rápido</strong> ou <strong>auto socorro mecânico</strong> está vivendo uma emergência e tem altíssima intenção de contratação imediata. O <strong>Guincho Brasil 24h</strong> é o maior portal nacional especializado em conectar esses motoristas a empresas locais qualificadas, com tráfego orgânico crescente nos buscadores e investimento contínuo em mídia paga.",
+          "Ao anunciar sua empresa de <strong>guincho e reboque</strong> em nossa plataforma, você ganha presença nas páginas de cidade (<strong>SEO local hiper-segmentado</strong>), aparece em listas de rodovias importantes (Dutra, Tamoios, Carvalho Pinto, Anchieta, Imigrantes, Bandeirantes, Castello Branco) e recebe chamadas direto pelo botão de telefone e WhatsApp — <strong>sem intermediários e sem comissão por atendimento</strong>.",
+          "Nosso modelo prioriza <strong>empresas verificadas</strong>: motorista habilitado, frota vistoriada, ANTT regularizada e seguro de responsabilidade civil. Isso aumenta a confiança do cliente e melhora sua taxa de conversão.",
+        ]}
+        bullets={[
+          "<strong>Mais visualizações</strong>: páginas otimizadas para palavras-chave de alta intenção comercial.",
+          "<strong>Mais ligações</strong>: botão de telefone e WhatsApp em destaque em todas as páginas.",
+          "<strong>Mais autoridade</strong>: selo de verificação e avaliações públicas dos clientes.",
+          "<strong>Relatório mensal</strong> de impressões, cliques e contatos gerados.",
+          "<strong>Sem fidelidade</strong>: cancele quando quiser, sem multa.",
+        ]}
+        faqs={[
+          { q: "Quanto custa anunciar minha empresa?", a: "Trabalhamos com planos mensais a partir de R$ 197/mês com destaque em até 3 cidades. Solicite uma proposta personalizada pelo formulário acima." },
+          { q: "Recebo os contatos direto ou vocês intermediam?", a: "Os contatos chegam direto para sua empresa pelo telefone e WhatsApp. Não cobramos comissão por atendimento fechado." },
+          { q: "Em quanto tempo meu anúncio fica no ar?", a: "Após análise documental e aprovação, seu anúncio entra no ar em até 48 horas úteis." },
+          { q: "Posso anunciar em mais de uma cidade?", a: "Sim. Os planos permitem destaque em múltiplas cidades e regiões metropolitanas." },
+        ]}
+      />
+
+      <TestimonialsCarousel />
     </div>
   );
 }

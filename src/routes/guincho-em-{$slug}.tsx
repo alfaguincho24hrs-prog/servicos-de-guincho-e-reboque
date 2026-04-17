@@ -392,6 +392,65 @@ function CityPage() {
         </div>
       </section>
 
+      {/* SEO LONGO — autoridade local */}
+      <section className="mt-14 max-w-4xl space-y-5">
+        <h2 className="text-2xl font-bold md:text-3xl">
+          Guincho 24 horas em {city.name}: socorro veicular completo perto de você
+        </h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Quando o seu carro pifa em <strong>{city.name}/{city.uf}</strong>, cada minuto parado
+          significa risco, estresse e prejuízo. O <strong>{SITE.name}</strong> mantém uma rede
+          consolidada de empresas locais especializadas em <strong>guincho 24h em {city.name}</strong>,{" "}
+          <strong>reboque rápido</strong>, <strong>auto socorro mecânico</strong>, <strong>pane seca</strong>{" "}
+          e <strong>remoção veicular</strong>, com cobertura em todos os bairros{local.cepRange ? <> e na faixa de CEP <strong>{local.cepRange}</strong></> : null}. Atendemos carros de
+          passeio, SUVs, picapes, vans, motocicletas, caminhões, ônibus e máquinas pesadas, com{" "}
+          <strong>plataformas hidráulicas</strong>, <strong>asas-delta</strong>, <strong>guinchos pesados</strong>{" "}
+          e <strong>prancha rebaixada</strong> para qualquer porte de veículo.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Nossa central despacha o socorro mais próximo da sua localização em{" "}
+          <strong>{city.name}</strong> em poucos minutos, com tempo médio de chegada entre 20 e 40
+          minutos em áreas urbanas. Se a pane aconteceu em <strong>rodovia</strong>, descida de
+          serra ou estrada vicinal próxima a {city.name}, também temos equipes preparadas com
+          sinalização rodoviária completa, freio motor reforçado e operadores experientes em
+          condução em aclives e declives. Os bairros mais demandados — como{" "}
+          {local.neighborhoods.slice(0, 6).map((b, i, arr) => (
+            <span key={b}>
+              <strong>{b}</strong>{i < arr.length - 1 ? ", " : ""}
+            </span>
+          ))} — recebem atendimento prioritário em qualquer horário do dia ou da noite.
+        </p>
+        <h3 className="text-xl font-bold pt-2">Quando acionar um guincho em {city.name}?</h3>
+        <p className="text-muted-foreground leading-relaxed">
+          Acidentes de trânsito, colisões, capotamentos, panes elétricas, problemas no câmbio,
+          superaquecimento de motor, pneu furado sem estepe, falta de combustível, bateria
+          descarregada, chave trancada dentro do carro, embreagem queimada, vazamento de óleo,
+          atolamentos em terrenos irregulares e transporte de veículos batidos para oficinas e
+          seguradoras — todas essas situações exigem um <strong>guincho profissional em {city.name}</strong>{" "}
+          imediatamente. Tentar empurrar ou rebocar de forma improvisada pode causar acidentes
+          graves, multas de trânsito e danos ainda maiores ao seu veículo.
+        </p>
+        <h3 className="text-xl font-bold pt-2">Por que escolher nossa rede em {city.name}/{city.uf}?</h3>
+        <ul className="space-y-2 text-muted-foreground leading-relaxed">
+          <li>✅ <strong>Atendimento 24h, 7 dias por semana</strong>, inclusive feriados e madrugada.</li>
+          <li>✅ <strong>Empresas verificadas</strong> com CNPJ ativo, ANTT regularizada e seguro.</li>
+          <li>✅ <strong>Orçamento transparente</strong> antes de iniciar o serviço — sem taxa surpresa.</li>
+          <li>✅ <strong>Pagamento facilitado</strong>: PIX, dinheiro, cartão e principais aplicativos.</li>
+          <li>✅ <strong>Tempo médio de chegada inferior a 40 minutos</strong> em {city.name}.</li>
+          <li>✅ <strong>Cobertura completa</strong> em todos os bairros e rodovias de acesso.</li>
+        </ul>
+        <div className="flex flex-wrap gap-3 pt-4">
+          <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
+            <a href={telHref}><Phone className="h-5 w-5" /> Ligar agora — {SITE.phone}</a>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Preciso de guincho em ${city.name}/${city.uf}`)}`} target="_blank" rel="noreferrer">
+              WhatsApp 24h
+            </a>
+          </Button>
+        </div>
+      </section>
+
       {/* CTA final */}
       <section className="mt-14 rounded-2xl bg-secondary/50 p-10 text-center">
         <h2 className="text-2xl font-bold md:text-3xl">
