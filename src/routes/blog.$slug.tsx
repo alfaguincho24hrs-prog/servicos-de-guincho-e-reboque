@@ -1,0 +1,80 @@
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Calendar, Pencil } from "lucide-react";
+import { getPostBySlug, type BlogPost } from "@/components/blog-data";
+
+export const Route = createFileRoute("/blog/$slug")({
+  head: ({ params }) => ({
+    meta: [
+      { title: `Artigo — ${params.slug} | Guincho Brasil 24h Blog` },
+      { name: "description", content: "Leia o artigo completo no blog Guincho Brasil 24h." },
+    ],
+  }),
+  component: BlogPostPage,
+  notFoundComponent: () => (
+    <div className="container mx-auto max-w-2xl px-4 py-20 text-center">
+      <h1 className="text-3xl font-bold">Artigo não encontrado</h1>
+      <p className="mt-3 text-muted-foreground">O artigo que você procura não existe ou foi removido.</p>
+      <Button asChild className="mt-6"><Link to="/blog">Voltar ao blog</Link></Button>
+    </div>
+  ),
+});
+
+function BlogPostPage() {
+  const { slug } = Route.useParams();
+  const [post, setPost] = useState<BlogPost | null | undefined>(undefined);
+
+  useEffect(() => {
+    setPost(getPostBySlug(slug) ?? null);
+  }, [slug]);
+
+  if (post === undefined) {
+    return <div className="container mx-auto px-4 py-20 text-center text-muted-foreground">Carregando…</div>;
+  }
+  if (post === null) {
+    throw notFound();
+  }
+
+  return (
+    <article className="bg-background">
+      <div className="container mx-auto max-w-3xl px-4 py-12">
+        <div className="mb-6 flex items-center justify-between">
+          <Button asChild variant="ghost" size="sm" className="px-0">
+            <Link to="/blog"><ArrowLeft className="h-4 w-4" /> Voltar ao blog</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/admin"><Pencil className="h-4 w-4" /> Editar</Link>
+          </Button>
+        </div>
+
+        {post.coverUrl && (
+          <img src={post.coverUrl} alt={post.title} className="mb-6 h-64 w-full rounded-lg object-cover" />
+        )}
+
+        <div className="mb-3 flex items-center gap-2 text-xs text-muted-foreground">
+          <span className="rounded bg-accent/10 px-2 py-0.5 font-medium text-accent">{post.category}</span>
+          <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{post.date}</span>
+        </div>
+
+        <h1 className="text-3xl font-bold leading-tight md:text-4xl">{post.title}</h1>
+        <p className="mt-4 text-lg text-muted-foreground">{post.excerpt}</p>
+
+        <div className="mt-8 space-y-5 text-base leading-relaxed text-foreground">
+          {post.content.split(/\n\n+/).map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+
+        <div className="mt-12 rounded-xl border border-border/60 bg-muted/30 p-6 text-center">
+          <h2 className="text-xl font-bold">Precisa de guincho agora?</h2>
+          <p className="mt-1 text-sm text-muted-foreground">Atendimento 24h em todo o Brasil.</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-3">
+            <Button asChild size="sm"><Link to="/cobertura">Ver cobertura</Link></Button>
+            <Button asChild size="sm" variant="outline"><Link to="/contato">Falar conosco</Link></Button>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}

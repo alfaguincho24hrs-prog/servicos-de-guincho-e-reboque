@@ -25,6 +25,7 @@ import { Route as AutoSocorroRouteImport } from './routes/auto-socorro'
 import { Route as AnuncieRouteImport } from './routes/anuncie'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const ServicosDeGuinchoEReboqueRoute =
   ServicosDeGuinchoEReboqueRouteImport.update({
@@ -108,13 +109,18 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/anuncie': typeof AnuncieRoute
   '/auto-socorro': typeof AutoSocorroRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-de-motos': typeof GuinchoDeMotosRoute
@@ -126,13 +132,14 @@ export interface FileRoutesByFullPath {
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/anuncie': typeof AnuncieRoute
   '/auto-socorro': typeof AutoSocorroRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-de-motos': typeof GuinchoDeMotosRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -151,7 +159,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/anuncie': typeof AnuncieRoute
   '/auto-socorro': typeof AutoSocorroRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
   '/guincho-de-motos': typeof GuinchoDeMotosRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
+    | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
+    | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -226,7 +238,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AnuncieRoute: typeof AnuncieRoute
   AutoSocorroRoute: typeof AutoSocorroRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CoberturaRoute: typeof CoberturaRoute
   ContatoRoute: typeof ContatoRoute
   GuinchoDeMotosRoute: typeof GuinchoDeMotosRoute
@@ -354,15 +366,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AnuncieRoute: AnuncieRoute,
   AutoSocorroRoute: AutoSocorroRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   CoberturaRoute: CoberturaRoute,
   ContatoRoute: ContatoRoute,
   GuinchoDeMotosRoute: GuinchoDeMotosRoute,
@@ -378,3 +407,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
