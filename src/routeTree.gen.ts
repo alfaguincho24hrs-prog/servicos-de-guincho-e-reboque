@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicosDeGuinchoEReboqueRouteImport } from './routes/servicos-de-guincho-e-reboque'
 import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as GuinchoEmSlugRouteImport } from './routes/guincho-em-$slug'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CoberturaRouteImport } from './routes/cobertura'
 import { Route as AnuncieRouteImport } from './routes/anuncie'
@@ -25,6 +26,11 @@ const ServicosDeGuinchoEReboqueRoute =
 const ServicosRoute = ServicosRouteImport.update({
   id: '/servicos',
   path: '/servicos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuinchoEmSlugRoute = GuinchoEmSlugRouteImport.update({
+  id: '/guincho-em-$slug',
+  path: '/guincho-em-$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/anuncie': typeof AnuncieRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
+  '/guincho-em-$slug': typeof GuinchoEmSlugRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/anuncie': typeof AnuncieRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
+  '/guincho-em-$slug': typeof GuinchoEmSlugRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/anuncie': typeof AnuncieRoute
   '/cobertura': typeof CoberturaRoute
   '/contato': typeof ContatoRoute
+  '/guincho-em-$slug': typeof GuinchoEmSlugRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
 }
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/anuncie'
     | '/cobertura'
     | '/contato'
+    | '/guincho-em-$slug'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
   fileRoutesByTo: FileRoutesByTo
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/anuncie'
     | '/cobertura'
     | '/contato'
+    | '/guincho-em-$slug'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
   id:
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/anuncie'
     | '/cobertura'
     | '/contato'
+    | '/guincho-em-$slug'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
   fileRoutesById: FileRoutesById
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   AnuncieRoute: typeof AnuncieRoute
   CoberturaRoute: typeof CoberturaRoute
   ContatoRoute: typeof ContatoRoute
+  GuinchoEmSlugRoute: typeof GuinchoEmSlugRoute
   ServicosRoute: typeof ServicosRoute
   ServicosDeGuinchoEReboqueRoute: typeof ServicosDeGuinchoEReboqueRoute
 }
@@ -123,6 +136,13 @@ declare module '@tanstack/react-router' {
       path: '/servicos'
       fullPath: '/servicos'
       preLoaderRoute: typeof ServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guincho-em-$slug': {
+      id: '/guincho-em-$slug'
+      path: '/guincho-em-$slug'
+      fullPath: '/guincho-em-$slug'
+      preLoaderRoute: typeof GuinchoEmSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnuncieRoute: AnuncieRoute,
   CoberturaRoute: CoberturaRoute,
   ContatoRoute: ContatoRoute,
+  GuinchoEmSlugRoute: GuinchoEmSlugRoute,
   ServicosRoute: ServicosRoute,
   ServicosDeGuinchoEReboqueRoute: ServicosDeGuinchoEReboqueRoute,
 }
