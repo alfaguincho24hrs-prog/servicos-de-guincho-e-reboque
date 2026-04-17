@@ -27,6 +27,7 @@ import { SITE } from "@/components/site-data";
 import { ALL_CITIES, type City } from "@/components/cities-data";
 import { getCityProviders } from "@/components/city-providers";
 import { ProviderDirectory } from "@/components/provider-cards";
+import { getCityCopy } from "@/components/city-variations";
 
 const SITE_URL = "https://guincho24hrs.com.br";
 
