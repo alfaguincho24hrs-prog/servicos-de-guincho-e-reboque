@@ -181,7 +181,22 @@ function AdminEditor({ initialCity }: { initialCity: string }) {
       <ProviderForm
         key={`new-${city}`}
         city={city}
-        onSaved={() => {
+        onSaved={(data) => {
+          addProvider(city, {
+            name: data.name,
+            tier: data.tier,
+            area: data.area || undefined,
+            whatsapp: data.whatsapp || undefined,
+            phoneMasked: data.phoneMasked || undefined,
+            phone: data.phone || undefined,
+            address: data.address || undefined,
+            description: data.description || undefined,
+            instagram: data.instagram || undefined,
+            website: data.website || undefined,
+            verified: data.verified,
+            logoUrl: data.logoUrl || undefined,
+            photos: data.photos.length ? data.photos : undefined,
+          });
           setTick((t) => t + 1);
           toast.success("Anunciante criado");
         }}
