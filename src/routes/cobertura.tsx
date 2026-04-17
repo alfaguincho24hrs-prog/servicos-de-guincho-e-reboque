@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, Phone, Star, Truck } from "lucide-react";
+import { MapPin, Phone, Star, Truck, Pencil } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +32,14 @@ function CoveragePage() {
           </p>
         </div>
 
-        <h2 className="mt-16 text-2xl font-bold">Empresas parceiras em destaque</h2>
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-2xl font-bold">Empresas parceiras em destaque</h2>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/admin" search={{ city: "" }}>
+              <Pencil className="h-4 w-4" /> Editar empresas parceiras
+            </Link>
+          </Button>
+        </div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PARTNERS.map((p) => (
             <Card key={p.name} className="border-border/60 transition-all hover:border-accent/60 hover:shadow-[var(--shadow-elegant)]">
