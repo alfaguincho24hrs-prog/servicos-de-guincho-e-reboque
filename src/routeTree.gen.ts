@@ -9,11 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicosDeGuinchoEReboqueRouteImport } from './routes/servicos-de-guincho-e-reboque'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as RodoviasValeDoParaibaRouteImport } from './routes/rodovias-vale-do-paraiba'
-import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as RemocaoVeicularRouteImport } from './routes/remocao-veicular'
 import { Route as PaneSecaRouteImport } from './routes/pane-seca'
 import { Route as GuinchoPesadoRouteImport } from './routes/guincho-pesado'
@@ -26,11 +24,6 @@ import { Route as AutoSocorroRouteImport } from './routes/auto-socorro'
 import { Route as AnuncieRouteImport } from './routes/anuncie'
 import { Route as IndexRouteImport } from './routes/index'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ServicosDeGuinchoEReboqueRoute =
   ServicosDeGuinchoEReboqueRouteImport.update({
     id: '/servicos-de-guincho-e-reboque',
@@ -45,11 +38,6 @@ const ServicosRoute = ServicosRouteImport.update({
 const RodoviasValeDoParaibaRoute = RodoviasValeDoParaibaRouteImport.update({
   id: '/rodovias-vale-do-paraiba',
   path: '/rodovias-vale-do-paraiba',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: '/robots.txt',
-  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RemocaoVeicularRoute = RemocaoVeicularRouteImport.update({
@@ -121,11 +109,9 @@ export interface FileRoutesByFullPath {
   '/guincho-pesado': typeof GuinchoPesadoRoute
   '/pane-seca': typeof PaneSecaRoute
   '/remocao-veicular': typeof RemocaoVeicularRoute
-  '/robots.txt': typeof RobotsDottxtRoute
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -139,11 +125,9 @@ export interface FileRoutesByTo {
   '/guincho-pesado': typeof GuinchoPesadoRoute
   '/pane-seca': typeof PaneSecaRoute
   '/remocao-veicular': typeof RemocaoVeicularRoute
-  '/robots.txt': typeof RobotsDottxtRoute
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -158,11 +142,9 @@ export interface FileRoutesById {
   '/guincho-pesado': typeof GuinchoPesadoRoute
   '/pane-seca': typeof PaneSecaRoute
   '/remocao-veicular': typeof RemocaoVeicularRoute
-  '/robots.txt': typeof RobotsDottxtRoute
   '/rodovias-vale-do-paraiba': typeof RodoviasValeDoParaibaRoute
   '/servicos': typeof ServicosRoute
   '/servicos-de-guincho-e-reboque': typeof ServicosDeGuinchoEReboqueRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -178,11 +160,9 @@ export interface FileRouteTypes {
     | '/guincho-pesado'
     | '/pane-seca'
     | '/remocao-veicular'
-    | '/robots.txt'
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
-    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -196,11 +176,9 @@ export interface FileRouteTypes {
     | '/guincho-pesado'
     | '/pane-seca'
     | '/remocao-veicular'
-    | '/robots.txt'
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
-    | '/sitemap.xml'
   id:
     | '__root__'
     | '/'
@@ -214,11 +192,9 @@ export interface FileRouteTypes {
     | '/guincho-pesado'
     | '/pane-seca'
     | '/remocao-veicular'
-    | '/robots.txt'
     | '/rodovias-vale-do-paraiba'
     | '/servicos'
     | '/servicos-de-guincho-e-reboque'
-    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -233,22 +209,13 @@ export interface RootRouteChildren {
   GuinchoPesadoRoute: typeof GuinchoPesadoRoute
   PaneSecaRoute: typeof PaneSecaRoute
   RemocaoVeicularRoute: typeof RemocaoVeicularRoute
-  RobotsDottxtRoute: typeof RobotsDottxtRoute
   RodoviasValeDoParaibaRoute: typeof RodoviasValeDoParaibaRoute
   ServicosRoute: typeof ServicosRoute
   ServicosDeGuinchoEReboqueRoute: typeof ServicosDeGuinchoEReboqueRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/servicos-de-guincho-e-reboque': {
       id: '/servicos-de-guincho-e-reboque'
       path: '/servicos-de-guincho-e-reboque'
@@ -268,13 +235,6 @@ declare module '@tanstack/react-router' {
       path: '/rodovias-vale-do-paraiba'
       fullPath: '/rodovias-vale-do-paraiba'
       preLoaderRoute: typeof RodoviasValeDoParaibaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/robots.txt': {
-      id: '/robots.txt'
-      path: '/robots.txt'
-      fullPath: '/robots.txt'
-      preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/remocao-veicular': {
@@ -369,11 +329,9 @@ const rootRouteChildren: RootRouteChildren = {
   GuinchoPesadoRoute: GuinchoPesadoRoute,
   PaneSecaRoute: PaneSecaRoute,
   RemocaoVeicularRoute: RemocaoVeicularRoute,
-  RobotsDottxtRoute: RobotsDottxtRoute,
   RodoviasValeDoParaibaRoute: RodoviasValeDoParaibaRoute,
   ServicosRoute: ServicosRoute,
   ServicosDeGuinchoEReboqueRoute: ServicosDeGuinchoEReboqueRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

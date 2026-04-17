@@ -5,5 +5,58 @@
 //     error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... } }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { writeFileSync, mkdirSync } from "node:fs";
+import { resolve } from "node:path";
+import type { Plugin } from "vite";
 
-export default defineConfig();
+const SITE_URL = "https://guincho24hrs.com.br";
+
+const STATIC_ROUTES = [
+  "/",
+  "/servicos",
+  "/cobertura",
+  "/anuncie",
+  "/contato",
+  "/servicos-de-guincho-e-reboque",
+  "/rodovias-vale-do-paraiba",
+  "/guincho-leve",
+  "/guincho-pesado",
+  "/guincho-de-motos",
+  "/auto-socorro",
+  "/pane-seca",
+  "/remocao-veicular",
+];
+
+function generateSeoFiles(): Plugin {
+  const generate = async () => {
+    // Dynamic import so SSR/edge bundle doesn't pull cities-data
+    const { ALL_CITIES } = await import("./src/components/cities-data");
+    const today = new Date().toISOString().split("T")[0];
+    const urls: string[] = [];
+    for (const path of STATIC_ROUTES) {
+      urls.push(`  <url><loc>${SITE_URL}${path}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>${path === "/" ? "1.0" : "0.8"}</priority></url>`);
+    }
+    for (const c of ALL_CITIES) {
+      const slug = `${c.slug}-${c.uf.toLowerCase()}`;
+      urls.push(`  <url><loc>${SITE_URL}/guincho-em-${slug}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+    }
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
+    const robots = `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+    const dir = resolve(process.cwd(), "public");
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(resolve(dir, "sitemap.xml"), sitemap, "utf-8");
+    writeFileSync(resolve(dir, "robots.txt"), robots, "utf-8");
+  };
+  return {
+    name: "lovable-seo-files",
+    apply: () => true,
+    async buildStart() {
+      try { await generate(); } catch (e) { this.warn(`SEO gen failed: ${(e as Error).message}`); }
+    },
+    async configureServer() {
+      try { await generate(); } catch { /* noop in dev */ }
+    },
+  };
+}
+
+export default defineConfig({ vite: { plugins: [generateSeoFiles()] } });
