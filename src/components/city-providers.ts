@@ -77,6 +77,7 @@ export type AdminOverrides = Record<string, Record<string, ProviderOverride>>;
 // formato: { [citySlug]: { [providerId]: override } }
 
 const STORAGE_KEY = "admin_provider_overrides_v1";
+const ADDED_KEY = "admin_provider_added_v1";
 
 export function readOverrides(): AdminOverrides {
   if (typeof window === "undefined") return {};
@@ -97,6 +98,41 @@ export function setProviderOverride(citySlug: string, providerId: string, patch:
   const all = readOverrides();
   all[citySlug] = { ...(all[citySlug] || {}), [providerId]: { ...(all[citySlug]?.[providerId] || {}), ...patch } };
   writeOverrides(all);
+}
+
+// ---------- Anunciantes adicionados pelo admin ----------
+
+export type AddedProviders = Record<string, Provider[]>;
+
+export function readAddedProviders(): AddedProviders {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(ADDED_KEY);
+    return raw ? (JSON.parse(raw) as AddedProviders) : {};
+  } catch {
+    return {};
+  }
+}
+
+export function writeAddedProviders(data: AddedProviders) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(ADDED_KEY, JSON.stringify(data));
+}
+
+export function addProvider(citySlug: string, p: Omit<Provider, "id"> & { id?: string }): Provider {
+  const all = readAddedProviders();
+  const id = p.id || `custom-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  const provider: Provider = { ...p, id };
+  all[citySlug] = [...(all[citySlug] || []), provider];
+  writeAddedProviders(all);
+  return provider;
+}
+
+export function removeAddedProvider(citySlug: string, providerId: string) {
+  const all = readAddedProviders();
+  if (!all[citySlug]) return;
+  all[citySlug] = all[citySlug].filter((p) => p.id !== providerId);
+  writeAddedProviders(all);
 }
 
 function applyOverrides(citySlug: string, list: Provider[]): Provider[] {
@@ -127,14 +163,24 @@ export function getCityProviders(slugWithUf: string): Provider[] {
   const key = slugWithUf.toLowerCase();
   const direct = CITY_PROVIDERS[key];
   const base = direct && direct.length ? direct : FALLBACK;
-  return applyOverrides(key, base);
+  const withOv = applyOverrides(key, base);
+  const added = readAddedProviders()[key] || [];
+  // Anunciantes adicionados também passam por overrides (caso editados depois)
+  const addedWithOv = applyOverrides(key, added);
+  return [...withOv, ...addedWithOv];
 }
 
-// Lista todas as cidades com prestadores cadastrados (para o admin)
+// Lista cidades com cadastro próprio (file) + cidades com providers adicionados
 export function listProviderCities(): string[] {
-  return Object.keys(CITY_PROVIDERS);
+  const fileCities = Object.keys(CITY_PROVIDERS);
+  const addedCities = typeof window !== "undefined" ? Object.keys(readAddedProviders()) : [];
+  return Array.from(new Set([...fileCities, ...addedCities])).sort();
 }
 
 export function getRawCityProviders(slugWithUf: string): Provider[] {
-  return CITY_PROVIDERS[slugWithUf.toLowerCase()] || FALLBACK;
+  const key = slugWithUf.toLowerCase();
+  const base = CITY_PROVIDERS[key] || FALLBACK;
+  const added = readAddedProviders()[key] || [];
+  return [...base, ...added];
 }
+
