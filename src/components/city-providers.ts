@@ -18,6 +18,15 @@ export type Provider = {
   area?: string;
   rating?: number;
   reviews?: number;
+  // Campos extras de perfil
+  phone?: string; // telefone para ligação (com DDD, dígitos)
+  address?: string; // endereço completo
+  logoUrl?: string; // URL ou data URL do logo
+  description?: string; // descrição da empresa
+  verified?: boolean; // selo de verificação
+  instagram?: string; // URL do Instagram
+  website?: string; // URL do site
+  photos?: string[]; // até 4 fotos (URLs ou data URLs)
 };
 
 const GENERIC_GHOSTS: Provider[] = [
@@ -71,6 +80,14 @@ export type ProviderOverride = {
   phoneMasked?: string;
   name?: string;
   area?: string;
+  phone?: string;
+  address?: string;
+  logoUrl?: string;
+  description?: string;
+  verified?: boolean;
+  instagram?: string;
+  website?: string;
+  photos?: string[];
 };
 
 export type AdminOverrides = Record<string, Record<string, ProviderOverride>>;
