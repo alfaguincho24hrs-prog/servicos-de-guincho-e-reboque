@@ -31,6 +31,9 @@ import { getCityCopy } from "@/components/city-variations";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import { AdminEditButton } from "@/components/admin-edit-button";
+import { EtaBadge } from "@/components/eta-badge";
+import { LeadFormGeo } from "@/components/lead-form-geo";
+import { CitySocialProof } from "@/components/city-social-proof";
 
 const SITE_URL = "https://sosguincho24horas.com.br";
 
@@ -210,6 +213,9 @@ function CityPage() {
           Guincho 24 Horas em {city.name} - {city.uf}
         </h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">{copy.heroIntro}</p>
+        <div className="mt-5">
+          <EtaBadge cityName={city.name} />
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
             <a href={telHref}>
