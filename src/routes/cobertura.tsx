@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { PARTNERS, CITIES } from "@/components/site-data";
 import { SeoBlock } from "@/components/seo-block";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/cobertura")({
   head: () => ({
@@ -15,7 +16,11 @@ export const Route = createFileRoute("/cobertura")({
       { name: "description", content: "Veja todas as capitais e cidades com atendimento de guincho e reboque 24h. Cobertura nacional com empresas parceiras qualificadas em cada região." },
       { property: "og:title", content: "Cobertura Nacional de Guincho 24h" },
       { property: "og:description", content: "Capitais e cidades atendidas em todo o Brasil." },
+      { property: "og:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
+      { property: "og:url", content: "https://sosguincho24horas.com.br/cobertura" },
+      { name: "twitter:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
     ],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/cobertura" }],
   }),
   component: CoveragePage,
 });

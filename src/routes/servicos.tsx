@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { SERVICES, SITE } from "@/components/site-data";
 import { SeoBlock } from "@/components/seo-block";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/servicos")({
   head: () => ({
@@ -14,7 +15,11 @@ export const Route = createFileRoute("/servicos")({
       { name: "description", content: "Conheça todos os serviços de guincho 24 horas: reboque leve, pesado, motos, auto socorro mecânico, pane seca e remoção veicular em todo o Brasil." },
       { property: "og:title", content: "Serviços de Guincho e Reboque 24h" },
       { property: "og:description", content: "Reboque leve, pesado, motos, auto socorro, pane seca e remoção." },
+      { property: "og:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
+      { property: "og:url", content: "https://sosguincho24horas.com.br/servicos" },
+      { name: "twitter:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
     ],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/servicos" }],
   }),
   component: ServicesPage,
 });

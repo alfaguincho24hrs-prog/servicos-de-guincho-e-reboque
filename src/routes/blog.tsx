@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight, Pencil } from "lucide-react";
 import { getAllPosts, type BlogPost } from "@/components/blog-data";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -12,7 +13,11 @@ export const Route = createFileRoute("/blog")({
       { name: "description", content: "Artigos e guias sobre guincho 24h, reboque, auto socorro, segurança nas rodovias e cuidados com seu veículo em emergências." },
       { property: "og:title", content: "Blog — Guincho Brasil 24h" },
       { property: "og:description", content: "Dicas, guias e novidades sobre guincho, reboque e auto socorro em todo o Brasil." },
+      { property: "og:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
+      { property: "og:url", content: "https://sosguincho24horas.com.br/blog" },
+      { name: "twitter:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
     ],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/blog" }],
   }),
   component: BlogPage,
 });
