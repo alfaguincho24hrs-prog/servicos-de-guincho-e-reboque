@@ -28,6 +28,7 @@ export const Route = createFileRoute("/cobertura")({
 function CoveragePage() {
   return (
     <div>
+      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Cobertura", url: "/cobertura" }]} />
       <div className="container mx-auto px-4 py-20">
         <div className="mx-auto max-w-3xl text-center">
           <Badge variant="secondary" className="mb-3">Cobertura</Badge>

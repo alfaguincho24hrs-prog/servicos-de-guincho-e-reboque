@@ -31,6 +31,7 @@ function BlogPage() {
 
   return (
     <div className="bg-background">
+      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Blog", url: "/blog" }]} />
       <section className="border-b border-border/60 bg-muted/30 py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Blog Guincho Brasil 24h</h1>
