@@ -36,6 +36,7 @@ const benefits = [
 function AnunciePage() {
   return (
     <div>
+      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Anuncie", url: "/anuncie" }]} />
       <section className="bg-[image:var(--gradient-hero)] py-20 text-primary-foreground">
         <div className="container mx-auto max-w-3xl px-4 text-center">
           <Badge className="mb-3 border-accent/40 bg-accent/15 text-accent">Para empresas</Badge>

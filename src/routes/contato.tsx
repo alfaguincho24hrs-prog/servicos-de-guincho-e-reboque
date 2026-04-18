@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { SITE } from "@/components/site-data";
 import { SeoBlock } from "@/components/seo-block";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -30,6 +31,7 @@ export const Route = createFileRoute("/contato")({
 function ContactPage() {
   return (
     <div>
+      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Contato", url: "/contato" }]} />
       <div className="container mx-auto px-4 py-20">
         <div className="mx-auto max-w-3xl text-center">
           <Badge variant="secondary" className="mb-3">Contato</Badge>

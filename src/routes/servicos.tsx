@@ -27,6 +27,7 @@ export const Route = createFileRoute("/servicos")({
 function ServicesPage() {
   return (
     <div>
+      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Serviços", url: "/servicos" }]} />
       <div className="container mx-auto px-4 py-20">
         <div className="mx-auto max-w-3xl text-center">
           <Badge variant="secondary" className="mb-3">Serviços</Badge>
