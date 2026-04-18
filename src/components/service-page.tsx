@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SITE } from "@/components/site-data";
 import { SeoBlock, type FAQItem } from "@/components/seo-block";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export type ServicePageProps = {
   serviceName: string; // ex: "Guincho Leve"
