@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SITE } from "@/components/site-data";
 import { SeoBlock, type FAQItem } from "@/components/seo-block";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export type ServicePageProps = {
   serviceName: string; // ex: "Guincho Leve"
@@ -50,6 +51,13 @@ export function ServicePage(p: ServicePageProps) {
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Início", url: "/" },
+          { name: "Serviços", url: "/servicos" },
+          { name: p.serviceName, url: `/${p.slug}` },
+        ]}
+      />
 
       {/* Hero */}
       <section className="bg-[image:var(--gradient-hero)] py-20 text-primary-foreground">

@@ -28,6 +28,7 @@ import { ALL_CITIES, type City } from "@/components/cities-data";
 import { getCityProviders } from "@/components/city-providers";
 import { ProviderDirectory } from "@/components/provider-cards";
 import { getCityCopy } from "@/components/city-variations";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
 import { AdminEditButton } from "@/components/admin-edit-button";
 
@@ -156,6 +157,13 @@ function CityPage() {
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Início", url: "/" },
+          { name: "Cidades atendidas", url: "/servicos-de-guincho-e-reboque" },
+          { name: `Guincho em ${city.name} - ${city.uf}`, url: `/guincho-em-${city.slug}-${city.uf.toLowerCase()}` },
+        ]}
       />
 
       <Breadcrumb className="mb-6">
