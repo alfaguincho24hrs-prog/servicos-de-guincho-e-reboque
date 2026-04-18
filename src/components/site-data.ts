@@ -3,7 +3,16 @@ export const SITE = {
   tagline: "Guincho e Reboque 24 Horas em Todo o Brasil",
   phone: "(11) 99645-1510",
   whatsapp: "5511996451510",
-  email: "atendimento@guinchobrasil24h.com.br",
+  email: "sosguincho24hrs@gmail.com",
+  address: {
+    street: "Praça Dom Epaminondas, 1-4 sala 104",
+    neighborhood: "Centro",
+    city: "Taubaté",
+    region: "SP",
+    postalCode: "12010-090",
+    country: "BR",
+  },
+  geo: { latitude: -23.026389, longitude: -45.555556 },
 };
 
 export const SERVICES = [
