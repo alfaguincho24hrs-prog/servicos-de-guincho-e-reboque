@@ -349,25 +349,7 @@ function CityPage() {
             </li>
           </ul>
         </div>
-        <Card className="border-border/60 bg-secondary/40">
-          <CardContent className="p-6">
-            <h3 className="text-xl font-bold">Atendimento imediato</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Ligue agora e tenha um guincho a caminho em {city.name} em poucos
-              minutos. Atendimento 24h, todos os dias, inclusive feriados.
-            </p>
-            <div className="mt-5 flex flex-col gap-3">
-              <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
-                <a href={telHref}>
-                  <Phone className="h-4 w-4" /> {SITE.phone}
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link to="/contato">Solicitar orçamento</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <LeadFormGeo defaultCity={city.name} />
       </section>
 
       {/* FAQ */}
