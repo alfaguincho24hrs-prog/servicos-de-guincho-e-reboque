@@ -4,8 +4,31 @@ import { SiteFooter } from "@/components/site-footer";
 import { LegalNotice } from "@/components/legal-notice";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { Toaster } from "@/components/ui/sonner";
+import { SITE } from "@/components/site-data";
 
 import appCss from "../styles.css?url";
+
+const LOCAL_BUSINESS_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://servicos-de-guincho-e-reboque.lovable.app/#business",
+  name: SITE.name,
+  description: "Rede nacional de guincho, reboque e auto socorro 24h em todo o Brasil.",
+  url: "https://servicos-de-guincho-e-reboque.lovable.app/",
+  telephone: SITE.phone,
+  email: SITE.email,
+  priceRange: "$$",
+  image: "https://servicos-de-guincho-e-reboque.lovable.app/favicon.svg",
+  areaServed: { "@type": "Country", name: "Brasil" },
+  address: { "@type": "PostalAddress", addressCountry: "BR", addressRegion: "SP" },
+  openingHoursSpecification: [{
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    opens: "00:00",
+    closes: "23:59",
+  }],
+  aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "1280" },
+};
 
 function NotFoundComponent() {
   return (
@@ -53,6 +76,12 @@ export const Route = createRootRoute({
       { rel: "alternate icon", type: "image/png", href: "/favicon.png" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
       { rel: "manifest", href: "/manifest.webmanifest" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(LOCAL_BUSINESS_JSONLD),
+      },
     ],
   }),
   shellComponent: RootShell,
