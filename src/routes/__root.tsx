@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { LegalNotice } from "@/components/legal-notice";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { MobileStickyCTA } from "@/components/mobile-sticky-cta";
 import { Toaster } from "@/components/ui/sonner";
 import { SITE } from "@/components/site-data";
 
@@ -146,12 +147,13 @@ function RootComponent() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <main className="flex-1">
+      <main className="flex-1 pb-16 md:pb-0">
         <Outlet />
       </main>
       <LegalNotice />
       <SiteFooter />
       <WhatsAppFloat />
+      <MobileStickyCTA />
       <Toaster />
     </div>
   );

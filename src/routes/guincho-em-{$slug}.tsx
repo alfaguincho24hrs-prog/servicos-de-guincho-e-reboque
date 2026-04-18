@@ -31,6 +31,9 @@ import { getCityCopy } from "@/components/city-variations";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import { AdminEditButton } from "@/components/admin-edit-button";
+import { EtaBadge } from "@/components/eta-badge";
+import { LeadFormGeo } from "@/components/lead-form-geo";
+import { CitySocialProof } from "@/components/city-social-proof";
 
 const SITE_URL = "https://sosguincho24horas.com.br";
 
@@ -210,6 +213,9 @@ function CityPage() {
           Guincho 24 Horas em {city.name} - {city.uf}
         </h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">{copy.heroIntro}</p>
+        <div className="mt-5">
+          <EtaBadge cityName={city.name} />
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
             <a href={telHref}>
@@ -343,26 +349,11 @@ function CityPage() {
             </li>
           </ul>
         </div>
-        <Card className="border-border/60 bg-secondary/40">
-          <CardContent className="p-6">
-            <h3 className="text-xl font-bold">Atendimento imediato</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Ligue agora e tenha um guincho a caminho em {city.name} em poucos
-              minutos. Atendimento 24h, todos os dias, inclusive feriados.
-            </p>
-            <div className="mt-5 flex flex-col gap-3">
-              <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
-                <a href={telHref}>
-                  <Phone className="h-4 w-4" /> {SITE.phone}
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link to="/contato">Solicitar orçamento</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <LeadFormGeo defaultCity={city.name} />
       </section>
+
+      {/* Prova social por cidade */}
+      <CitySocialProof cityName={city.name} neighborhoods={local.neighborhoods} />
 
       {/* FAQ */}
       <section className="mt-14">
