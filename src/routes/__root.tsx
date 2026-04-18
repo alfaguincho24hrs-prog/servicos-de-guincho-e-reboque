@@ -77,6 +77,12 @@ export const Route = createRootRoute({
       { rel: "apple-touch-icon", href: "/favicon.png" },
       { rel: "manifest", href: "/manifest.webmanifest" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(LOCAL_BUSINESS_JSONLD),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
