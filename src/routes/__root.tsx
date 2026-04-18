@@ -20,7 +20,16 @@ const LOCAL_BUSINESS_JSONLD = {
   priceRange: "$$",
   image: "https://servicos-de-guincho-e-reboque.lovable.app/favicon.svg",
   areaServed: { "@type": "Country", name: "Brasil" },
-  address: { "@type": "PostalAddress", addressCountry: "BR", addressRegion: "SP" },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Av. Paulista, 1000",
+    addressLocality: "São Paulo",
+    addressRegion: "SP",
+    postalCode: "01310-100",
+    addressCountry: "BR",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: -23.561414, longitude: -46.655881 },
+  hasMap: "https://www.google.com/maps/search/?api=1&query=-23.561414,-46.655881",
   openingHoursSpecification: [{
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
