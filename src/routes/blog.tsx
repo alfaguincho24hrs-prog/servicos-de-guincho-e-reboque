@@ -52,7 +52,7 @@ function BlogPage() {
             <Card key={post.slug} className="flex flex-col transition-shadow hover:shadow-lg">
               <CardHeader>
                 {post.coverUrl && (
-                  <img src={post.coverUrl} alt={post.title} className="mb-3 h-40 w-full rounded-md object-cover" />
+                  <img src={post.coverUrl} alt={post.title} className="mb-3 h-40 w-full rounded-md object-cover" width={640} height={160} loading="lazy" decoding="async" />
                 )}
                 <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
                   <span className="rounded bg-accent/10 px-2 py-0.5 font-medium text-accent">{post.category}</span>
