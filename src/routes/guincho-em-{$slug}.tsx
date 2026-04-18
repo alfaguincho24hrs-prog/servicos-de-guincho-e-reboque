@@ -158,6 +158,13 @@ function CityPage() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Início", url: "/" },
+          { name: "Cidades atendidas", url: "/servicos-de-guincho-e-reboque" },
+          { name: `Guincho em ${city.name} - ${city.uf}`, url: `/guincho-em-${city.slug}-${city.uf.toLowerCase()}` },
+        ]}
+      />
 
       <Breadcrumb className="mb-6">
         <BreadcrumbList>
