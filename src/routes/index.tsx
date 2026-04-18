@@ -18,6 +18,53 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Guincho 24 Horas no Brasil | Reboque e Auto Socorro" },
       { property: "og:description", content: "Reboque, auto socorro e remoção veicular 24h em todo o Brasil." },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "LocalBusiness",
+              "@id": "https://servicos-de-guincho-e-reboque.lovable.app/#business",
+              name: SITE.name,
+              description: "Rede nacional de guincho, reboque e auto socorro 24h em todo o Brasil.",
+              url: "https://servicos-de-guincho-e-reboque.lovable.app/",
+              telephone: SITE.phone,
+              email: SITE.email,
+              priceRange: "$$",
+              areaServed: { "@type": "Country", name: "Brasil" },
+              address: { "@type": "PostalAddress", addressCountry: "BR", addressRegion: "SP" },
+              openingHoursSpecification: [{
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+                opens: "00:00", closes: "23:59",
+              }],
+              aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "1280" },
+            },
+            ...SERVICES.map((s) => ({
+              "@type": "Service",
+              "@id": `https://servicos-de-guincho-e-reboque.lovable.app/${s.slug}`,
+              serviceType: s.title,
+              name: s.title,
+              description: s.desc,
+              provider: { "@id": "https://servicos-de-guincho-e-reboque.lovable.app/#business" },
+              areaServed: { "@type": "Country", name: "Brasil" },
+            })),
+            {
+              "@type": "FAQPage",
+              mainEntity: [
+                { "@type": "Question", name: "Quanto custa um guincho 24 horas?", acceptedAnswer: { "@type": "Answer", text: "O valor varia conforme distância (KM rodado), tipo de veículo, horário e região. Em média, na cidade fica entre R$ 150 e R$ 350. Em rodovias o cálculo é por quilômetro. Sempre fornecemos orçamento antes do atendimento." } },
+                { "@type": "Question", name: "Em quanto tempo o guincho chega?", acceptedAnswer: { "@type": "Answer", text: "Em áreas urbanas, o tempo médio é de 30 a 40 minutos. Em rodovias e regiões afastadas, entre 40 e 60 minutos." } },
+                { "@type": "Question", name: "Vocês atendem em rodovias e na serra?", acceptedAnswer: { "@type": "Answer", text: "Sim. Cobertura completa em rodovias federais e estaduais, incluindo trechos de serra como Tamoios, Oswaldo Cruz, Régis Bittencourt e Anchieta/Imigrantes." } },
+                { "@type": "Question", name: "Posso pagar com cartão ou PIX?", acceptedAnswer: { "@type": "Answer", text: "Sim. Aceitamos PIX, débito, crédito (à vista e parcelado), dinheiro e principais aplicativos de assistência veicular." } },
+                { "@type": "Question", name: "Atendem moto, caminhão e veículo blindado?", acceptedAnswer: { "@type": "Answer", text: "Sim. Plataformas para motos com içamento sem dano, guincho pesado para caminhões e ônibus, e prancha rebaixada para blindados, esportivos e clássicos." } },
+              ],
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: HomePage,
 });
