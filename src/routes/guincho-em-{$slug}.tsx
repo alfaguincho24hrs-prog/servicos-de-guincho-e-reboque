@@ -352,6 +352,9 @@ function CityPage() {
         <LeadFormGeo defaultCity={city.name} />
       </section>
 
+      {/* Prova social por cidade */}
+      <CitySocialProof cityName={city.name} neighborhoods={local.neighborhoods} />
+
       {/* FAQ */}
       <section className="mt-14">
         <h2 className="text-2xl font-bold md:text-3xl">{copy.faqTitle}</h2>
