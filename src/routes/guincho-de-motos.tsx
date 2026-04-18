@@ -9,7 +9,7 @@ export const Route = createFileRoute("/guincho-de-motos")({
       { property: "og:title", content: "Guincho de Motos 24h" },
       { property: "og:description", content: "Reboque seguro para motocicletas com rampa e cintas específicas." },
     ],
-    links: [{ rel: "canonical", href: "https://guincho24hrs.com.br/guincho-de-motos" }],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/guincho-de-motos" }],
   }),
   component: () => (
     <ServicePage

@@ -9,7 +9,7 @@ export const Route = createFileRoute("/auto-socorro")({
       { property: "og:title", content: "Auto Socorro Mecânico 24h" },
       { property: "og:description", content: "Resolvemos sua emergência no local: bateria, pneu, chaveiro e mais." },
     ],
-    links: [{ rel: "canonical", href: "https://guincho24hrs.com.br/auto-socorro" }],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/auto-socorro" }],
   }),
   component: () => (
     <ServicePage

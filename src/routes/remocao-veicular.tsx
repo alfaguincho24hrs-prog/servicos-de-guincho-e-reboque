@@ -9,7 +9,7 @@ export const Route = createFileRoute("/remocao-veicular")({
       { property: "og:title", content: "Remoção Veicular 24h" },
       { property: "og:description", content: "Transporte programado de veículos para sinistros, leilões e frotistas." },
     ],
-    links: [{ rel: "canonical", href: "https://guincho24hrs.com.br/remocao-veicular" }],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/remocao-veicular" }],
   }),
   component: () => (
     <ServicePage

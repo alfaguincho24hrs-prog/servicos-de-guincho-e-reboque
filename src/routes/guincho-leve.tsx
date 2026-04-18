@@ -9,7 +9,7 @@ export const Route = createFileRoute("/guincho-leve")({
       { property: "og:title", content: "Guincho Leve 24h — Reboque para Carros e SUVs" },
       { property: "og:description", content: "Plataforma hidráulica, atendimento 24h em todo o Brasil." },
     ],
-    links: [{ rel: "canonical", href: "https://guincho24hrs.com.br/guincho-leve" }],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/guincho-leve" }],
   }),
   component: () => (
     <ServicePage

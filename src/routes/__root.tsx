@@ -11,14 +11,14 @@ import appCss from "../styles.css?url";
 const LOCAL_BUSINESS_JSONLD = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://servicos-de-guincho-e-reboque.lovable.app/#business",
+  "@id": "https://sosguincho24horas.com.br/#business",
   name: SITE.name,
   description: "Rede nacional de guincho, reboque e auto socorro 24h em todo o Brasil.",
-  url: "https://servicos-de-guincho-e-reboque.lovable.app/",
+  url: "https://sosguincho24horas.com.br/",
   telephone: SITE.phone,
   email: SITE.email,
   priceRange: "$$",
-  image: "https://servicos-de-guincho-e-reboque.lovable.app/favicon.svg",
+  image: "https://sosguincho24horas.com.br/favicon.svg",
   areaServed: { "@type": "Country", name: "Brasil" },
   address: {
     "@type": "PostalAddress",
