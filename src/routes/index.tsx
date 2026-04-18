@@ -72,10 +72,18 @@ function HomePage() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
             <Card key={s.slug} className="group relative overflow-hidden border-border/60 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]">
-              <CardContent className="space-y-3 p-6">
+              <CardContent className="flex h-full flex-col space-y-3 p-6">
                 <div className="text-3xl">{s.icon}</div>
                 <h3 className="text-lg font-semibold">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.desc}</p>
+                <Button
+                  asChild
+                  className="mt-auto w-full animate-pulse bg-orange-500 font-bold text-white shadow-lg shadow-orange-500/40 hover:animate-none hover:bg-orange-600"
+                >
+                  <a href={`tel:${SITE.phone}`}>
+                    <Phone className="h-4 w-4" /> CHAMAR GUINCHO
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           ))}
