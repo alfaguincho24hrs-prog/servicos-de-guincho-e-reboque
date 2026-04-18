@@ -24,7 +24,7 @@ export type ServicePageProps = {
 
 export function ServicePage(p: ServicePageProps) {
   const wppHref = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(p.whatsappMsg)}`;
-  const url = `https://guincho24hrs.com.br/${p.slug}`;
+  const url = `https://sosguincho24horas.com.br/${p.slug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -35,7 +35,7 @@ export function ServicePage(p: ServicePageProps) {
       "@type": "LocalBusiness",
       name: SITE.name,
       telephone: SITE.phone,
-      url: "https://guincho24hrs.com.br",
+      url: "https://sosguincho24horas.com.br",
     },
     areaServed: { "@type": "Country", name: "Brasil" },
     description: p.heroSubtitle,

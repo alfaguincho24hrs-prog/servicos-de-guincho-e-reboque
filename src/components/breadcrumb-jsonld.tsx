@@ -1,6 +1,6 @@
 type Crumb = { name: string; url: string };
 
-const BASE = "https://servicos-de-guincho-e-reboque.lovable.app";
+const BASE = "https://sosguincho24horas.com.br";
 
 export function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {
   const data = {

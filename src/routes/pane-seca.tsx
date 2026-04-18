@@ -9,7 +9,7 @@ export const Route = createFileRoute("/pane-seca")({
       { property: "og:title", content: "Pane Seca 24h — Entrega de Combustível" },
       { property: "og:description", content: "Combustível emergencial entregue onde você está, 24 horas." },
     ],
-    links: [{ rel: "canonical", href: "https://guincho24hrs.com.br/pane-seca" }],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/pane-seca" }],
   }),
   component: () => (
     <ServicePage

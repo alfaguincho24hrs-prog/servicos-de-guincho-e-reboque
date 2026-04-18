@@ -9,7 +9,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 import type { Plugin } from "vite";
 
-const SITE_URL = "https://guincho24hrs.com.br";
+const SITE_URL = "https://sosguincho24horas.com.br";
 
 const STATIC_ROUTES = [
   "/",

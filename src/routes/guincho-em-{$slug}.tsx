@@ -32,7 +32,7 @@ import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
 import { AdminEditButton } from "@/components/admin-edit-button";
 
-const SITE_URL = "https://guincho24hrs.com.br";
+const SITE_URL = "https://sosguincho24horas.com.br";
 
 function findCity(slug: string): City | undefined {
   const normalized = slug.toLowerCase().trim();

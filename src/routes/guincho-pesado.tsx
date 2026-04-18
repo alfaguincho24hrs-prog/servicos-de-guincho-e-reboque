@@ -9,7 +9,7 @@ export const Route = createFileRoute("/guincho-pesado")({
       { property: "og:title", content: "Guincho Pesado 24h — Caminhões e Ônibus" },
       { property: "og:description", content: "Reboque pesado com guincho munk e prancha rebaixada, 24h." },
     ],
-    links: [{ rel: "canonical", href: "https://guincho24hrs.com.br/guincho-pesado" }],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/guincho-pesado" }],
   }),
   component: () => (
     <ServicePage

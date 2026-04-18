@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://guincho24hrs.com.br/sitemap.xml
+Sitemap: https://sosguincho24horas.com.br/sitemap.xml

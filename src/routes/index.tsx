@@ -26,10 +26,10 @@ export const Route = createFileRoute("/")({
           "@graph": [
             {
               "@type": "LocalBusiness",
-              "@id": "https://servicos-de-guincho-e-reboque.lovable.app/#business",
+              "@id": "https://sosguincho24horas.com.br/#business",
               name: SITE.name,
               description: "Rede nacional de guincho, reboque e auto socorro 24h em todo o Brasil.",
-              url: "https://servicos-de-guincho-e-reboque.lovable.app/",
+              url: "https://sosguincho24horas.com.br/",
               telephone: SITE.phone,
               email: SITE.email,
               priceRange: "$$",
@@ -44,11 +44,11 @@ export const Route = createFileRoute("/")({
             },
             ...SERVICES.map((s) => ({
               "@type": "Service",
-              "@id": `https://servicos-de-guincho-e-reboque.lovable.app/${s.slug}`,
+              "@id": `https://sosguincho24horas.com.br/${s.slug}`,
               serviceType: s.title,
               name: s.title,
               description: s.desc,
-              provider: { "@id": "https://servicos-de-guincho-e-reboque.lovable.app/#business" },
+              provider: { "@id": "https://sosguincho24horas.com.br/#business" },
               areaServed: { "@type": "Country", name: "Brasil" },
             })),
             {

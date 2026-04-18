@@ -20,7 +20,7 @@ export const Route = createFileRoute("/rodovias-vale-do-paraiba")({
       { property: "og:type", content: "website" },
       { name: "robots", content: "index,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://guincho24hrs.com.br/rodovias-vale-do-paraiba" }],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/rodovias-vale-do-paraiba" }],
   }),
   component: RodoviasVPPage,
 });
