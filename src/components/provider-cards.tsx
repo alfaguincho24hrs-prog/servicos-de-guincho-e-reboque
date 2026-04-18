@@ -89,7 +89,10 @@ function PaidCard({ p, cityName }: { p: Provider; cityName: string }) {
               src={p.logoUrl}
               alt={`Logo ${p.name}`}
               className="h-14 w-14 shrink-0 rounded-md border object-cover"
+              width={56}
+              height={56}
               loading="lazy"
+              decoding="async"
             />
           ) : null}
           <div className="min-w-0 flex-1">
@@ -122,7 +125,10 @@ function PaidCard({ p, cityName }: { p: Provider; cityName: string }) {
                 src={src}
                 alt={`${p.name} foto ${i + 1}`}
                 className="aspect-square w-full rounded-md border object-cover"
+                width={160}
+                height={160}
                 loading="lazy"
+                decoding="async"
               />
             ))}
           </div>
