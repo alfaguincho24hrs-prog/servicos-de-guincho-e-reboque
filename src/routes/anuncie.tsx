@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { SeoBlock } from "@/components/seo-block";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/anuncie")({
   head: () => ({
@@ -17,7 +18,11 @@ export const Route = createFileRoute("/anuncie")({
       { name: "description", content: "Cadastre sua empresa de guincho e reboque no maior portal nacional. Apareça nos primeiros resultados e conquiste mais clientes na sua região." },
       { property: "og:title", content: "Anuncie sua Empresa de Guincho" },
       { property: "og:description", content: "Mais visibilidade, mais clientes, mais chamados para sua empresa de reboque." },
+      { property: "og:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
+      { property: "og:url", content: "https://sosguincho24horas.com.br/anuncie" },
+      { name: "twitter:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
     ],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/anuncie" }],
   }),
   component: AnunciePage,
 });
@@ -31,6 +36,7 @@ const benefits = [
 function AnunciePage() {
   return (
     <div>
+      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Anuncie", url: "/anuncie" }]} />
       <section className="bg-[image:var(--gradient-hero)] py-20 text-primary-foreground">
         <div className="container mx-auto max-w-3xl px-4 text-center">
           <Badge className="mb-3 border-accent/40 bg-accent/15 text-accent">Para empresas</Badge>

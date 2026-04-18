@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { SITE } from "@/components/site-data";
 import { SeoBlock } from "@/components/seo-block";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -18,7 +19,11 @@ export const Route = createFileRoute("/contato")({
       { name: "description", content: "Fale com a central do Guincho Brasil 24h. Atendimento por telefone, WhatsApp e e-mail, 24 horas por dia, em todo o Brasil." },
       { property: "og:title", content: "Contato | Guincho Brasil 24h" },
       { property: "og:description", content: "Atendimento 24h por telefone, WhatsApp e e-mail." },
+      { property: "og:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
+      { property: "og:url", content: "https://sosguincho24horas.com.br/contato" },
+      { name: "twitter:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
     ],
+    links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/contato" }],
   }),
   component: ContactPage,
 });
@@ -26,6 +31,7 @@ export const Route = createFileRoute("/contato")({
 function ContactPage() {
   return (
     <div>
+      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Contato", url: "/contato" }]} />
       <div className="container mx-auto px-4 py-20">
         <div className="mx-auto max-w-3xl text-center">
           <Badge variant="secondary" className="mb-3">Contato</Badge>

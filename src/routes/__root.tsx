@@ -85,6 +85,8 @@ export const Route = createRootRoute({
       { rel: "alternate icon", type: "image/png", href: "/favicon.png" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
       { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "alternate", hrefLang: "pt-BR", href: "https://sosguincho24horas.com.br/" },
+      { rel: "alternate", hrefLang: "x-default", href: "https://sosguincho24horas.com.br/" },
     ],
     scripts: [
       {
