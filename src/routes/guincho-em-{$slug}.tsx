@@ -28,6 +28,7 @@ import { ALL_CITIES, type City } from "@/components/cities-data";
 import { getCityProviders } from "@/components/city-providers";
 import { ProviderDirectory } from "@/components/provider-cards";
 import { getCityCopy } from "@/components/city-variations";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
 import { AdminEditButton } from "@/components/admin-edit-button";
 
