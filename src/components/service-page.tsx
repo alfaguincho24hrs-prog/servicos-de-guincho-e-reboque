@@ -51,6 +51,13 @@ export function ServicePage(p: ServicePageProps) {
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Início", url: "/" },
+          { name: "Serviços", url: "/servicos" },
+          { name: p.serviceName, url: `/${p.slug}` },
+        ]}
+      />
 
       {/* Hero */}
       <section className="bg-[image:var(--gradient-hero)] py-20 text-primary-foreground">
