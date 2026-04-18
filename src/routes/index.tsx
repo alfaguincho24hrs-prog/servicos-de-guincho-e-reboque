@@ -76,7 +76,16 @@ function HomePage() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImg} alt="Guincho e Reboque 24 horas plataforma remoção de veículo e auto socorro" className="h-full w-full object-cover" width={1920} height={1280} />
+          <img
+            src={heroImg}
+            alt="Guincho e Reboque 24 horas plataforma remoção de veículo e auto socorro"
+            className="h-full w-full object-cover"
+            width={1920}
+            height={1280}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+          />
           <div className="absolute inset-0 bg-[image:var(--gradient-hero)] opacity-90" />
         </div>
         <div className="container relative mx-auto grid gap-10 px-4 py-24 md:grid-cols-2 md:py-36">
