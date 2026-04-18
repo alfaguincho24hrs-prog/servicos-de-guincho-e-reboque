@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { SeoBlock } from "@/components/seo-block";
-import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/anuncie")({
@@ -126,7 +126,7 @@ function AnunciePage() {
         ]}
       />
 
-      <TestimonialsCarousel />
+      <LazyTestimonialsCarousel />
     </div>
   );
 }

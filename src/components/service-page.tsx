@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SITE } from "@/components/site-data";
 import { SeoBlock, type FAQItem } from "@/components/seo-block";
-import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export type ServicePageProps = {
@@ -127,7 +127,7 @@ export function ServicePage(p: ServicePageProps) {
         whatsappMessage={p.whatsappMsg}
       />
 
-      <TestimonialsCarousel />
+      <LazyTestimonialsCarousel />
     </div>
   );
 }

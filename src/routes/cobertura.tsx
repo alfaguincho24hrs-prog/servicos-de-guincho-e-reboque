@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PARTNERS, CITIES } from "@/components/site-data";
 import { SeoBlock } from "@/components/seo-block";
-import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/cobertura")({
@@ -97,7 +97,7 @@ function CoveragePage() {
         ]}
       />
 
-      <TestimonialsCarousel />
+      <LazyTestimonialsCarousel />
     </div>
   );
 }

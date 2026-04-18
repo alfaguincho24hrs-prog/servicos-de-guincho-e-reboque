@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Phone, Clock, ShieldCheck, MapPin, Star, ArrowRight, Truck, Wrench, Zap } from "lucide-react";
-import { useRef } from "react";
-import Autoplay from "embla-carousel-autoplay";
+import { lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SITE, SERVICES, PARTNERS, CITIES } from "@/components/site-data";
-import { TestimonialsCarousel } from "@/components/testimonials-carousel";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import heroImg from "@/assets/reboque.webp";
+
+const PartnersCarousel = lazy(() => import("@/components/partners-carousel"));
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -70,7 +70,6 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const partnersAutoplay = useRef(Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }));
   return (
     <div>
       {/* HERO */}
@@ -177,33 +176,9 @@ function HomePage() {
           </div>
           <Button asChild variant="outline"><Link to="/cobertura">Ver todos <ArrowRight className="h-4 w-4" /></Link></Button>
         </div>
-        <Carousel opts={{ align: "start", loop: true }} plugins={[partnersAutoplay.current]} className="w-full">
-          <CarouselContent>
-            {PARTNERS.map((p) => (
-              <CarouselItem key={p.name} className="sm:basis-1/2 lg:basis-1/3">
-                <Card className="h-full border-border/60 transition-all hover:border-accent/60 hover:shadow-[var(--shadow-elegant)]">
-                  <CardContent className="space-y-3 p-6">
-                    <div className="flex items-start justify-between">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                        <Truck className="h-5 w-5" />
-                      </div>
-                      <div className="flex items-center gap-1 text-sm font-medium text-accent-foreground">
-                        <Star className="h-4 w-4 fill-accent text-accent" /> {p.rating}
-                      </div>
-                    </div>
-                    <h3 className="text-lg font-semibold">{p.name}</h3>
-                    <p className="flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="h-4 w-4" /> {p.city}</p>
-                    <Button asChild className="w-full" variant="secondary">
-                      <a href={`tel:${p.phone.replace(/\D/g, "")}`}><Phone className="h-4 w-4" /> {p.phone}</a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex" />
-          <CarouselNext className="hidden sm:flex" />
-        </Carousel>
+        <Suspense fallback={<div className="h-72" aria-hidden />}>
+          <PartnersCarousel />
+        </Suspense>
       </section>
 
       {/* COVERAGE */}
@@ -348,7 +323,7 @@ function HomePage() {
         </div>
       </section>
 
-      <TestimonialsCarousel />
+      <LazyTestimonialsCarousel />
 
       {/* CTA ANUNCIE */}
       <section className="container mx-auto px-4 py-20">
