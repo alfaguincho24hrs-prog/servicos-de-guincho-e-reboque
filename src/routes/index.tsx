@@ -323,7 +323,7 @@ function HomePage() {
         </div>
       </section>
 
-      <TestimonialsCarousel />
+      <LazyTestimonialsCarousel />
 
       {/* CTA ANUNCIE */}
       <section className="container mx-auto px-4 py-20">

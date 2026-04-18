@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SERVICES, SITE } from "@/components/site-data";
 import { SeoBlock } from "@/components/seo-block";
-import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 
 export const Route = createFileRoute("/servicos")({
@@ -83,7 +83,7 @@ function ServicesPage() {
         ]}
       />
 
-      <TestimonialsCarousel />
+      <LazyTestimonialsCarousel />
     </div>
   );
 }

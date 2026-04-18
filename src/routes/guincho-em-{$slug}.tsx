@@ -29,7 +29,7 @@ import { getCityProviders } from "@/components/city-providers";
 import { ProviderDirectory } from "@/components/provider-cards";
 import { getCityCopy } from "@/components/city-variations";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
-import { TestimonialsCarousel } from "@/components/testimonials-carousel";
+import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import { AdminEditButton } from "@/components/admin-edit-button";
 
 const SITE_URL = "https://sosguincho24horas.com.br";
@@ -447,7 +447,7 @@ function CityPage() {
       </section>
 
       {/* Depoimentos rotacionados por cidade (variação anti-doorway) */}
-      <TestimonialsCarousel citySeed={`${city.slug}-${city.uf}`} />
+      <LazyTestimonialsCarousel citySeed={`${city.slug}-${city.uf}`} />
 
       {/* Botão de edição (login na rota /admin) */}
       <AdminEditButton citySlugUf={`${city.slug}-${city.uf.toLowerCase()}`} />
