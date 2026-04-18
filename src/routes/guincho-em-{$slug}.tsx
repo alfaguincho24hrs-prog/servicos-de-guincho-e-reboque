@@ -122,6 +122,9 @@ function CityPage() {
   const local = getCityLocalData(`${city.slug}-${city.uf.toLowerCase()}`, city.uf);
   const copy = getCityCopy(city.name, city.uf, city.slug);
 
+  const mapQuery = encodeURIComponent(`Guincho 24h ${city.name} ${city.uf}`);
+  const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -131,23 +134,33 @@ function CityPage() {
     url,
     telephone: SITE.phone,
     priceRange: "$$",
+    image: `${SITE_URL}/og-image.webp`,
     address: {
       "@type": "PostalAddress",
       addressLocality: city.name,
       addressRegion: city.uf,
       addressCountry: "BR",
+      ...(local.cepRange ? { postalCode: local.cepRange } : {}),
     },
-    areaServed: { "@type": "City", name: city.name },
+    areaServed: [
+      { "@type": "City", name: city.name, address: { "@type": "PostalAddress", addressRegion: city.uf, addressCountry: "BR" } },
+      ...local.neighborhoods.slice(0, 20).map((n) => ({
+        "@type": "Place",
+        name: n,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: city.name,
+          addressRegion: city.uf,
+          addressCountry: "BR",
+        },
+      })),
+    ],
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
       opens: "00:00",
       closes: "23:59",
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "248",
     },
   };
 
@@ -280,6 +293,20 @@ function CityPage() {
           Não encontrou seu bairro? Atendemos toda a região metropolitana de
           {" "}{city.name}. Ligue agora e confirme a cobertura no seu endereço.
         </p>
+
+        {/* Mapa Google incorporado para SEO local */}
+        <div className="mt-6 overflow-hidden rounded-xl border border-border/60 shadow-[var(--shadow-elegant)]">
+          <iframe
+            title={`Mapa de cobertura — Guincho em ${city.name}/${city.uf}`}
+            src={mapEmbedSrc}
+            width="100%"
+            height="360"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="block w-full"
+            allowFullScreen
+          />
+        </div>
       </section>
 
       {/* Por que escolher */}
@@ -352,30 +379,54 @@ function CityPage() {
         </div>
       </section>
 
-      {/* Cidades próximas */}
-      <section className="mt-14">
-        <h2 className="text-2xl font-bold">Outras cidades atendidas em {city.uf}</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {ALL_CITIES.filter((c) => c.uf === city.uf && c.slug !== city.slug)
-            .slice(0, 12)
-            .map((c) => (
+      {/* Cidades vizinhas + serviços relacionados — internal linking SEO */}
+      <section className="mt-14 grid gap-8 md:grid-cols-2">
+        <div>
+          <h2 className="text-2xl font-bold">Cidades vizinhas em {city.uf}</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {ALL_CITIES.filter((c) => c.uf === city.uf && c.slug !== city.slug)
+              .slice(0, 6)
+              .map((c) => (
+                <Link
+                  key={c.slug}
+                  to="/guincho-em-{$slug}"
+                  params={{ slug: `${c.slug}-${c.uf.toLowerCase()}` }}
+                  className="rounded-full border bg-secondary/40 px-3 py-1 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+                >
+                  Guincho em {c.name}
+                </Link>
+              ))}
+          </div>
+          <div className="mt-4">
+            <Link
+              to="/servicos-de-guincho-e-reboque"
+              className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+            >
+              Ver todas as cidades atendidas →
+            </Link>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-bold">Serviços em {city.name}</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[
+              { to: "/guincho-leve" as const, label: `Guincho leve em ${city.name}` },
+              { to: "/guincho-pesado" as const, label: `Guincho pesado em ${city.name}` },
+              { to: "/guincho-de-motos" as const, label: `Guincho de motos em ${city.name}` },
+              { to: "/auto-socorro" as const, label: `Auto socorro em ${city.name}` },
+              { to: "/pane-seca" as const, label: `Pane seca em ${city.name}` },
+              { to: "/remocao-veicular" as const, label: `Remoção veicular em ${city.name}` },
+            ].map((s) => (
               <Link
-                key={c.slug}
-                to="/guincho-em-{$slug}"
-                params={{ slug: `${c.slug}-${c.uf.toLowerCase()}` }}
+                key={s.to}
+                to={s.to}
                 className="rounded-full border bg-secondary/40 px-3 py-1 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
               >
-                Guincho em {c.name}
+                {s.label}
               </Link>
             ))}
-        </div>
-        <div className="mt-4">
-          <Link
-            to="/servicos-de-guincho-e-reboque"
-            className="text-sm font-medium text-primary underline-offset-4 hover:underline"
-          >
-            Ver todas as cidades atendidas →
-          </Link>
+          </div>
         </div>
       </section>
 
