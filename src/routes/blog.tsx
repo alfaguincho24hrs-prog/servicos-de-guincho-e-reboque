@@ -40,7 +40,7 @@ function BlogPage() {
           </p>
           <div className="mt-5">
             <Button asChild variant="outline" size="sm">
-              <Link to="/admin" search={{}}><Pencil className="h-4 w-4" /> Gerenciar blog</Link>
+              <Link to="/admin" search={{ city: "" }}><Pencil className="h-4 w-4" /> Gerenciar blog</Link>
             </Button>
           </div>
         </div>
