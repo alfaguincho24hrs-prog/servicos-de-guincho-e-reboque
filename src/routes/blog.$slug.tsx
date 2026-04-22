@@ -44,7 +44,7 @@ function BlogPostPage() {
             <Link to="/blog"><ArrowLeft className="h-4 w-4" /> Voltar ao blog</Link>
           </Button>
           <Button asChild variant="outline" size="sm">
-            <Link to="/admin"><Pencil className="h-4 w-4" /> Editar</Link>
+            <Link to="/admin" search={{}}><Pencil className="h-4 w-4" /> Editar</Link>
           </Button>
         </div>
 
