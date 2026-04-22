@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "Guincho Brasil 24h",
+  name: "SOS Guincho 24 horas",
   tagline: "Guincho e Reboque 24 Horas em Todo o Brasil",
   phone: "(11) 99645-1510",
   whatsapp: "5511996451510",
