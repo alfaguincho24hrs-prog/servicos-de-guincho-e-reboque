@@ -164,7 +164,7 @@ export function TestimonialsCarousel({ citySeed }: { citySeed?: string } = {}) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            name: "Guincho Brasil 24h",
+            name: "SOS Guincho 24 horas",
             aggregateRating: {
               "@type": "AggregateRating",
               ratingValue: "5",

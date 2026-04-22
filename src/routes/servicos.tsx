@@ -11,7 +11,7 @@ import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 export const Route = createFileRoute("/servicos")({
   head: () => ({
     meta: [
-      { title: "Serviços de Guincho e Reboque 24h | Guincho Brasil 24h" },
+      { title: "Serviços de Guincho e Reboque 24h | SOS Guincho 24 horas" },
       { name: "description", content: "Conheça todos os serviços de guincho 24 horas: reboque leve, pesado, motos, auto socorro mecânico, pane seca e remoção veicular em todo o Brasil." },
       { property: "og:title", content: "Serviços de Guincho e Reboque 24h" },
       { property: "og:description", content: "Reboque leve, pesado, motos, auto socorro, pane seca e remoção." },
@@ -64,7 +64,7 @@ function ServicesPage() {
         badge="Autoridade em guincho 24h"
         title="Especialistas em reboque, auto socorro e remoção veicular em todo o Brasil"
         paragraphs={[
-          "Há mais de uma década o <strong>Guincho Brasil 24h</strong> conecta motoristas a empresas qualificadas de <strong>guincho 24 horas</strong>, <strong>reboque rápido</strong> e <strong>auto socorro mecânico</strong> em todas as capitais e principais cidades do país. Nossa missão é simples: garantir que ninguém fique parado na rodovia, na garagem ou no estacionamento sem socorro profissional, com preço transparente e tempo de chegada reduzido.",
+          "Há mais de uma década o <strong>SOS Guincho 24 horas</strong> conecta motoristas a empresas qualificadas de <strong>guincho 24 horas</strong>, <strong>reboque rápido</strong> e <strong>auto socorro mecânico</strong> em todas as capitais e principais cidades do país. Nossa missão é simples: garantir que ninguém fique parado na rodovia, na garagem ou no estacionamento sem socorro profissional, com preço transparente e tempo de chegada reduzido.",
           "Atendemos <strong>guincho leve</strong> (carros de passeio, SUVs, picapes, utilitários até 3,5 t), <strong>guincho médio com asa delta</strong> (vans, furgões, micro-ônibus), <strong>guincho pesado</strong> (caminhões, ônibus, máquinas agrícolas e veículos acima de 8 t), <strong>guincho de motos</strong> com içamento adequado, <strong>prancha rebaixada</strong> para esportivos, blindados e clássicos, além de serviços complementares como <strong>chaveiro automotivo</strong>, <strong>pane seca</strong> com entrega de combustível, partida de bateria, troca de pneu e <strong>remoção veicular</strong> programada para sinistros, leilões, mudanças interestaduais e transporte de carros novos para concessionárias.",
           "Toda a frota dos parceiros é vistoriada periodicamente, equipada com <strong>plataformas hidráulicas modernas</strong>, sinalização rodoviária completa e operadores treinados para atender em <strong>rodovias federais e estaduais</strong>, descidas de serra, áreas urbanas congestionadas e estradas vicinais.",
         ]}

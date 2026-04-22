@@ -15,9 +15,9 @@ import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 export const Route = createFileRoute("/contato")({
   head: () => ({
     meta: [
-      { title: "Contato | Guincho Brasil 24h - Atendimento 24 Horas" },
-      { name: "description", content: "Fale com a central do Guincho Brasil 24h. Atendimento por telefone, WhatsApp e e-mail, 24 horas por dia, em todo o Brasil." },
-      { property: "og:title", content: "Contato | Guincho Brasil 24h" },
+      { title: "Contato | SOS Guincho 24 horas - Atendimento 24 Horas" },
+      { name: "description", content: "Fale com a central do SOS Guincho 24 horas. Atendimento por telefone, WhatsApp e e-mail, 24 horas por dia, em todo o Brasil." },
+      { property: "og:title", content: "Contato | SOS Guincho 24 horas" },
       { property: "og:description", content: "Atendimento 24h por telefone, WhatsApp e e-mail." },
       { property: "og:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
       { property: "og:url", content: "https://sosguincho24horas.com.br/contato" },
@@ -83,7 +83,7 @@ function ContactPage() {
 
       <SeoBlock
         badge="Central de atendimento 24 horas"
-        title="Fale agora com a central do Guincho Brasil 24h — atendimento humano e imediato"
+        title="Fale agora com a central do SOS Guincho 24 horas — atendimento humano e imediato"
         paragraphs={[
           "Nossa <strong>central de emergências</strong> opera 24 horas por dia, 7 dias por semana, com operadores treinados para acionar o <strong>guincho mais próximo</strong> da sua localização em poucos minutos. Sem URA, sem robô, sem espera longa: você fala direto com um atendente que registra a ocorrência, calcula a rota e despacha imediatamente uma <strong>plataforma de reboque</strong> ou <strong>auto socorro mecânico</strong> compatível com o seu veículo.",
           "Atendemos chamadas de <strong>emergência veicular</strong> em qualquer cidade do Brasil, com prioridade absoluta para casos em <strong>rodovia</strong>, <strong>vias expressas</strong>, <strong>descidas de serra</strong> e <strong>locais de risco</strong>. Também recebemos solicitações de <strong>remoção programada</strong>, transporte interestadual, leilão, sinistro com seguradora, mudança de veículos e fretes especiais com prancha rebaixada.",
