@@ -166,7 +166,7 @@ function applyOverrides(citySlug: string, list: Provider[]): Provider[] {
 const FALLBACK: Provider[] = [
   {
     id: "central-verified",
-    name: "Central Guincho Brasil 24h — Parceiro Verificado",
+    name: "Central SOS Guincho 24 horas — Parceiro Verificado",
     tier: "gold",
     whatsapp: "5511996451510",
     area: "Cobertura total da cidade",

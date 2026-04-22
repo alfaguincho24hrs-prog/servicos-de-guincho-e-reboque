@@ -98,7 +98,7 @@ export const Route = createRootRoute({
       { title: "Guincho e Reboque 24 horas |  Guincho em Todo o Brasil" },
       { name: "description", content: "Portal nacional de guincho e reboque 24 horas. Encontre empresas de auto socorro qualificadas na sua cidade. Atendimento rápido em rodovias e área urbana." },
       { name: "theme-color", content: "#ef2b2b" },
-      { name: "author", content: "Guincho Brasil 24h" },
+      { name: "author", content: "SOS Guincho 24 horas" },
       { name: "keywords", content: "guincho 24 horas, reboque, auto socorro, guincho perto de mim, guincho rodovia, guincho leve, guincho pesado, reboque de moto" },
       { name: "google-site-verification", content: "bBfjL-B8hzlB_4mru_KuIMVtB4XitQ9WMsUNgvLQVBk" },
       { property: "og:title", content: "Guincho e Reboque 24 horas |  Guincho em Todo o Brasil" },

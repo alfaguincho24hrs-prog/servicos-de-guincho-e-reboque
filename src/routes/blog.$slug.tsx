@@ -7,8 +7,8 @@ import { getPostBySlug, type BlogPost } from "@/components/blog-data";
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ params }) => ({
     meta: [
-      { title: `Artigo — ${params.slug} | Guincho Brasil 24h Blog` },
-      { name: "description", content: "Leia o artigo completo no blog Guincho Brasil 24h." },
+      { title: `Artigo — ${params.slug} | SOS Guincho 24 horas Blog` },
+      { name: "description", content: "Leia o artigo completo no blog SOS Guincho 24 horas." },
     ],
   }),
   component: BlogPostPage,

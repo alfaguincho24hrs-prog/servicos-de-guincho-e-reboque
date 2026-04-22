@@ -9,9 +9,9 @@ import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Blog — Dicas de Guincho, Reboque e Auto Socorro | Guincho Brasil 24h" },
+      { title: "Blog — Dicas de Guincho, Reboque e Auto Socorro | SOS Guincho 24 horas" },
       { name: "description", content: "Artigos e guias sobre guincho 24h, reboque, auto socorro, segurança nas rodovias e cuidados com seu veículo em emergências." },
-      { property: "og:title", content: "Blog — Guincho Brasil 24h" },
+      { property: "og:title", content: "Blog — SOS Guincho 24 horas" },
       { property: "og:description", content: "Dicas, guias e novidades sobre guincho, reboque e auto socorro em todo o Brasil." },
       { property: "og:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
       { property: "og:url", content: "https://sosguincho24horas.com.br/blog" },
@@ -34,7 +34,7 @@ function BlogPage() {
       <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Blog", url: "/blog" }]} />
       <section className="border-b border-border/60 bg-muted/30 py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Blog Guincho Brasil 24h</h1>
+          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Blog SOS Guincho 24 horas</h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
             Dicas, guias e novidades sobre guincho, reboque, auto socorro e segurança nas rodovias.
           </p>
