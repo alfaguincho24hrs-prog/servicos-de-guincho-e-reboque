@@ -149,7 +149,11 @@ export function ServicePage(p: ServicePageProps) {
       <section className="bg-[image:var(--gradient-hero)] py-20 text-primary-foreground">
         <div className="container mx-auto max-w-4xl px-4 text-center">
           <Badge className="mb-3 border-accent/40 bg-accent/15 text-accent">{p.serviceName} 24h</Badge>
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl flex flex-wrap gap-x-3 justify-center items-baseline">{p.heroTitle}</h1>
+          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+            {p.heroTitle.split(" ").map((word, i) => (
+              <span key={i} className="inline-block mr-[0.3em] last:mr-0">{word}</span>
+            ))}
+          </h1>
           <p className="mt-4 text-primary-foreground/85">{p.heroSubtitle}</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
