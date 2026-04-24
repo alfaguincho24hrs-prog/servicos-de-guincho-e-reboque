@@ -29,13 +29,20 @@ const checkRoutes = () => {
     let canonicalCorrect = content.includes(`href: "${expectedCanonical}"`);
     let schemaValid = false;
 
+    // Especial case for dynamic routes
+    if (file === 'blog.$slug.tsx') {
+      canonicalCorrect = content.includes('href: url') && content.includes('blog/${params.slug}');
+    }
+    if (file === 'guincho-em-{$slug}.tsx') {
+      canonicalCorrect = content.includes('href: url') && content.includes('guincho-em-${city.slug}-${city.uf.toLowerCase()}');
+    }
+
     // Schema Validation
     if (file === 'index.tsx') {
       schemaValid = content.includes('"@type": "LocalBusiness"') && 
                     content.includes('"@id": `https://sosguincho24horas.com.br/index.html`') &&
                     content.includes('"url": `https://sosguincho24horas.com.br/`');
     } else if (file === 'guincho-em-{$slug}.tsx') {
-      canonicalCorrect = content.includes('href: url') && content.includes('guincho-em-${city.slug}-${city.uf.toLowerCase()}');
       schemaValid = content.includes('"@type": "LocalBusiness"') && 
                     content.includes('SOS Guincho 24 horas - ${city.name}') &&
                     content.includes('`https://sosguincho24horas.com.br/guincho-em-${city.slug}-${city.uf.toLowerCase()}.html`');
