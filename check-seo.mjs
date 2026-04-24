@@ -41,6 +41,15 @@ const checkRoutes = () => {
   });
 
   console.table(results);
+  
+  const errors = results.filter(r => r.status === '❌ ERROR');
+  if (errors.length > 0) {
+    console.error(`\n❌ SEO Check failed: ${errors.length} route(s) have issues.`);
+    process.exit(1);
+  } else {
+    console.log('\n✅ SEO Check passed for all routes!');
+    process.exit(0);
+  }
 };
 
 checkRoutes();
