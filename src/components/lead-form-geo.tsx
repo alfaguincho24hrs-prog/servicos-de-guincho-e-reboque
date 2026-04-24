@@ -116,6 +116,7 @@ export function LeadFormGeo({ defaultCity = "" }: Props) {
               maxLength={80}
               value={city}
               onChange={(e) => setCity(e.target.value)}
+              aria-label="Sua cidade"
             />
             <Button
               type="button"
