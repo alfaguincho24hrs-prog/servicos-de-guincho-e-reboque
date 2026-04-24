@@ -16,8 +16,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-2 font-bold">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[image:var(--gradient-cta)] text-primary shadow-[var(--shadow-glow)]">
+        <Link to="/" className="flex items-center gap-2 font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md" aria-label={`Ir para a página inicial de ${SITE.name}`}>
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[image:var(--gradient-cta)] text-primary shadow-[var(--shadow-glow)]" aria-hidden="true">
             <Truck className="h-5 w-5" />
           </span>
           <span className="text-lg tracking-tight">{SITE.name}</span>
