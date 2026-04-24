@@ -33,6 +33,9 @@ export const Route = createFileRoute("/servicos-de-guincho-e-reboque")({
       },
       { name: "robots", content: "index, follow" },
     ],
+    links: [
+      { rel: "canonical", href: "https://sosguincho24horas.com.br/servicos-de-guincho-e-reboque" }
+    ],
   }),
   component: CitiesIndexPage,
 });

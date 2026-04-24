@@ -66,6 +66,9 @@ export const Route = createFileRoute("/")({
         }),
       },
     ],
+    links: [
+      { rel: "canonical", href: "https://sosguincho24horas.com.br" }
+    ],
   }),
   component: HomePage,
 });
