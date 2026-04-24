@@ -39,8 +39,18 @@ export function SiteFooter() {
         <div>
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Contato</h3>
           <ul className="space-y-2 text-sm text-primary-foreground/80">
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4" />{SITE.phone}</li>
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4" />{SITE.email}</li>
+            <li className="flex items-center gap-2">
+              <a href={`tel:${SITE.phone}`} className="flex items-center gap-2 hover:text-accent transition-colors" aria-label={`Ligar para ${SITE.phone}`}>
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                {SITE.phone}
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 hover:text-accent transition-colors" aria-label={`Enviar e-mail para ${SITE.email}`}>
+                <Mail className="h-4 w-4" aria-hidden="true" />
+                {SITE.email}
+              </a>
+            </li>
             <li className="flex items-center gap-2"><MapPin className="h-4 w-4" />Atendimento em todo o Brasil</li>
           </ul>
         </div>
