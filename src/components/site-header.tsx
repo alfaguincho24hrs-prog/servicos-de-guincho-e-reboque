@@ -22,7 +22,7 @@ export function SiteHeader() {
           </span>
           <span className="text-lg tracking-tight">{SITE.name}</span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
+        <nav className="hidden items-center gap-6 text-sm font-medium md:flex" aria-label="Menu principal">
           <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">Início</Link>
           <div className="group relative">
             <Link to="/servicos" activeProps={{ className: "text-accent" }} className="inline-flex items-center gap-1 transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">
@@ -30,14 +30,20 @@ export function SiteHeader() {
             </Link>
             <div className="invisible absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
               <div className="overflow-hidden rounded-lg border border-border/60 bg-background shadow-lg">
-                {SERVICE_LINKS.map((s) => (
-                  <Link key={s.to} to={s.to} activeProps={{ className: "text-accent bg-muted/50" }} className="block px-4 py-2.5 text-sm transition-colors hover:bg-muted hover:text-accent">
-                    {s.label}
-                  </Link>
-                ))}
-                <Link to="/servicos" className="block border-t border-border/60 px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted hover:text-accent">
-                  Ver todos os serviços →
-                </Link>
+                <ul className="py-1">
+                  {SERVICE_LINKS.map((s) => (
+                    <li key={s.to}>
+                      <Link to={s.to} activeProps={{ className: "text-accent bg-muted/50" }} className="block px-4 py-2.5 text-sm transition-colors hover:bg-muted hover:text-accent">
+                        {s.label}
+                      </Link>
+                    </li>
+                  ))}
+                  <li className="border-t border-border/60">
+                    <Link to="/servicos" className="block px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted hover:text-accent">
+                      Ver todos os serviços →
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

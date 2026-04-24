@@ -16,7 +16,7 @@ export function SiteFooter() {
           </p>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Serviços</h3>
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Serviços</h2>
           <ul className="space-y-2 text-sm text-primary-foreground/80">
             <li><Link to="/guincho-leve" className="hover:text-accent">Guincho Leve</Link></li>
             <li><Link to="/guincho-pesado" className="hover:text-accent">Guincho Pesado</Link></li>
@@ -28,7 +28,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Portal</h3>
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Portal</h2>
           <ul className="space-y-2 text-sm text-primary-foreground/80">
             <li><Link to="/cobertura" className="hover:text-accent">Cobertura nacional</Link></li>
             <li><Link to="/anuncie" className="hover:text-accent">Anuncie sua empresa</Link></li>
@@ -37,7 +37,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Contato</h3>
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Contato</h2>
           <ul className="space-y-2 text-sm text-primary-foreground/80">
             <li className="flex items-center gap-2">
               <a href={`tel:${SITE.phone}`} className="flex items-center gap-2 hover:text-accent transition-colors" aria-label={`Ligar para ${SITE.phone}`}>

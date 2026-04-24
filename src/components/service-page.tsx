@@ -106,9 +106,9 @@ export function ServicePage(p: ServicePageProps) {
         <Card className="border-border/60 bg-secondary/40 mt-8">
           <CardContent className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h3 className="text-xl font-bold">Precisa de {p.serviceName.toLowerCase()} agora?</h3>
-              <p className="text-muted-foreground text-sm">Atendimento 24 horas em todo o Brasil.</p>
-            </div>
+                <h2 className="text-xl font-bold">Precisa de {p.serviceName.toLowerCase()} agora?</h2>
+                <p className="text-muted-foreground text-sm">Atendimento 24 horas em todo o Brasil.</p>
+              </div>
             <div className="flex flex-wrap gap-3">
               <Button asChild><a href={`tel:${SITE.phone}`} aria-label={`Ligar para ${SITE.name}`}><Phone className="h-4 w-4" aria-hidden="true" /> {SITE.phone}</a></Button>
               <Button asChild variant="outline"><a href={wppHref} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp">WhatsApp</a></Button>
