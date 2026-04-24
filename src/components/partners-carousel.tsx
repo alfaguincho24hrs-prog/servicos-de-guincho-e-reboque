@@ -31,7 +31,7 @@ export function PartnersCarousel() {
                     <Star className="h-4 w-4 fill-accent text-accent" /> {p.rating}
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold">{p.name}</h3>
+                <h4 className="text-lg font-semibold">{p.name}</h4>
                 <p className="flex items-center gap-2 text-sm text-muted-foreground">
                   <MapPin className="h-4 w-4" /> {p.city}
                 </p>
