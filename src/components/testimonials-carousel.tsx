@@ -143,9 +143,9 @@ export function TestimonialsCarousel({ citySeed }: { citySeed?: string } = {}) {
                     <p className="flex-1 text-sm leading-relaxed text-muted-foreground">"{t.text}"</p>
                     <div className="border-t pt-3">
                       <h4 className="font-semibold">{t.name}</h4>
-                      <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <h5 className="flex items-center gap-1 text-xs font-normal text-muted-foreground">
                         <MapPin className="h-3 w-3" /> {t.city}
-                      </p>
+                      </h5>
                     </div>
                   </CardContent>
                 </Card>
