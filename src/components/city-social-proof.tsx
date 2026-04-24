@@ -77,7 +77,7 @@ export function CitySocialProof({ cityName, neighborhoods }: Props) {
               </div>
               <p className="mt-3 text-sm text-muted-foreground">"{it.text}"</p>
               <div className="mt-4 border-t border-border/60 pt-3 text-xs text-muted-foreground">
-                <h4 className="inline text-foreground font-bold">{it.name}</h4> · {it.hood}
+                <h4 className="inline text-foreground font-bold">{it.name}</h4> · <h5 className="inline">{it.hood}</h5>
                 <br />
                 há {it.days} {it.days === 1 ? "dia" : "dias"}
               </div>
