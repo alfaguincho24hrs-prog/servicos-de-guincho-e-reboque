@@ -20,7 +20,15 @@ const checkRoutes = () => {
     const hasTitle = content.includes('title:');
     const hasDescription = content.includes('name: "description"');
     const hasCanonical = content.includes('rel: "canonical"');
-    const canonicalCorrect = content.includes(`href: "${expectedCanonical}"`);
+    let canonicalCorrect = content.includes(`href: "${expectedCanonical}"`);
+    
+    // Especial case for dynamic routes
+    if (file === 'blog.$slug.tsx') {
+      canonicalCorrect = content.includes('href: url') && content.includes('blog/${params.slug}');
+    }
+    if (file === 'guincho-em-{$slug}.tsx') {
+      canonicalCorrect = content.includes('href: url') && content.includes('guincho-em-${city.slug}-${city.uf.toLowerCase()}');
+    }
 
     results.push({
       route: routePath,
