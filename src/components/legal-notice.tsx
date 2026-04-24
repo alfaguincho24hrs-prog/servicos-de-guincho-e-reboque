@@ -12,7 +12,7 @@ export function LegalNotice() {
           <strong>Lei do Marco Civil da Internet (Lei nº 12.965/2014)</strong>. As informações exibidas nesta página são públicas e foram adquiridas legalmente através da internet e também em portais do Governo Federal, juntas comerciais, listas telefônicas públicas e diretórios empresariais abertos. É o responsável por uma das empresas listadas e deseja atualizar, complementar ou remover seus dados?
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
-          <Button asChild className="bg-orange-500 text-white hover:bg-orange-600">
+          <Button asChild className="bg-orange-600 text-white hover:bg-orange-700 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-600 focus-visible:ring-offset-2">
             <Link to="/anuncie">
               <Unlock className="mr-2 h-4 w-4" />
               Clique aqui para liberar
