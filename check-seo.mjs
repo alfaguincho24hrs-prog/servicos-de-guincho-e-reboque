@@ -10,7 +10,7 @@ const checkRoutes = () => {
   const files = fs.readdirSync(ROUTES_DIR);
   const results = [];
 
-  // Also read ServicePage component to check schema pattern
+  // Also read ServicePage component to check schema pattern and headings
   const servicePagePath = path.join(COMPONENTS_DIR, 'service-page.tsx');
   const servicePageContent = fs.existsSync(servicePagePath) ? fs.readFileSync(servicePagePath, 'utf-8') : '';
 
@@ -29,7 +29,7 @@ const checkRoutes = () => {
     let canonicalCorrect = content.includes(`href: "${expectedCanonical}"`);
     let schemaValid = false;
 
-    // Especial case for dynamic routes
+    // Special case for dynamic routes
     if (file === 'blog.$slug.tsx') {
       canonicalCorrect = content.includes('href: url') && content.includes('blog/${params.slug}');
     }
@@ -56,12 +56,38 @@ const checkRoutes = () => {
                     content.includes('.html') &&
                     content.includes('SOS Guincho 24 horas');
     } else {
-      // Fallback for other pages or if schema is not expected
       schemaValid = true; 
     }
 
     // Check for placeholders [NOME DA CIDADE]
     const hasPlaceholders = content.includes('[NOME DA CIDADE]') || content.includes('[nome-da-cidade]');
+
+    // Heading Validation
+    // For ServicePage routes, we check the component content as well
+    const fullContentForHeadings = ['auto-socorro.tsx', 'guincho-leve.tsx', 'guincho-pesado.tsx', 'pane-seca.tsx', 'remocao-veicular.tsx', 'guincho-de-motos.tsx'].includes(file) 
+      ? content + servicePageContent 
+      : content;
+
+    const h1Count = (fullContentForHeadings.match(/<h1/g) || []).length;
+    
+    // Check heading hierarchy (no skipping levels)
+    const headingsFound = [];
+    if (fullContentForHeadings.includes('<h1')) headingsFound.push(1);
+    if (fullContentForHeadings.includes('<h2')) headingsFound.push(2);
+    if (fullContentForHeadings.includes('<h3')) headingsFound.push(3);
+    if (fullContentForHeadings.includes('<h4')) headingsFound.push(4);
+    if (fullContentForHeadings.includes('<h5')) headingsFound.push(5);
+    if (fullContentForHeadings.includes('<h6')) headingsFound.push(6);
+
+    let hierarchyValid = true;
+    for (let i = 0; i < headingsFound.length; i++) {
+      if (headingsFound[i] !== i + 1) {
+        hierarchyValid = false;
+        break;
+      }
+    }
+
+    const headingCheck = h1Count === 1 && hierarchyValid;
 
     results.push({
       route: routePath,
@@ -70,7 +96,9 @@ const checkRoutes = () => {
       hasCanonical,
       canonicalCorrect,
       schemaValid: schemaValid && !hasPlaceholders,
-      status: (hasTitle && hasDescription && hasCanonical && canonicalCorrect && schemaValid && !hasPlaceholders) ? '✅ OK' : '❌ ERROR'
+      headingsValid: headingCheck,
+      h1Count,
+      status: (hasTitle && hasDescription && hasCanonical && canonicalCorrect && schemaValid && !hasPlaceholders && headingCheck) ? '✅ OK' : '❌ ERROR'
     });
   });
 
@@ -78,10 +106,10 @@ const checkRoutes = () => {
   
   const errors = results.filter(r => r.status === '❌ ERROR');
   if (errors.length > 0) {
-    console.error(`\n❌ SEO/Schema Check failed: ${errors.length} route(s) have issues.`);
+    console.error(`\n❌ Validation failed: ${errors.length} route(s) have issues (SEO, Schema, or Headings).`);
     process.exit(1);
   } else {
-    console.log('\n✅ SEO and Schema Check passed for all routes!');
+    console.log('\n✅ All validations passed: SEO, Schema, and Heading hierarchy!');
     process.exit(0);
   }
 };
