@@ -110,9 +110,9 @@ export function ServicePage(p: ServicePageProps) {
               <p className="text-muted-foreground text-sm">Atendimento 24 horas em todo o Brasil.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button asChild><a href={`tel:${SITE.phone}`}><Phone className="h-4 w-4" /> {SITE.phone}</a></Button>
-              <Button asChild variant="outline"><a href={wppHref} target="_blank" rel="noreferrer">WhatsApp</a></Button>
-              <Button asChild variant="secondary"><Link to="/servicos-de-guincho-e-reboque">Ver cidades</Link></Button>
+              <Button asChild><a href={`tel:${SITE.phone}`} aria-label={`Ligar para ${SITE.name}`}><Phone className="h-4 w-4" aria-hidden="true" /> {SITE.phone}</a></Button>
+              <Button asChild variant="outline"><a href={wppHref} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp">WhatsApp</a></Button>
+              <Button asChild variant="secondary"><Link to="/servicos-de-guincho-e-reboque" aria-label="Ver todas as cidades atendidas">Ver cidades</Link></Button>
             </div>
           </CardContent>
         </Card>
