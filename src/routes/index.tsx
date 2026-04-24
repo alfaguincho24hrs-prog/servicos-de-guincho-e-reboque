@@ -275,7 +275,9 @@ function HomePage() {
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Dúvidas comuns sobre guincho 24h</h2>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Quanto custa um guincho 24 horas?</AccordionTrigger>
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline text-left">
+                Quanto custa um guincho 24 horas?
+              </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-base">
                 O valor varia conforme distância percorrida (KM rodado), tipo de veículo (leve, médio ou pesado),
                 horário (diurno, noturno, feriados) e região. Em média, dentro da cidade o serviço fica entre R$ 150
@@ -284,7 +286,9 @@ function HomePage() {
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Em quanto tempo o guincho chega?</AccordionTrigger>
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline text-left">
+                Em quanto tempo o guincho chega?
+              </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-base">
                 Em áreas urbanas, o tempo médio é de 30 a 40 minutos. Em rodovias e regiões afastadas, entre 40 e 60
                 minutos, dependendo do trânsito e da localização exata. Trabalhamos com bases distribuídas para
@@ -292,21 +296,27 @@ function HomePage() {
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Vocês atendem em rodovias e na serra?</AccordionTrigger>
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline text-left">
+                Vocês atendem em rodovias e na serra?
+              </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-base">
                 Sim. Temos cobertura completa em rodovias federais e estaduais, incluindo trechos de serra como
                 Tamoios, Oswaldo Cruz, Floriano Rodrigues Pinheiro, Régis Bittencourt e Anchieta/Imigrantes.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Posso pagar com cartão ou PIX?</AccordionTrigger>
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline text-left">
+                Posso pagar com cartão ou PIX?
+              </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-base">
                 Sim. Aceitamos PIX, cartão de débito, crédito (à vista e parcelado), dinheiro e principais
                 aplicativos de assistência veicular conveniados.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Atendem moto, caminhão e veículo blindado?</AccordionTrigger>
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline text-left">
+                Atendem moto, caminhão e veículo blindado?
+              </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-base">
                 Sim. Possuímos plataformas para motos com içamento sem dano à pintura, guincho pesado para
                 caminhões e ônibus, e prancha rebaixada para veículos blindados, esportivos rebaixados e clássicos.
