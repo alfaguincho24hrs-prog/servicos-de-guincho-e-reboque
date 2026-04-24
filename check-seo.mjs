@@ -123,8 +123,10 @@ const checkRoutes = () => {
     }
     const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
     const missingInSitemap = results.filter(r => {
-      // For the homepage, sitemap might use the base URL without trailing slash
-      // or with specific formatting. Our script uses SITE_URL + route.
+      // Dynamic route definitions are placeholders for thousands of actual URLs
+      // We don't expect the literal string '/guincho-em-{$slug}' or '/blog.$slug' in the sitemap
+      if (r.route.includes('$slug')) return false;
+
       const fullUrl = `${SITE_URL}${r.route === '/' ? '' : r.route}`;
       return !sitemapContent.includes(`<loc>${fullUrl}</loc>`);
     });
