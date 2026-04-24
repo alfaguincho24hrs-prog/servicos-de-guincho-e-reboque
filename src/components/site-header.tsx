@@ -23,7 +23,7 @@ export function SiteHeader() {
           <span className="text-lg tracking-tight">{SITE.name}</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-          <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent">Início</Link>
+          <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">Início</Link>
           <div className="group relative">
             <Link to="/servicos" activeProps={{ className: "text-accent" }} className="inline-flex items-center gap-1 transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">
               Serviços <ChevronDown className="h-3.5 w-3.5" />
