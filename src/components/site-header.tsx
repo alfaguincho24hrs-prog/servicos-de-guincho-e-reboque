@@ -47,8 +47,11 @@ export function SiteHeader() {
           <Link to="/blog" activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent">Blog</Link>
           <Link to="/contato" activeProps={{ className: "text-accent" }} className="transition-colors hover:text-accent">Contato</Link>
         </nav>
-        <Button asChild size="sm" className="bg-[image:var(--gradient-cta)] text-primary hover:opacity-90">
-          <a href={`tel:${SITE.phone}`}><Phone className="h-4 w-4" />{SITE.phone}</a>
+        <Button asChild size="sm" className="bg-[image:var(--gradient-cta)] text-primary hover:opacity-90 focus-visible:ring-2">
+          <a href={`tel:${SITE.phone}`} aria-label={`Ligar para ${SITE.phone}`}>
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            {SITE.phone}
+          </a>
         </Button>
       </div>
     </header>
