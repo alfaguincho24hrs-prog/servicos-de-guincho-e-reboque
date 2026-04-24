@@ -278,9 +278,9 @@ function CityPage() {
         <Badge variant="secondary" className="mb-3">
           <MapPin className="mr-1 h-3 w-3" /> {city.name} - {city.uf}
         </Badge>
-        <h1 className="text-3xl font-bold tracking-tight md:text-5xl flex flex-wrap gap-x-2 items-baseline">
-          <span className="shrink-0">Guincho 24 Horas em</span>
-          <span className="shrink-0">{city.name} - {city.uf}</span>
+        <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
+          <span className="inline-block mr-2">Guincho 24 Horas em</span>
+          <span className="inline-block">{city.name} - {city.uf}</span>
         </h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">{copy.heroIntro}</p>
         <div className="mt-5">
