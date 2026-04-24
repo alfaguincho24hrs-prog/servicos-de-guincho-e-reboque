@@ -161,8 +161,10 @@ function HomePage() {
             <Badge className="border-accent/40 bg-accent/15 text-accent hover:bg-accent/20">
               <Clock className="h-3 w-3" /> Atendimento 24h · 7 dias por semana
             </Badge>
-            <h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
-              <span className="bg-[image:var(--gradient-cta)] bg-clip-text text-transparent">SOS</span> Guincho e Reboque <span className="bg-[image:var(--gradient-cta)] bg-clip-text text-transparent">24 horas</span>
+            <h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-6xl flex flex-wrap gap-x-3 items-baseline">
+              <span className="bg-[image:var(--gradient-cta)] bg-clip-text text-transparent shrink-0">SOS</span>
+              <span className="shrink-0">Guincho e Reboque</span>
+              <span className="bg-[image:var(--gradient-cta)] bg-clip-text text-transparent shrink-0">24 horas</span>
             </h1>
             <p className="max-w-xl text-lg text-primary-foreground/85">
               Conectamos motoristas a empresas de auto socorro qualificadas, com chegada rápida na rodovia ou na cidade. Resgate seu veículo com segurança e tranquilidade.
