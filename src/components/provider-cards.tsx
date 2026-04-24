@@ -232,12 +232,12 @@ function GhostCard({
 
         <div className="mt-4 grid gap-2">
           <Button asChild className="bg-[image:var(--gradient-cta)] text-primary">
-            <a href={wppHref} target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-4 w-4" /> Solicitar Guincho Agora
+            <a href={wppHref} target="_blank" rel="noopener noreferrer" aria-label={`Solicitar guincho para ${p.name} via Central`}>
+              <MessageCircle className="h-4 w-4" aria-hidden="true" /> Solicitar Guincho Agora
             </a>
           </Button>
           <Button asChild variant="ghost" size="sm" className="text-xs">
-            <Link to="/anuncie">
+            <Link to="/anuncie" aria-label={`Sou proprietário da ${p.name}, quero liberar o telefone`}>
               É o proprietário? Liberar telefone →
             </Link>
           </Button>
