@@ -114,6 +114,28 @@ const checkRoutes = () => {
     process.exit(1);
   } else {
     console.log('\n✅ All validations passed: SEO, Schema, and Heading hierarchy!');
+    
+    // Sitemap Validation
+    const sitemapPath = './public/sitemap.xml';
+    if (!fs.existsSync(sitemapPath)) {
+      console.error('\n❌ Sitemap Check failed: sitemap.xml not found in public/');
+      process.exit(1);
+    }
+    const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
+    const missingInSitemap = results.filter(r => {
+      // For the homepage, sitemap might use the base URL without trailing slash
+      // or with specific formatting. Our script uses SITE_URL + route.
+      const fullUrl = `${SITE_URL}${r.route === '/' ? '' : r.route}`;
+      return !sitemapContent.includes(`<loc>${fullUrl}</loc>`);
+    });
+
+    if (missingInSitemap.length > 0) {
+      console.error(`\n❌ Sitemap Check failed: ${missingInSitemap.length} route(s) are missing from sitemap.xml.`);
+      missingInSitemap.forEach(m => console.error(`   - Missing: ${m.route}`));
+      process.exit(1);
+    }
+
+    console.log('\n✅ Sitemap validation passed: All active routes are present!');
     process.exit(0);
   }
 };
