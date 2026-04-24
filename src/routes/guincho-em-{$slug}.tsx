@@ -97,7 +97,7 @@ export const Route = createFileRoute("/guincho-em-{$slug}")({
   },
   notFoundComponent: () => (
     <div className="container mx-auto px-4 py-24 text-center">
-      <h1 className="text-3xl font-bold">Cidade não encontrada</h1>
+      <h2 className="text-3xl font-bold">Cidade não encontrada</h2>
       <p className="mt-3 text-muted-foreground">
         Não localizamos esta cidade em nossa cobertura.
       </p>
