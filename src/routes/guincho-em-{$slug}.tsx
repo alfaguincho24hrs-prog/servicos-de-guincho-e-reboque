@@ -131,40 +131,109 @@ function CityPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": url,
-    name: `${SITE.name} - ${city.name}`,
-    description: `Guincho e reboque 24 horas em ${city.name}/${city.uf}.`,
-    url,
-    telephone: SITE.phone,
-    priceRange: "$$",
-    image: `${SITE_URL}/og-image.webp`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: city.name,
-      addressRegion: city.uf,
-      addressCountry: "BR",
-      ...(local.cepRange ? { postalCode: local.cepRange } : {}),
-    },
-    areaServed: [
-      { "@type": "City", name: city.name, address: { "@type": "PostalAddress", addressRegion: city.uf, addressCountry: "BR" } },
-      ...local.neighborhoods.slice(0, 20).map((n) => ({
-        "@type": "Place",
-        name: n,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: city.name,
-          addressRegion: city.uf,
-          addressCountry: "BR",
-        },
-      })),
+    "name": `SOS Guincho 24 horas - ${city.name}`,
+    "image": "https://sosguincho24horas.com.br/assets/imagem-do-guincho.webp",
+    "@id": `https://sosguincho24horas.com.br/guincho-em-${city.slug}-${city.uf.toLowerCase()}.html`,
+    "url": `https://sosguincho24horas.com.br/guincho-em-${city.slug}-${city.uf.toLowerCase()}.html`,
+    "telephone": [
+      "+5511996451510",
+      "+5512992184913"
     ],
-    hasMap: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
-    openingHoursSpecification: {
+    "priceRange": "$$",
+    "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "00:00",
-      closes: "23:59",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
     },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": city.name,
+      "addressRegion": city.uf,
+      "addressCountry": "BR"
+    },
+    "description": "Serviço de guincho 24 horas, reboque de carros e motos, auto socorro mecânico, remoção de veículos pesados, transporte de vans, empilhadeiras e embarcações. Atendimento rápido e preço justo.",
+    "areaServed": {
+      "@type": "City",
+      "name": city.name
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Serviços de Reboque, Auto Socorro e Transporte",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guincho 24 Horas"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guincho Plataforma Leve e Pesado"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guincho para carros"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guincho para Motos"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Transporte de Carros de Colecionador e Veículos Antigos"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Transporte de Embarcações (Jet Ski, Lancha, Barco)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Transporte de Máquinas (Empilhadeira, Trator, Bobcat)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Remoção de Veículo em Subsolo"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Auto Socorro Mecânico e Pane Seca"
+          }
+        }
+      ]
+    }
   };
 
   return (

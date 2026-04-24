@@ -20,6 +20,50 @@ export const Route = createFileRoute("/cobertura")({
       { property: "og:url", content: "https://sosguincho24horas.com.br/cobertura" },
       { name: "twitter:image", content: "https://sosguincho24horas.com.br/og-image.webp" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "SOS Guincho 24 horas - Cobertura",
+          "image": "https://sosguincho24horas.com.br/assets/imagem-do-guincho.webp",
+          "@id": "https://sosguincho24horas.com.br/cobertura.html",
+          "url": "https://sosguincho24horas.com.br/cobertura",
+          "telephone": ["+5511996451510", "+5512992184913"],
+          "priceRange": "$$",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Brasil",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+          },
+          "description": "Serviço de guincho 24 horas, reboque de carros e motos, auto socorro mecânico, remoção de veículos pesados, transporte de vans, empilhadeiras e embarcações. Atendimento rápido e preço justo.",
+          "areaServed": { "@type": "Country", "name": "Brasil" },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Serviços de Reboque, Auto Socorro e Transporte",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Guincho 24 Horas" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Guincho Plataforma Leve e Pesado" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Guincho para carros" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Guincho para Motos" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Transporte de Carros de Colecionador e Veículos Antigos" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Transporte de Embarcações (Jet Ski, Lancha, Barco)" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Transporte de Máquinas (Empilhadeira, Trator, Bobcat)" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Remoção de Veículo em Subsolo" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Auto Socorro Mecânico e Pane Seca" } }
+            ]
+          }
+        })
+      }
+    ],
     links: [{ rel: "canonical", href: "https://sosguincho24horas.com.br/cobertura" }],
   }),
   component: CoveragePage,

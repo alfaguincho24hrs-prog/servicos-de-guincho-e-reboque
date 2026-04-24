@@ -24,45 +24,110 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "LocalBusiness",
-              "@id": "https://sosguincho24horas.com.br/#business",
-              name: SITE.name,
-              description: "Rede nacional de guincho, reboque e auto socorro 24h em todo o Brasil.",
-              url: "https://sosguincho24horas.com.br/",
-              telephone: SITE.phone,
-              email: SITE.email,
-              priceRange: "$$",
-              areaServed: { "@type": "Country", name: "Brasil" },
-              address: { "@type": "PostalAddress", addressCountry: "BR", addressRegion: "SP" },
-              openingHoursSpecification: [{
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                opens: "00:00", closes: "23:59",
-              }],
-              aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "1280" },
-            },
-            ...SERVICES.map((s) => ({
-              "@type": "Service",
-              "@id": `https://sosguincho24horas.com.br/${s.slug}`,
-              serviceType: s.title,
-              name: s.title,
-              description: s.desc,
-              provider: { "@id": "https://sosguincho24horas.com.br/#business" },
-              areaServed: { "@type": "Country", name: "Brasil" },
-            })),
-            {
-              "@type": "FAQPage",
-              mainEntity: [
-                { "@type": "Question", name: "Quanto custa um guincho 24 horas?", acceptedAnswer: { "@type": "Answer", text: "O valor varia conforme distância (KM rodado), tipo de veículo, horário e região. Em média, na cidade fica entre R$ 150 e R$ 350. Em rodovias o cálculo é por quilômetro. Sempre fornecemos orçamento antes do atendimento." } },
-                { "@type": "Question", name: "Em quanto tempo o guincho chega?", acceptedAnswer: { "@type": "Answer", text: "Em áreas urbanas, o tempo médio é de 30 a 40 minutos. Em rodovias e regiões afastadas, entre 40 e 60 minutos." } },
-                { "@type": "Question", name: "Vocês atendem em rodovias e na serra?", acceptedAnswer: { "@type": "Answer", text: "Sim. Cobertura completa em rodovias federais e estaduais, incluindo trechos de serra como Tamoios, Oswaldo Cruz, Régis Bittencourt e Anchieta/Imigrantes." } },
-                { "@type": "Question", name: "Posso pagar com cartão ou PIX?", acceptedAnswer: { "@type": "Answer", text: "Sim. Aceitamos PIX, débito, crédito (à vista e parcelado), dinheiro e principais aplicativos de assistência veicular." } },
-                { "@type": "Question", name: "Atendem moto, caminhão e veículo blindado?", acceptedAnswer: { "@type": "Answer", text: "Sim. Plataformas para motos com içamento sem dano, guincho pesado para caminhões e ônibus, e prancha rebaixada para blindados, esportivos e clássicos." } },
-              ],
-            },
+          "@type": "LocalBusiness",
+          "name": `SOS Guincho 24 horas`,
+          "image": "https://sosguincho24horas.com.br/assets/imagem-do-guincho.webp",
+          "@id": `https://sosguincho24horas.com.br/index.html`,
+          "url": `https://sosguincho24horas.com.br/`,
+          "telephone": [
+            "+5511996451510",
+            "+5512992184913"
           ],
+          "priceRange": "$$",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Brasil",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+          },
+          "description": "Serviço de guincho 24 horas, reboque de carros e motos, auto socorro mecânico, remoção de veículos pesados, transporte de vans, empilhadeiras e embarcações. Atendimento rápido e preço justo.",
+          "areaServed": {
+            "@type": "Country",
+            "name": "Brasil"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Serviços de Reboque, Auto Socorro e Transporte",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Guincho 24 Horas"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Guincho Plataforma Leve e Pesado"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Guincho para carros"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Guincho para Motos"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Transporte de Carros de Colecionador e Veículos Antigos"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Transporte de Embarcações (Jet Ski, Lancha, Barco)"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Transporte de Máquinas (Empilhadeira, Trator, Bobcat)"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Remoção de Veículo em Subsolo"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Auto Socorro Mecânico e Pane Seca"
+                }
+              }
+            ]
+          }
         }),
       },
     ],

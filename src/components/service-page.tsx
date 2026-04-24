@@ -28,24 +28,110 @@ export function ServicePage(p: ServicePageProps) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: p.schemaServiceType,
-    name: p.serviceName,
-    provider: {
-      "@type": "LocalBusiness",
-      name: SITE.name,
-      telephone: SITE.phone,
-      url: "https://sosguincho24horas.com.br",
-    },
-    areaServed: { "@type": "Country", name: "Brasil" },
-    description: p.heroSubtitle,
-    url,
-    hoursAvailable: {
+    "@type": "LocalBusiness",
+    "name": `SOS Guincho 24 horas - ${p.serviceName}`,
+    "image": "https://sosguincho24horas.com.br/assets/imagem-do-guincho.webp",
+    "@id": `https://sosguincho24horas.com.br/${p.slug}.html`,
+    "url": `https://sosguincho24horas.com.br/${p.slug}.html`,
+    "telephone": [
+      "+5511996451510",
+      "+5512992184913"
+    ],
+    "priceRange": "$$",
+    "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "00:00",
-      closes: "23:59",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
     },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Brasil",
+      "addressRegion": "SP",
+      "addressCountry": "BR"
+    },
+    "description": "Serviço de guincho 24 horas, reboque de carros e motos, auto socorro mecânico, remoção de veículos pesados, transporte de vans, empilhadeiras e embarcações. Atendimento rápido e preço justo.",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Brasil"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Serviços de Reboque, Auto Socorro e Transporte",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guincho 24 Horas"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guincho Plataforma Leve e Pesado"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guincho para carros"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guincho para Motos"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Transporte de Carros de Colecionador e Veículos Antigos"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Transporte de Embarcações (Jet Ski, Lancha, Barco)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Transporte de Máquinas (Empilhadeira, Trator, Bobcat)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Remoção de Veículo em Subsolo"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Auto Socorro Mecânico e Pane Seca"
+          }
+        }
+      ]
+    }
   };
 
   return (
