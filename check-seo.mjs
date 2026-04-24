@@ -63,11 +63,15 @@ const checkRoutes = () => {
     const hasPlaceholders = content.includes('[NOME DA CIDADE]') || content.includes('[nome-da-cidade]');
 
     // Heading Validation
-    // For ServicePage routes, we check the component content as well
     const fullContentForHeadings = ['auto-socorro.tsx', 'guincho-leve.tsx', 'guincho-pesado.tsx', 'pane-seca.tsx', 'remocao-veicular.tsx', 'guincho-de-motos.tsx'].includes(file) 
       ? content + servicePageContent 
       : content;
 
+    // Use regex to count h1 tags, but exclude notFoundComponent h1s if we can distinguish them
+    // A better way is to count only if it's NOT inside notFoundComponent
+    // But since we are doing simple string analysis, let's just count all <h1> and subtract 1 if it's a dynamic route
+    // that contains a notFoundComponent with <h1> (which we already fixed to <h2> in some places)
+    
     const h1Count = (fullContentForHeadings.match(/<h1/g) || []).length;
     
     // Check heading hierarchy (no skipping levels)
