@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "bun run check-seo && vite build",
+    "build": "bun run generate-sitemap && bun run check-seo && vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "check-seo": "node check-seo.mjs"
+    "check-seo": "node check-seo.mjs",
+    "generate-sitemap": "node generate-sitemap.mjs"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
