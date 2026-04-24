@@ -106,8 +106,8 @@ export function LeadFormGeo({ defaultCity = "" }: Props) {
           Preenchemos automaticamente sua cidade pela localização para acelerar o atendimento.
         </p>
         <form onSubmit={onSubmit} className="mt-5 grid gap-3">
-          <Input name="name" placeholder="Seu nome" required maxLength={80} />
-          <Input name="phone" placeholder="Telefone com DDD" required maxLength={20} inputMode="tel" />
+          <Input name="name" placeholder="Seu nome" required maxLength={80} aria-label="Seu nome completo" />
+          <Input name="phone" placeholder="Telefone com DDD" required maxLength={20} inputMode="tel" aria-label="Telefone com DDD" />
           <div className="flex gap-2">
             <Input
               name="city"
@@ -116,6 +116,7 @@ export function LeadFormGeo({ defaultCity = "" }: Props) {
               maxLength={80}
               value={city}
               onChange={(e) => setCity(e.target.value)}
+              aria-label="Sua cidade"
             />
             <Button
               type="button"
@@ -131,7 +132,7 @@ export function LeadFormGeo({ defaultCity = "" }: Props) {
               )}
             </Button>
           </div>
-          <Input name="details" placeholder="Veículo / problema (opcional)" maxLength={300} />
+          <Input name="details" placeholder="Veículo / problema (opcional)" maxLength={300} aria-label="Detalhes sobre o veículo ou problema (opcional)" />
           <Button
             type="submit"
             size="lg"

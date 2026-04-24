@@ -67,10 +67,10 @@ export function ServicePage(p: ServicePageProps) {
           <p className="mt-4 text-primary-foreground/85">{p.heroSubtitle}</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary">
-              <a href={`tel:${SITE.phone}`}><Phone className="h-5 w-5" /> {SITE.phone}</a>
+              <a href={`tel:${SITE.phone}`} aria-label={`Ligar para ${SITE.name} agora`}><Phone className="h-5 w-5" aria-hidden="true" /> {SITE.phone}</a>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10">
-              <a href={wppHref} target="_blank" rel="noreferrer"><MessageCircle className="h-5 w-5" /> WhatsApp 24h</a>
+              <a href={wppHref} target="_blank" rel="noreferrer" aria-label={`Falar no WhatsApp para ${p.serviceName}`}><MessageCircle className="h-5 w-5" aria-hidden="true" /> WhatsApp 24h</a>
             </Button>
           </div>
         </div>
@@ -110,9 +110,9 @@ export function ServicePage(p: ServicePageProps) {
               <p className="text-muted-foreground text-sm">Atendimento 24 horas em todo o Brasil.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button asChild><a href={`tel:${SITE.phone}`}><Phone className="h-4 w-4" /> {SITE.phone}</a></Button>
-              <Button asChild variant="outline"><a href={wppHref} target="_blank" rel="noreferrer">WhatsApp</a></Button>
-              <Button asChild variant="secondary"><Link to="/servicos-de-guincho-e-reboque">Ver cidades</Link></Button>
+              <Button asChild><a href={`tel:${SITE.phone}`} aria-label={`Ligar para ${SITE.name}`}><Phone className="h-4 w-4" aria-hidden="true" /> {SITE.phone}</a></Button>
+              <Button asChild variant="outline"><a href={wppHref} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp">WhatsApp</a></Button>
+              <Button asChild variant="secondary"><Link to="/servicos-de-guincho-e-reboque" aria-label="Ver todas as cidades atendidas">Ver cidades</Link></Button>
             </div>
           </CardContent>
         </Card>

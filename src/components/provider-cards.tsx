@@ -152,13 +152,13 @@ function PaidCard({ p, cityName }: { p: Provider; cityName: string }) {
 
         <div className="mt-4 grid gap-2 sm:grid-cols-2">
           <Button asChild className="bg-[#25D366] text-white hover:bg-[#1ebe57]">
-            <a href={wppHref} target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-4 w-4" /> WhatsApp
+            <a href={wppHref} target="_blank" rel="noopener noreferrer" aria-label={`Falar com ${p.name} no WhatsApp`}>
+              <MessageCircle className="h-4 w-4" aria-hidden="true" /> WhatsApp
             </a>
           </Button>
           <Button asChild variant="outline">
-            <a href={telHref}>
-              <Phone className="h-4 w-4" /> Ligar
+            <a href={telHref} aria-label={`Ligar para ${p.name}`}>
+              <Phone className="h-4 w-4" aria-hidden="true" /> Ligar
             </a>
           </Button>
         </div>
@@ -232,12 +232,12 @@ function GhostCard({
 
         <div className="mt-4 grid gap-2">
           <Button asChild className="bg-[image:var(--gradient-cta)] text-primary">
-            <a href={wppHref} target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-4 w-4" /> Solicitar Guincho Agora
+            <a href={wppHref} target="_blank" rel="noopener noreferrer" aria-label={`Solicitar guincho para ${p.name} via Central`}>
+              <MessageCircle className="h-4 w-4" aria-hidden="true" /> Solicitar Guincho Agora
             </a>
           </Button>
           <Button asChild variant="ghost" size="sm" className="text-xs">
-            <Link to="/anuncie">
+            <Link to="/anuncie" aria-label={`Sou proprietário da ${p.name}, quero liberar o telefone`}>
               É o proprietário? Liberar telefone →
             </Link>
           </Button>
