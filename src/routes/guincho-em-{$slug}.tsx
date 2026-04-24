@@ -71,7 +71,7 @@ export const Route = createFileRoute("/guincho-em-{$slug}")({
     const { city } = loaderData;
     const title = `Guincho em ${city.name} - ${city.uf} | Reboque 24 Horas | ${SITE.name}`;
     const description = `Guincho 24 horas em ${city.name}/${city.uf}. Reboque rápido para carros, motos, caminhões, auto socorro e pane seca. Atendimento imediato em toda ${city.name}.`;
-    const url = `${SITE_URL}/guincho-em-${city.slug}`;
+    const url = `${SITE_URL}/guincho-em-${city.slug}-${city.uf.toLowerCase()}`;
     return {
       meta: [
         { title },

@@ -5,12 +5,16 @@ import { ArrowLeft, Calendar, Pencil } from "lucide-react";
 import { getPostBySlug, type BlogPost } from "@/components/blog-data";
 
 export const Route = createFileRoute("/blog/$slug")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `Artigo — ${params.slug} | SOS Guincho 24 horas Blog` },
-      { name: "description", content: "Leia o artigo completo no blog SOS Guincho 24 horas." },
-    ],
-  }),
+  head: ({ params }) => {
+    const url = `https://sosguincho24horas.com.br/blog/${params.slug}`;
+    return {
+      meta: [
+        { title: `Artigo — ${params.slug} | SOS Guincho 24 horas Blog` },
+        { name: "description", content: "Leia o artigo completo no blog SOS Guincho 24 horas." },
+      ],
+      links: [{ rel: "canonical", href: url }],
+    };
+  },
   component: BlogPostPage,
   notFoundComponent: () => (
     <div className="container mx-auto max-w-2xl px-4 py-20 text-center">
