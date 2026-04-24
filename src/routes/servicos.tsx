@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, MessageCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,8 +43,13 @@ function ServicesPage() {
                 <div className="text-4xl">{s.icon}</div>
                 <h2 className="text-xl font-semibold">{s.title}</h2>
                 <p className="text-sm text-muted-foreground">{s.desc}</p>
-                <Button asChild variant="link" className="px-0">
-                  <a href={`tel:${SITE.phone}`}>Solicitar agora <ArrowRight className="h-4 w-4" /></a>
+                <Button
+                  asChild
+                  className="w-full animate-button-pulse bg-orange-500 font-bold text-white shadow-lg shadow-orange-500/40 hover:animate-none hover:bg-orange-600 transition-all duration-300"
+                >
+                  <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer">
+                    <MessageCircle className="h-4 w-4" /> CHAMAR GUINCHO
+                  </a>
                 </Button>
               </CardContent>
             </Card>
