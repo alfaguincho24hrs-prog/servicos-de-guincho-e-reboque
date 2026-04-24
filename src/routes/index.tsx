@@ -135,8 +135,8 @@ function HomePage() {
                   asChild
                   className="mt-auto w-full animate-pulse bg-orange-500 font-bold text-white shadow-lg shadow-orange-500/40 hover:animate-none hover:bg-orange-600"
                 >
-                  <a href={`tel:${SITE.phone}`}>
-                    <Phone className="h-4 w-4" /> CHAMAR GUINCHO
+                  <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer">
+                    <MessageCircle className="h-4 w-4" /> CHAMAR GUINCHO
                   </a>
                 </Button>
               </CardContent>
