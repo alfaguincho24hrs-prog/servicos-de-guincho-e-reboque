@@ -106,8 +106,8 @@ export function LeadFormGeo({ defaultCity = "" }: Props) {
           Preenchemos automaticamente sua cidade pela localização para acelerar o atendimento.
         </p>
         <form onSubmit={onSubmit} className="mt-5 grid gap-3">
-          <Input name="name" placeholder="Seu nome" required maxLength={80} />
-          <Input name="phone" placeholder="Telefone com DDD" required maxLength={20} inputMode="tel" />
+          <Input name="name" placeholder="Seu nome" required maxLength={80} aria-label="Seu nome completo" />
+          <Input name="phone" placeholder="Telefone com DDD" required maxLength={20} inputMode="tel" aria-label="Telefone com DDD" />
           <div className="flex gap-2">
             <Input
               name="city"
