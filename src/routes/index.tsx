@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, Clock, ShieldCheck, MapPin, Star, ArrowRight, Truck, Wrench, Zap } from "lucide-react";
+import { Phone, Clock, ShieldCheck, MapPin, Star, ArrowRight, Truck, Wrench, Zap, MessageCircle } from "lucide-react";
 import { lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -135,8 +135,8 @@ function HomePage() {
                   asChild
                   className="mt-auto w-full animate-pulse bg-orange-500 font-bold text-white shadow-lg shadow-orange-500/40 hover:animate-none hover:bg-orange-600"
                 >
-                  <a href={`tel:${SITE.phone}`}>
-                    <Phone className="h-4 w-4" /> CHAMAR GUINCHO
+                  <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer">
+                    <MessageCircle className="h-4 w-4" /> CHAMAR GUINCHO
                   </a>
                 </Button>
               </CardContent>
