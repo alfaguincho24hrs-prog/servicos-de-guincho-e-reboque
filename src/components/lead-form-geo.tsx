@@ -132,7 +132,7 @@ export function LeadFormGeo({ defaultCity = "" }: Props) {
               )}
             </Button>
           </div>
-          <Input name="details" placeholder="Veículo / problema (opcional)" maxLength={300} />
+          <Input name="details" placeholder="Veículo / problema (opcional)" maxLength={300} aria-label="Detalhes sobre o veículo ou problema (opcional)" />
           <Button
             type="submit"
             size="lg"
