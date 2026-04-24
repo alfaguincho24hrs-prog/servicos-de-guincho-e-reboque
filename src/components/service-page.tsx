@@ -168,21 +168,21 @@ export function ServicePage(p: ServicePageProps) {
           <p key={i} className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t }} />
         ))}
 
-        <h2 className="text-2xl font-bold pt-4">O que está incluso no serviço de {p.serviceName.toLowerCase()}</h2>
+        <h3 className="text-2xl font-bold pt-4">O que está incluso no serviço de {p.serviceName.toLowerCase()}</h3>
         <ul className="grid gap-3 sm:grid-cols-2">
           {p.features.map((f) => (
             <li key={f} className="flex gap-3"><Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" /><span dangerouslySetInnerHTML={{ __html: f }} /></li>
           ))}
         </ul>
 
-        <h2 className="text-2xl font-bold pt-4">Quando acionar nosso {p.serviceName.toLowerCase()}?</h2>
+        <h3 className="text-2xl font-bold pt-4">Quando acionar nosso {p.serviceName.toLowerCase()}?</h3>
         <ul className="space-y-2 text-muted-foreground">
           {p.whenToUse.map((w) => (
             <li key={w}>• {w}</li>
           ))}
         </ul>
 
-        <h2 className="text-2xl font-bold pt-4">Veículos atendidos</h2>
+        <h3 className="text-2xl font-bold pt-4">Veículos atendidos</h3>
         <div className="flex flex-wrap gap-2">
           {p.vehicles.map((v) => (
             <span key={v} className="rounded-full border bg-secondary/40 px-3 py-1.5 text-sm">{v}</span>
@@ -192,7 +192,7 @@ export function ServicePage(p: ServicePageProps) {
         <Card className="border-border/60 bg-secondary/40 mt-8">
           <CardContent className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-                <h2 className="text-xl font-bold">Precisa de {p.serviceName.toLowerCase()} agora?</h2>
+                <h3 className="text-xl font-bold">Precisa de {p.serviceName.toLowerCase()} agora?</h3>
                 <p className="text-muted-foreground text-sm">Atendimento 24 horas em todo o Brasil.</p>
               </div>
             <div className="flex flex-wrap gap-3">

@@ -334,9 +334,9 @@ function CityPage() {
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-secondary">
                   <s.icon className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="font-semibold">
+                <h4 className="font-semibold">
                   {s.title} em {city.name}
-                </h3>
+                </h4>
                 <p className="mt-1 text-sm text-muted-foreground">{s.desc}</p>
               </CardContent>
             </Card>
@@ -431,7 +431,7 @@ function CityPage() {
           {copy.faqs.map((f) => (
             <Card key={f.q} className="border-border/60">
               <CardContent className="p-5">
-                <h3 className="font-semibold">{f.q}</h3>
+                <h4 className="font-semibold">{f.q}</h4>
                 <p className="mt-2 text-sm text-muted-foreground">{f.a}</p>
               </CardContent>
             </Card>

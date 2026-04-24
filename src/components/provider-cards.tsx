@@ -98,7 +98,7 @@ function PaidCard({ p, cityName }: { p: Provider; cityName: string }) {
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               {(p.verified ?? true) && <BadgeCheck className="h-5 w-5 shrink-0 text-primary" />}
-              <h3 className="text-lg font-bold leading-tight">{p.name}</h3>
+              <h4 className="text-lg font-bold leading-tight">{p.name}</h4>
             </div>
             {p.address && (
               <p className="mt-1 flex items-start gap-1 text-xs text-muted-foreground">
@@ -208,9 +208,9 @@ function GhostCard({
     <Card className="border-border/60 bg-muted/30">
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="text-base font-semibold leading-tight text-foreground/80">
+          <h4 className="text-base font-semibold leading-tight text-foreground/80">
             {p.name}
-          </h3>
+          </h4>
           <Badge variant="outline" className="shrink-0 text-[10px]">
             Não verificado
           </Badge>

@@ -35,7 +35,7 @@ export function SeoBlock({ badge, title, paragraphs, bullets, faqs, whatsappMess
 
         {faqs && faqs.length > 0 && (
           <>
-            <h2 className="text-2xl font-bold pt-4">Perguntas frequentes</h2>
+            <h3 className="text-2xl font-bold pt-4">Perguntas frequentes</h3>
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((f, i) => (
                 <AccordionItem key={i} value={`faq-${i}`}>
