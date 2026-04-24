@@ -29,8 +29,8 @@ const getStaticRoutes = () => {
       !['admin.tsx', 'anuncie.tsx'].includes(file)
     )
     .map(file => {
-      const slug = file.replace('.tsx', '').replace('index', '');
-      return slug === '' ? '/' : `/${slug}`;
+      const slug = file.replace('.tsx', '');
+      return slug === 'index' ? '/' : `/${slug}`;
     });
 };
 
