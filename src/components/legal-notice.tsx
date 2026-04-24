@@ -18,7 +18,7 @@ export function LegalNotice() {
               Clique aqui para liberar
             </Link>
           </Button>
-          <Button asChild className="bg-green-600 text-white hover:bg-green-700">
+          <Button asChild className="bg-green-600 text-white hover:bg-green-700 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2">
             <Link to="/anuncie">
               <Phone className="mr-2 h-4 w-4" />
               Atualizar seu telefone
