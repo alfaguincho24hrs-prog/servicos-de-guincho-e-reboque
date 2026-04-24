@@ -102,7 +102,7 @@ function HomePage() {
               <Button asChild size="lg" className="bg-[image:var(--gradient-cta)] text-primary shadow-[var(--shadow-glow)] hover:opacity-95">
                 <a href={`tel:${SITE.phone}`}><Phone className="h-5 w-5" /> Solicitar guincho agora</a>
               </Button>
-              <Button asChild size="lg" className="bg-orange-500 text-white hover:bg-orange-600 border-none">
+              <Button asChild size="lg" className="bg-orange-600 text-white hover:bg-orange-700 border-none ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-600 focus-visible:ring-offset-2">
                 <Link to="/cobertura">Ver cidades atendidas <ArrowRight className="h-4 w-4" /></Link>
               </Button>
             </div>
