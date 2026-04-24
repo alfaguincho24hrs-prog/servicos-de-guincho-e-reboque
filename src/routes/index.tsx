@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SITE, SERVICES, PARTNERS, CITIES } from "@/components/site-data";
 import { LazyTestimonialsCarousel } from "@/components/lazy-testimonials";
 import heroImg from "@/assets/reboque.webp";
@@ -272,46 +273,46 @@ function HomePage() {
         <div className="container mx-auto max-w-4xl px-4 space-y-6">
           <Badge variant="secondary">Perguntas frequentes</Badge>
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Dúvidas comuns sobre guincho 24h</h2>
-          <div className="space-y-5">
-            <div>
-              <h3 className="font-semibold text-lg">Quanto custa um guincho 24 horas?</h3>
-              <p className="text-muted-foreground">
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Quanto custa um guincho 24 horas?</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-base">
                 O valor varia conforme distância percorrida (KM rodado), tipo de veículo (leve, médio ou pesado),
                 horário (diurno, noturno, feriados) e região. Em média, dentro da cidade o serviço fica entre R$ 150
                 e R$ 350. Em rodovias o cálculo é por quilômetro a partir do ponto de saída. Sempre fornecemos
                 orçamento exato antes de iniciar o atendimento.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg">Em quanto tempo o guincho chega?</h3>
-              <p className="text-muted-foreground">
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Em quanto tempo o guincho chega?</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-base">
                 Em áreas urbanas, o tempo médio é de 30 a 40 minutos. Em rodovias e regiões afastadas, entre 40 e 60
                 minutos, dependendo do trânsito e da localização exata. Trabalhamos com bases distribuídas para
                 garantir o menor tempo de resposta.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg">Vocês atendem em rodovias e na serra?</h3>
-              <p className="text-muted-foreground">
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Vocês atendem em rodovias e na serra?</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-base">
                 Sim. Temos cobertura completa em rodovias federais e estaduais, incluindo trechos de serra como
                 Tamoios, Oswaldo Cruz, Floriano Rodrigues Pinheiro, Régis Bittencourt e Anchieta/Imigrantes.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg">Posso pagar com cartão ou PIX?</h3>
-              <p className="text-muted-foreground">
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Posso pagar com cartão ou PIX?</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-base">
                 Sim. Aceitamos PIX, cartão de débito, crédito (à vista e parcelado), dinheiro e principais
                 aplicativos de assistência veicular conveniados.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg">Atendem moto, caminhão e veículo blindado?</h3>
-              <p className="text-muted-foreground">
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-5">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline">Atendem moto, caminhão e veículo blindado?</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-base">
                 Sim. Possuímos plataformas para motos com içamento sem dano à pintura, guincho pesado para
                 caminhões e ônibus, e prancha rebaixada para veículos blindados, esportivos rebaixados e clássicos.
-              </p>
-            </div>
-          </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
           <div className="flex flex-wrap gap-3 pt-4">
             <Button asChild size="lg">
               <a href={`tel:${SITE.phone}`}><Phone className="h-5 w-5" /> Solicitar guincho — {SITE.phone}</a>

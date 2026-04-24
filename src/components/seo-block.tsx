@@ -1,6 +1,7 @@
 import { Phone, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SITE } from "@/components/site-data";
 
 export type FAQItem = { q: string; a: string };
@@ -35,14 +36,18 @@ export function SeoBlock({ badge, title, paragraphs, bullets, faqs, whatsappMess
         {faqs && faqs.length > 0 && (
           <>
             <h3 className="text-2xl font-bold pt-4">Perguntas frequentes</h3>
-            <div className="space-y-5">
-              {faqs.map((f) => (
-                <div key={f.q}>
-                  <h4 className="font-semibold text-lg">{f.q}</h4>
-                  <p className="text-muted-foreground">{f.a}</p>
-                </div>
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((f, i) => (
+                <AccordionItem key={i} value={`faq-${i}`}>
+                  <AccordionTrigger className="text-lg font-semibold hover:no-underline text-left">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-base">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{
