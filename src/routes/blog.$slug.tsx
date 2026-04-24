@@ -18,7 +18,7 @@ export const Route = createFileRoute("/blog/$slug")({
   component: BlogPostPage,
   notFoundComponent: () => (
     <div className="container mx-auto max-w-2xl px-4 py-20 text-center">
-      <h1 className="text-3xl font-bold">Artigo não encontrado</h1>
+      <h2 className="text-3xl font-bold">Artigo não encontrado</h2>
       <p className="mt-3 text-muted-foreground">O artigo que você procura não existe ou foi removido.</p>
       <Button asChild className="mt-6"><Link to="/blog">Voltar ao blog</Link></Button>
     </div>
