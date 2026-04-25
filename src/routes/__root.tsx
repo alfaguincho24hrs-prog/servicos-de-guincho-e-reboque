@@ -95,23 +95,21 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Guincho e Reboque 24 horas |  Guincho em Todo o Brasil" },
+      { title: "SOS Guincho 24 horas |  Guincho em Todo o Brasil" },
       { name: "description", content: "Portal nacional de guincho e reboque 24 horas. Encontre empresas de auto socorro qualificadas na sua cidade. Atendimento rápido em rodovias e área urbana." },
       { name: "theme-color", content: "#ef2b2b" },
       { name: "author", content: "SOS Guincho 24 horas" },
       { name: "keywords", content: "guincho 24 horas, reboque, auto socorro, guincho perto de mim, guincho rodovia, guincho leve, guincho pesado, reboque de moto" },
       { name: "google-site-verification", content: "bBfjL-B8hzlB_4mru_KuIMVtB4XitQ9WMsUNgvLQVBk" },
-      { property: "og:title", content: "Guincho e Reboque 24 horas |  Guincho em Todo o Brasil" },
+      { property: "og:title", content: "SOS Guincho 24 horas |  Guincho em Todo o Brasil" },
       { property: "og:description", content: "Portal nacional de guincho e reboque 24 horas. Encontre empresas de auto socorro qualificadas na sua cidade. Atendimento rápido em rodovias e área urbana." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:image", content: `${SITE_URL}/og-image.webp` },
-      { property: "og:url", content: `${SITE_URL}/` },
-      { property: "og:site_name", content: SITE.name },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Guincho e Reboque 24 horas |  Guincho em Todo o Brasil" },
+      { name: "twitter:title", content: "SOS Guincho 24 horas |  Guincho em Todo o Brasil" },
       { name: "twitter:description", content: "Portal nacional de guincho e reboque 24 horas. Encontre empresas de auto socorro qualificadas na sua cidade. Atendimento rápido em rodovias e área urbana." },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.webp` },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/48d258fa-b427-456a-a7f0-e19a83c1b0eb/id-preview-c90c82a8--1cb195f7-066f-4873-bc78-670d3b8929fb.lovable.app-1777081509409.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/48d258fa-b427-456a-a7f0-e19a83c1b0eb/id-preview-c90c82a8--1cb195f7-066f-4873-bc78-670d3b8929fb.lovable.app-1777081509409.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -144,49 +142,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <div id="loading-overlay" style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: '#ffffff',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 9999,
-          transition: 'opacity 0.5s ease-out'
-        }}>
-          <div style={{
-            width: '40px',
-            height: '40px',
-            border: '4px solid #f3f3f3',
-            borderTop: '4px solid #ef2b2b',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite'
-          }} />
-          <style>{`
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          `}</style>
-        </div>
         {children}
         <Scripts />
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.addEventListener('load', function() {
-              var loader = document.getElementById('loading-overlay');
-              if (loader) {
-                loader.style.opacity = '0';
-                setTimeout(function() {
-                  loader.style.display = 'none';
-                }, 500);
-              }
-            });
-          `
-        }} />
       </body>
     </html>
   );
