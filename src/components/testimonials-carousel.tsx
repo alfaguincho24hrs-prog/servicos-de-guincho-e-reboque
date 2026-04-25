@@ -76,7 +76,7 @@ const TESTIMONIALS: Testimonial[] = [
   { name: "Rodrigo Fonseca Telles", city: "Jundiaí - SP", text: "Guincho pesados em Jundiaí para meu caminhão de mudança. Reboque para caminhões em Jundiaí com guincho preparado. Transporte de caminhão em Jundiaí sem complicação." },
   { name: "Cláudia Marina Esteves", city: "Itu - SP", text: "Guincho próximo em Itu chegou em 20 minutos, surpreendente. Guincho preço justo em região turística, sem abuso. Empresa de reboque em Itu que valoriza o cliente." },
   { name: "Gabriel Henrique Macedo", city: "Salto - SP", text: "Reboque em Salto após colisão traseira. Guincho na região com atendimento 24h real. Empresa de reboque no interior que cumpre o prometido, sem demora absurda." },
-  { name: "Vanessa Lopes Quadros", city: "Indaiatuba - SP", text: "Guincho de carro no Indaiatuba após pane elétrica. Guincho 24 horas with socorro mecânico embutido, deu partida na hora. Serviço de guincho dois em um, ótimo." },
+  { name: "Vanessa Lopes Quadros", city: "Indaiatuba - SP", text: "Guincho de carro no Indaiatuba após pane elétrica. Guincho 24 horas com socorro mecânico embutido, deu partida na hora. Serviço de guincho dois em um, ótimo." },
   { name: "Sérgio Murilo Caetano", city: "Americana - SP", text: "Guinchos baratos no interior são raros, essa empresa é exceção. Guincho de carro no Americana com plataforma nova. Preço de guincho 24h muito competitivo, recomendo." },
   { name: "Priscila Tavares Dornelas", city: "Santa Bárbara d'Oeste - SP", text: "Empresa de guincho em Santa Bárbara confiável de verdade. Guincho urgente em hora de aperto, sem deixar na mão. Guincho 24 horas no interior funciona mesmo." },
   { name: "Marco Aurélio Cintra", city: "Hortolândia - SP", text: "Transporte de veículos em Hortolândia até concessionária. Guincho plataforma em Hortolândia com cintas certificadas. Serviços de reboque em Hortolândia organizados, sem improviso." },
@@ -85,7 +85,7 @@ const TESTIMONIALS: Testimonial[] = [
   { name: "Renato Fernandes Quiroga", city: "Embu das Artes - SP", text: "Remoção de veículo em subsolo do prédio com patins. Remoção de carro com patins é especialidade rara, encontraram solução. Empresa de reboque 24h equipada de verdade." },
   { name: "Carla Beatriz Olinto", city: "Taboão da Serra - SP", text: "Transporte de motos antigas em Taboão da Serra até evento de colecionador. Transporte de moto com cuidado de joia. Transporte de motos de colecionador em mãos certas." },
   { name: "Eduardo Martins Bragança", city: "Barueri - SP", text: "Transporte de carros antigos em Barueri para exposição. Transporte de carros de colecionador com plataforma fechada. Transporte de veículos especiais com profissionalismo total, indico." },
-  { name: "Joana Darc Albuquerque", city: "Itapevi - SP", text: "Transporte de jet ski em Itapevi até represa. Transporte de lancha e jet ski with prancha adequada. Serviços de guinchos em Itapevi que atendem demandas especiais." },
+  { name: "Joana Darc Albuquerque", city: "Itapevi - SP", text: "Transporte de jet ski em Itapevi até represa. Transporte de lancha e jet ski com prancha adequada. Serviços de guinchos em Itapevi que atendem demandas especiais." },
 ];
 
 function hashSeed(s: string): number {
