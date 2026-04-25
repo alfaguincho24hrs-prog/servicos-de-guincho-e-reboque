@@ -105,9 +105,13 @@ export const Route = createRootRoute({
       { property: "og:description", content: "Portal nacional de guincho e reboque 24 horas. Encontre empresas de auto socorro qualificadas na sua cidade. Atendimento rápido em rodovias e área urbana." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
+      { property: "og:image", content: `${SITE_URL}/og-image.webp` },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:site_name", content: SITE.name },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Guincho e Reboque 24 horas |  Guincho em Todo o Brasil" },
       { name: "twitter:description", content: "Portal nacional de guincho e reboque 24 horas. Encontre empresas de auto socorro qualificadas na sua cidade. Atendimento rápido em rodovias e área urbana." },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.webp` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -140,8 +144,49 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <div id="loading-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#ffffff',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 9999,
+          transition: 'opacity 0.5s ease-out'
+        }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #f3f3f3',
+            borderTop: '4px solid #ef2b2b',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+          }} />
+          <style>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
+        </div>
         {children}
         <Scripts />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.addEventListener('load', function() {
+              var loader = document.getElementById('loading-overlay');
+              if (loader) {
+                loader.style.opacity = '0';
+                setTimeout(function() {
+                  loader.style.display = 'none';
+                }, 500);
+              }
+            });
+          `
+        }} />
       </body>
     </html>
   );
