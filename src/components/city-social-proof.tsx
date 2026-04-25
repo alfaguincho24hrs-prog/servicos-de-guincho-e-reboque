@@ -90,6 +90,10 @@ export function CitySocialProof({ cityName, neighborhoods, uf }: Props) {
 
   return (
     <section className="mt-14">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsJsonLd) }}
+      />
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="text-2xl font-bold md:text-3xl">
