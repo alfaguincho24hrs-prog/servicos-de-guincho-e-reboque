@@ -423,7 +423,7 @@ function CityPage() {
       </section>
 
       {/* Prova social por cidade */}
-      <CitySocialProof cityName={city.name} neighborhoods={local.neighborhoods} />
+      <CitySocialProof cityName={city.name} neighborhoods={local.neighborhoods} uf={city.uf} />
 
       {/* FAQ */}
       <section className="mt-14">

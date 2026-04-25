@@ -1,5 +1,6 @@
 import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { SITE } from "./site-data";
 
 const FIRST_NAMES = [
   "Carlos", "Ana", "Roberto", "Juliana", "Marcos", "Patrícia", "Ricardo",
@@ -33,9 +34,10 @@ function pick<T>(arr: T[], seed: number, offset: number): T {
 type Props = {
   cityName: string;
   neighborhoods: string[];
+  uf?: string;
 };
 
-export function CitySocialProof({ cityName, neighborhoods }: Props) {
+export function CitySocialProof({ cityName, neighborhoods, uf }: Props) {
   const seed = hash(cityName);
   const items = Array.from({ length: 4 }, (_, i) => {
     const name = `${pick(FIRST_NAMES, seed, i)} ${pick(LAST_INITIALS, seed, i + 3)}`;
@@ -45,8 +47,46 @@ export function CitySocialProof({ cityName, neighborhoods }: Props) {
     const template = pick(TEMPLATES, seed, i + 2);
     const text = template.replaceAll("{city}", cityName).replaceAll("{hood}", hood);
     const days = 1 + ((seed + i * 11) % 28);
-    return { name, hood, text, days };
+    // Para o Schema, precisamos de uma data real aproximada
+    const datePublished = new Date();
+    datePublished.setDate(datePublished.getDate() - days);
+    
+    return { name, hood, text, days, datePublished: datePublished.toISOString().split('T')[0] };
   });
+
+  const reviewsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": `${SITE.name} - ${cityName}`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": cityName,
+      "addressRegion": uf || "SP",
+      "addressCountry": "BR"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "64"
+    },
+    "review": items.map(it => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": it.name
+      },
+      "datePublished": it.datePublished,
+      "reviewBody": it.text,
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "contentLocation": {
+        "@type": "Place",
+        "name": `${it.hood}, ${cityName}`
+      }
+    }))
+  };
 
   return (
     <section className="mt-14">

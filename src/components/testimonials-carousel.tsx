@@ -1,6 +1,7 @@
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Star, Quote, MapPin } from "lucide-react";
+import { SITE } from "./site-data";
 import {
   Carousel,
   CarouselContent,
