@@ -33,8 +33,19 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
-const ADMIN_PASS = "guincho-admin-2026";
+const ADMIN_PASS_KEY = "admin_password_v1";
+const DEFAULT_PASS = "guincho-admin-2026";
 const AUTH_KEY = "admin_session_v1";
+
+function getAdminPass() {
+  if (typeof window === "undefined") return DEFAULT_PASS;
+  return localStorage.getItem(ADMIN_PASS_KEY) || DEFAULT_PASS;
+}
+
+function setAdminPass(newPass: string) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(ADMIN_PASS_KEY, newPass);
+}
 const MAX_PHOTOS = 4;
 
 export const Route = createFileRoute("/admin")({
@@ -75,7 +86,7 @@ function AdminPage() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                if (pwd === ADMIN_PASS) {
+                if (pwd === getAdminPass()) {
                   sessionStorage.setItem(AUTH_KEY, "1");
                   setAuthed(true);
                   toast.success("Login realizado");
@@ -165,16 +176,19 @@ function AdminEditor({ initialCity }: { initialCity: string }) {
             Crie e edite anunciantes com perfil completo (logo, fotos, contatos e mais).
           </p>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => {
-            sessionStorage.removeItem(AUTH_KEY);
-            location.reload();
-          }}
-        >
-          <LogOut className="mr-2 h-4 w-4" /> Sair
-        </Button>
+        <div className="flex gap-2">
+          <SettingsModal />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              sessionStorage.removeItem(AUTH_KEY);
+              location.reload();
+            }}
+          >
+            <LogOut className="mr-2 h-4 w-4" /> Sair
+          </Button>
+        </div>
       </div>
 
       <div className="mb-6">
@@ -258,6 +272,92 @@ function AdminEditor({ initialCity }: { initialCity: string }) {
           />
         ))}
       </div>
+    </div>
+  );
+}
+
+function SettingsModal() {
+  const [open, setOpen] = useState(false);
+  const [current, setCurrent] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [confirm, setConfirm] = useState("");
+
+  const handleUpdate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (current !== getAdminPass()) {
+      return toast.error("Senha atual incorreta");
+    }
+    if (newPass.length < 6) {
+      return toast.error("A nova senha deve ter no mínimo 6 caracteres");
+    }
+    if (newPass !== confirm) {
+      return toast.error("As senhas não coincidem");
+    }
+    setAdminPass(newPass);
+    toast.success("Senha alterada com sucesso!");
+    setOpen(false);
+    setCurrent("");
+    setNewPass("");
+    setConfirm("");
+  };
+
+  if (!open) {
+    return (
+      <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
+        <Lock className="mr-2 h-4 w-4" /> Alterar Senha
+      </Button>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
+      <Card className="w-full max-w-sm shadow-xl">
+        <CardContent className="p-6">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-lg font-bold">Configurações de Acesso</h3>
+            <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+          <form onSubmit={handleUpdate} className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-xs font-medium">Senha atual</label>
+              <Input
+                type="password"
+                value={current}
+                onChange={(e) => setCurrent(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-medium">Nova senha</label>
+              <Input
+                type="password"
+                value={newPass}
+                onChange={(e) => setNewPass(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-medium">Confirmar nova senha</label>
+              <Input
+                type="password"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex gap-2 pt-2">
+              <Button type="button" variant="outline" className="flex-1" onClick={() => setOpen(false)}>
+                Cancelar
+              </Button>
+              <Button type="submit" className="flex-1">
+                Salvar
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }
