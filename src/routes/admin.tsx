@@ -71,7 +71,7 @@ const MAX_PHOTOS = 4;
 export const Route = createFileRoute("/admin")({
   validateSearch: (s: Record<string, unknown>) => ({
     city: typeof s.city === "string" ? s.city : "",
-    token: typeof s.token === "string" ? s.token : "",
+    token: typeof s.token === "string" ? s.token : undefined,
   }),
   head: () => ({
     meta: [
