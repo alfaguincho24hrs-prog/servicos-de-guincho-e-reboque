@@ -70,9 +70,9 @@ const MAX_PHOTOS = 4;
 
 export const Route = createFileRoute("/admin")({
   validateSearch: (s: Record<string, unknown>) => ({
-    city: typeof s.city === "string" ? s.city : "",
-    token: typeof s.token === "string" ? s.token : undefined,
-  }),
+    city: (s.city as string) || "",
+    token: (s.token as string) || undefined,
+  }) as { city: string; token?: string },
   head: () => ({
     meta: [
       { title: "Painel Admin — Editar Anunciantes" },
