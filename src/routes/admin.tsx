@@ -36,6 +36,26 @@ import { toast } from "sonner";
 const ADMIN_PASS_KEY = "admin_password_v1";
 const DEFAULT_PASS = "guincho-admin-2026";
 const AUTH_KEY = "admin_session_v1";
+const RESET_TOKEN_KEY = "admin_reset_token";
+
+type ResetToken = {
+  token: string;
+  expires: number;
+};
+
+function getResetToken(): ResetToken | null {
+  if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem(RESET_TOKEN_KEY);
+  return raw ? JSON.parse(raw) : null;
+}
+
+function generateResetToken() {
+  if (typeof window === "undefined") return "";
+  const token = Math.random().toString(36).slice(2, 12);
+  const expires = Date.now() + 1000 * 60 * 15; // 15 minutos
+  localStorage.setItem(RESET_TOKEN_KEY, JSON.stringify({ token, expires }));
+  return token;
+}
 
 function getAdminPass() {
   if (typeof window === "undefined") return DEFAULT_PASS;
@@ -50,8 +70,9 @@ const MAX_PHOTOS = 4;
 
 export const Route = createFileRoute("/admin")({
   validateSearch: (s: Record<string, unknown>) => ({
-    city: typeof s.city === "string" ? s.city : "",
-  }),
+    city: (s.city as string) || "",
+    token: (s.token as string) || undefined,
+  }) as { city: string; token?: string },
   head: () => ({
     meta: [
       { title: "Painel Admin — Editar Anunciantes" },
@@ -65,13 +86,88 @@ function AdminPage() {
   const search = Route.useSearch();
   const [authed, setAuthed] = useState(false);
   const [pwd, setPwd] = useState("");
+  const [resetMode, setResetMode] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const resetTokenData = getResetToken();
+  const isResettingWithToken = search.token && resetTokenData && search.token === resetTokenData.token && Date.now() < resetTokenData.expires;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     setAuthed(sessionStorage.getItem(AUTH_KEY) === "1");
   }, []);
 
+  if (isResettingWithToken) {
+    return (
+      <div className="container mx-auto max-w-md px-4 py-20">
+        <Card>
+          <CardContent className="p-6">
+            <h1 className="text-xl font-bold mb-4">Redefinir Senha</h1>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (pwd.length < 6) return toast.error("Mínimo 6 caracteres");
+                setAdminPass(pwd);
+                localStorage.removeItem(RESET_TOKEN_KEY);
+                sessionStorage.setItem(AUTH_KEY, "1");
+                setAuthed(true);
+                toast.success("Senha alterada e login realizado");
+                // Remove token from URL
+                window.history.replaceState({}, "", "/admin");
+              }}
+              className="space-y-3"
+            >
+              <Input
+                type="password"
+                placeholder="Nova senha"
+                value={pwd}
+                onChange={(e) => setPwd(e.target.value)}
+                autoFocus
+              />
+              <Button type="submit" className="w-full">Salvar e Entrar</Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   if (!authed) {
+    if (resetMode) {
+      return (
+        <div className="container mx-auto max-w-md px-4 py-20">
+          <Card>
+            <CardContent className="p-6">
+              <h1 className="text-xl font-bold mb-2">Esqueceu a senha?</h1>
+              <p className="text-sm text-muted-foreground mb-4">
+                Enviaremos um link de recuperação para o seu e-mail cadastrado.
+              </p>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const token = generateResetToken();
+                  const link = `${window.location.origin}/admin?token=${token}`;
+                  console.log("recovery-email-simulation", { to: email, link });
+                  toast.success("E-mail de recuperação enviado (simulação)");
+                  setResetMode(false);
+                }}
+                className="space-y-3"
+              >
+                <Input
+                  type="email"
+                  placeholder="Seu e-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <Button type="submit" className="w-full">Enviar Link</Button>
+                <Button variant="ghost" className="w-full" onClick={() => setResetMode(false)}>Voltar</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      );
+    }
     return (
       <div className="container mx-auto max-w-md px-4 py-20">
         <Card>
@@ -106,6 +202,13 @@ function AdminPage() {
               <Button type="submit" className="w-full">
                 Entrar
               </Button>
+              <button
+                type="button"
+                onClick={() => setResetMode(true)}
+                className="w-full text-center text-xs text-muted-foreground hover:underline mt-2"
+              >
+                Esqueceu a senha?
+              </button>
             </form>
           </CardContent>
         </Card>
